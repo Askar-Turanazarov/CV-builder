@@ -1,0 +1,90 @@
+{
+  "steps": {
+    "personal": "Personal details",
+    "contacts": "Contacts",
+    "experience": "Work experience",
+    "education": "Education",
+    "skills": "Skills",
+    "languages": "Languages",
+    "review": "Review & AI"
+  },
+  "personal": {
+    "fullName": { "label": "Full name", "placeholder": "e.g. Jane Carter" },
+    "jobTitle": { "label": "Job title", "placeholder": "e.g. Frontend Developer" },
+    "birthDate": { "label": "Date of birth" },
+    "photo": { "label": "Photo", "hint": "JPG or PNG — the image will be resized automatically" }
+  },
+  "contacts": {
+    "email": { "label": "Email", "placeholder": "you@example.com" },
+    "phone": { "label": "Phone", "placeholder": "+1 555 123 4567" },
+    "location": { "label": "Location", "placeholder": "New York, USA" },
+    "website": { "label": "Website", "placeholder": "https://" },
+    "linkedin": { "label": "LinkedIn" },
+    "telegram": { "label": "Telegram" },
+    "github": { "label": "GitHub" }
+  },
+  "experience": {
+    "company": { "label": "Company" },
+    "position": { "label": "Position" },
+    "startDate": { "label": "Start date" },
+    "endDate": { "label": "End date" },
+    "isCurrent": { "label": "I currently work here" },
+    "location": { "label": "Location" },
+    "description": {
+      "label": "Responsibilities & achievements",
+      "placeholder": "Briefly describe what you did and what you achieved"
+    },
+    "addEntry": "Add a job",
+    "empty": "No work experience added yet"
+  },
+  "education": {
+    "institution": { "label": "Institution" },
+    "degree": { "label": "Degree or qualification" },
+    "fieldOfStudy": { "label": "Field of study" },
+    "startDate": { "label": "Start date" },
+    "endDate": { "label": "End date" },
+    "description": { "label": "Additional details" },
+    "addEntry": "Add education",
+    "empty": "No education added yet"
+  },
+  "skills": {
+    "name": { "label": "Skill", "placeholder": "e.g. React" },
+    "level": { "label": "Level" },
+    "addEntry": "Add a skill",
+    "empty": "Add a few of your key skills",
+    "levels": {
+      "1": "Beginner",
+      "2": "Basic",
+      "3": "Intermediate",
+      "4": "Advanced",
+      "5": "Expert"
+    }
+  },
+  "languages": {
+    "name": { "label": "Language", "placeholder": "e.g. Spanish" },
+    "level": { "label": "Proficiency" },
+    "addEntry": "Add a language",
+    "empty": "Add the languages you speak",
+    "levels": {
+      "A1": "A1 — beginner",
+      "A2": "A2 — elementary",
+      "B1": "B1 — intermediate",
+      "B2": "B2 — upper-intermediate",
+      "C1": "C1 — advanced",
+      "C2": "C2 — proficient",
+      "native": "native speaker"
+    }
+  },
+  "review": {
+    "title": "Review your details and generate the description",
+    "subtitle": "AI will write a professional summary and highlight your strengths based on what you've entered",
+    "summaryLabel": "Summary",
+    "strengthsLabel": "Strengths",
+    "editHint": "Feel free to edit the text after it's generated",
+    "aiIdleHint": "Click \"Generate with AI\" to get a ready-made description"
+  },
+  "validation": {
+    "required": "This field is required",
+    "invalidEmail": "Please enter a valid email address"
+  }
+}

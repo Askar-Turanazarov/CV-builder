@@ -1,0 +1,28 @@
+.wrapper {
+  display: inline-flex;
+  gap: 4px;
+  background: var(--color-surface-alt);
+  padding: 3px;
+  border-radius: 999px;
+}
+
+.option {
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.option:hover {
+  color: var(--color-text);
+}
+
+.active {
+  background: var(--color-surface);
+  color: var(--color-primary);
+  box-shadow: var(--shadow-card);
+}

@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "summary": "Men haqimda",
+    "strengths": "Kuchli tomonlar",
+    "experience": "Ish tajribasi",
+    "education": "Ta'lim",
+    "skills": "Ko'nikmalar",
+    "languages": "Tillar",
+    "contacts": "Aloqa"
+  },
+  "present": "hozirgi kungacha",
+  "noPhoto": "Rasm yuklanmagan",
+  "ledger": {
+    "period": "Davr",
+    "position": "Lavozim",
+    "degree": "Daraja",
+    "company": "Kompaniya",
+    "institution": "Muassasa",
+    "details": "Tafsilotlar"
+  }
+}

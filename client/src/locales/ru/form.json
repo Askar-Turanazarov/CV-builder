@@ -1,0 +1,90 @@
+{
+  "steps": {
+    "personal": "Личные данные",
+    "contacts": "Контакты",
+    "experience": "Опыт работы",
+    "education": "Образование",
+    "skills": "Навыки",
+    "languages": "Языки",
+    "review": "Проверка и ИИ"
+  },
+  "personal": {
+    "fullName": { "label": "Имя и фамилия", "placeholder": "Например, Айгерим Нурланова" },
+    "jobTitle": { "label": "Должность", "placeholder": "Например, Frontend-разработчик" },
+    "birthDate": { "label": "Дата рождения" },
+    "photo": { "label": "Фотография", "hint": "JPG или PNG — изображение будет автоматически уменьшено" }
+  },
+  "contacts": {
+    "email": { "label": "Email", "placeholder": "you@example.com" },
+    "phone": { "label": "Телефон", "placeholder": "+998 90 123 45 67" },
+    "location": { "label": "Город", "placeholder": "Ташкент, Узбекистан" },
+    "website": { "label": "Сайт", "placeholder": "https://" },
+    "linkedin": { "label": "LinkedIn" },
+    "telegram": { "label": "Telegram" },
+    "github": { "label": "GitHub" }
+  },
+  "experience": {
+    "company": { "label": "Компания" },
+    "position": { "label": "Должность" },
+    "startDate": { "label": "Начало" },
+    "endDate": { "label": "Окончание" },
+    "isCurrent": { "label": "Работаю здесь сейчас" },
+    "location": { "label": "Город" },
+    "description": {
+      "label": "Обязанности и достижения",
+      "placeholder": "Кратко опишите, чем занимались и каких результатов достигли"
+    },
+    "addEntry": "Добавить место работы",
+    "empty": "Пока не добавлено ни одного места работы"
+  },
+  "education": {
+    "institution": { "label": "Учебное заведение" },
+    "degree": { "label": "Степень или квалификация" },
+    "fieldOfStudy": { "label": "Специальность" },
+    "startDate": { "label": "Начало" },
+    "endDate": { "label": "Окончание" },
+    "description": { "label": "Дополнительно" },
+    "addEntry": "Добавить образование",
+    "empty": "Пока не добавлено ни одного места учёбы"
+  },
+  "skills": {
+    "name": { "label": "Навык", "placeholder": "Например, React" },
+    "level": { "label": "Уровень" },
+    "addEntry": "Добавить навык",
+    "empty": "Добавьте хотя бы несколько ключевых навыков",
+    "levels": {
+      "1": "Начальный",
+      "2": "Базовый",
+      "3": "Средний",
+      "4": "Продвинутый",
+      "5": "Эксперт"
+    }
+  },
+  "languages": {
+    "name": { "label": "Язык", "placeholder": "Например, English" },
+    "level": { "label": "Уровень владения" },
+    "addEntry": "Добавить язык",
+    "empty": "Добавьте языки, которыми вы владеете",
+    "levels": {
+      "A1": "A1 — начальный",
+      "A2": "A2 — элементарный",
+      "B1": "B1 — средний",
+      "B2": "B2 — выше среднего",
+      "C1": "C1 — продвинутый",
+      "C2": "C2 — в совершенстве",
+      "native": "родной язык"
+    }
+  },
+  "review": {
+    "title": "Проверьте данные и сгенерируйте описание",
+    "subtitle": "ИИ составит профессиональное описание и выделит ваши сильные стороны на основе введённых данных",
+    "summaryLabel": "Описание",
+    "strengthsLabel": "Сильные стороны",
+    "editHint": "Текст можно свободно отредактировать после генерации",
+    "aiIdleHint": "Нажмите «Сгенерировать с ИИ», чтобы получить готовое описание"
+  },
+  "validation": {
+    "required": "Обязательное поле",
+    "invalidEmail": "Некорректный email"
+  }
+}

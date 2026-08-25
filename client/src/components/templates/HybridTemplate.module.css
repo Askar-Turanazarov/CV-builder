@@ -1,0 +1,135 @@
+.page {
+  background: var(--color-surface);
+  color: var(--color-text);
+  padding: 30px 26px;
+  max-width: 780px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.name {
+  font-size: 1.5rem;
+  margin-bottom: 2px;
+}
+
+.jobTitle {
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.contactCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.contactRow {
+  justify-content: flex-end;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.birthDate {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.band {
+  background: var(--color-accent-soft);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 24px;
+  display: grid;
+  gap: 8px;
+}
+
+.summaryText {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.skillsLine {
+  margin: 0;
+  font-size: 0.88rem;
+  display: grid;
+  gap: 8px;
+}
+
+.pillRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.page :global(.resume-section) {
+  margin-bottom: 22px;
+}
+
+.page :global(.resume-section) h3 {
+  display: inline-block;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-primary);
+  background: var(--color-accent-soft);
+  padding: 5px 12px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.strengthList {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 6px;
+}
+
+.strengthList li::marker {
+  color: var(--color-primary);
+}
+
+.entry {
+  margin-bottom: 16px;
+  border-left: 3px solid var(--color-primary);
+  padding-left: 14px;
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.entryHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.entryDate {
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.entrySub {
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+}
+
+.entryDescription {
+  margin-top: 6px;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+

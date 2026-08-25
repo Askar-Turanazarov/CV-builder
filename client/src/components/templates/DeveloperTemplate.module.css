@@ -1,0 +1,164 @@
+.page {
+  background: var(--color-surface);
+  color: var(--color-text);
+  max-width: 760px;
+  margin-inline: auto;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+
+.tabBar {
+  background: #1e1e1e;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #55575c;
+}
+
+.fileName {
+  margin-left: 12px;
+  color: #9aa0a6;
+  font-size: 0.78rem;
+}
+
+.headerBody {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: 20px 20px 26px;
+}
+
+.name {
+  font-size: 1.4rem;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.jobTitle {
+  color: var(--color-primary);
+  filter: brightness(1.4) saturate(0.8);
+  font-size: 0.88rem;
+  margin-bottom: 8px;
+}
+
+.contactLine {
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: #9cdcfe;
+}
+
+.page :global(.resume-section) {
+  padding: 0 22px;
+  margin-bottom: 22px;
+}
+
+.page :global(.resume-section):first-of-type {
+  margin-top: 22px;
+}
+
+.page :global(.resume-section):last-of-type {
+  padding-bottom: 22px;
+}
+
+.page :global(.resume-section) h3 {
+  display: inline-block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-primary);
+  background: var(--color-accent-soft);
+  padding: 4px 12px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.page :global(.resume-section) h3::before {
+  content: '# ';
+}
+
+.summaryText {
+  line-height: 1.6;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+}
+
+.pillRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.strengthList {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+}
+
+.strengthList li::marker {
+  color: var(--color-primary);
+}
+
+.entry {
+  margin-bottom: 14px;
+  border-left: 3px solid var(--color-primary);
+  padding-left: 12px;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.entryHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.entryDate {
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.entrySub {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.entryDescription {
+  margin-top: 6px;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+.footerNote {
+  padding: 0 22px 20px;
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}

@@ -1,0 +1,45 @@
+/*
+ * Templates apply the plain (non-module-scoped) classes below alongside
+ * their CSS-module classes, specifically so this global stylesheet can
+ * target them regardless of which template/theme is active.
+ */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color-adjust: exact;
+  }
+
+  .container {
+    padding-inline: 0 !important;
+    max-width: none !important;
+  }
+
+  .resume-document {
+    box-shadow: none !important;
+    border: none !important;
+    max-width: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .resume-section,
+  .resume-entry {
+    break-inside: avoid;
+  }
+}

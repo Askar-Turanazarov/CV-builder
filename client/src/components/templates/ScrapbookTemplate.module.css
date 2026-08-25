@@ -1,0 +1,245 @@
+.page {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  padding: 24px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.document {
+  max-width: 800px;
+  margin-inline: auto;
+}
+
+.site {
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .page {
+    padding: 40px 44px;
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+  padding-bottom: 24px;
+  margin-bottom: 28px;
+  border-bottom: 2px dashed var(--color-border);
+}
+
+@media (min-width: 640px) {
+  .header {
+    flex-direction: row;
+    text-align: left;
+  }
+}
+
+/* Polaroid-style photo frame: white border, tilted a few degrees, with a
+   washi-tape strip stuck across the top-left corner. */
+.polaroid {
+  position: relative;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 10px 10px 26px;
+  box-shadow: var(--shadow-card);
+  transform: rotate(-4deg);
+  flex-shrink: 0;
+}
+
+.polaroid::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: -14px;
+  width: 56px;
+  height: 22px;
+  background: var(--color-accent-soft);
+  border: 1px solid var(--color-primary);
+  opacity: 0.85;
+  transform: rotate(-18deg);
+}
+
+.polaroid::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  right: -12px;
+  width: 44px;
+  height: 20px;
+  background: var(--color-primary);
+  opacity: 0.55;
+  transform: rotate(12deg);
+}
+
+.photoWrap {
+  width: 110px;
+  height: 110px;
+  overflow: hidden;
+  background: var(--color-surface-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photoWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photoPlaceholder {
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+  padding: 6px;
+  text-align: center;
+}
+
+.headerText {
+  min-width: 0;
+}
+
+.name {
+  font-family: 'Segoe Print', 'Comic Sans MS', cursive;
+  font-size: 1.9rem;
+  margin-bottom: 6px;
+  transform: rotate(-1.5deg);
+  display: inline-block;
+  color: var(--color-primary);
+}
+
+.jobTitle {
+  color: var(--color-text);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.contactRow {
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .contactRow {
+    justify-content: flex-start;
+  }
+}
+
+.birthDate {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  margin-top: 8px;
+}
+
+/* Section "blocks" as tilted scrapbook cards, alternating rotation
+   direction, each with its own little washi-tape accent. Body text inside
+   is never rotated — only the card and its heading. */
+.page :global(section.resume-section) {
+  position: relative;
+  background: var(--color-surface-alt);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin: 0 0 32px;
+  box-shadow: var(--shadow-card);
+  transform: rotate(-1deg);
+}
+
+.page :global(section.resume-section):nth-of-type(even) {
+  transform: rotate(1deg);
+}
+
+.page :global(section.resume-section)::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 24px;
+  width: 46px;
+  height: 18px;
+  background: var(--color-primary);
+  opacity: 0.5;
+  transform: rotate(-8deg);
+}
+
+.page :global(section.resume-section):nth-of-type(even)::before {
+  left: auto;
+  right: 24px;
+  transform: rotate(8deg);
+}
+
+.page :global(section.resume-section) h3 {
+  display: inline-block;
+  font-family: 'Segoe Print', 'Comic Sans MS', cursive;
+  font-size: 1rem;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  color: var(--color-primary);
+  background: var(--color-accent-soft);
+  padding: 4px 12px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  transform: rotate(-1deg);
+}
+
+.summaryText {
+  color: var(--color-text);
+  line-height: 1.7;
+}
+
+.strengthList {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 6px;
+}
+
+.strengthList li::marker {
+  color: var(--color-primary);
+}
+
+.entry {
+  margin-bottom: 16px;
+  border-left: 3px solid var(--color-primary);
+  padding-left: 14px;
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.entryHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.entryDate {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.entrySub {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  margin-top: 2px;
+}
+
+.entryDescription {
+  margin-top: 8px;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.pillRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

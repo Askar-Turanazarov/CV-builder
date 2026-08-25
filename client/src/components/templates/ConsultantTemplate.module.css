@@ -1,0 +1,136 @@
+.page {
+  background: var(--color-surface);
+  color: var(--color-text);
+  padding: 32px 28px;
+  max-width: 800px;
+  margin-inline: auto;
+  width: 100%;
+  font-size: 0.92rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.name {
+  font-size: 1.5rem;
+  margin-bottom: 2px;
+}
+
+.jobTitle {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.contactList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.birthDate {
+  color: var(--color-text-muted);
+}
+
+.headerRule {
+  height: 2px;
+  background: var(--color-primary);
+  margin: 14px 0 24px;
+}
+
+.page :global(.resume-section),
+.callouts {
+  margin-bottom: 24px;
+}
+
+.page :global(.resume-section) h3,
+.callouts h3 {
+  display: inline-block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-primary);
+  background: var(--color-accent-soft);
+  padding: 5px 12px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.summaryText {
+  line-height: 1.7;
+}
+
+/* Stat-callout tiles in a responsive row, like SalesVibrantTemplate's
+   achievement callouts — each strength is its own card/tile instead of a
+   bulleted or two-column list. */
+.calloutRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.calloutCard {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 200px;
+  background: var(--color-accent-soft);
+  border-left: 2px solid var(--color-primary);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.88rem;
+}
+
+.calloutIndex {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.entry {
+  margin-bottom: 16px;
+  border-left: 3px solid var(--color-primary);
+  padding-left: 14px;
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.entryHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.entryDate {
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.entrySub {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  margin-top: 2px;
+}
+
+.entryDescription {
+  margin-top: 6px;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+.pillRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

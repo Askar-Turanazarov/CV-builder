@@ -1,0 +1,115 @@
+{
+  "appName": "Rezyume konstruktori",
+  "nav": {
+    "home": "Bosh sahifa",
+    "editor": "Muharrir",
+    "preview": "Ko'rib chiqish"
+  },
+  "actions": {
+    "next": "Keyingisi",
+    "back": "Orqaga",
+    "print": "Chop etish",
+    "printHint": "Tizimning chop etish oynasi ochiladi",
+    "downloadPdf": "PDF yuklab olish",
+    "downloadingPdf": "PDF tayyorlanmoqda…",
+    "generateAi": "AI yordamida yaratish",
+    "regenerateAi": "Qayta yaratish",
+    "generating": "Tavsif yozilmoqda…",
+    "startOver": "Qaytadan boshlash",
+    "getStarted": "Rezyume tuzishni boshlash",
+    "addPhoto": "Rasm yuklash",
+    "removePhoto": "Rasmni o'chirish",
+    "add": "Qo'shish",
+    "remove": "O'chirish",
+    "finish": "Tayyor — ko'rib chiqishga o'tish"
+  },
+  "theme": {
+    "label": "Rang mavzusi",
+    "blue": "Ko'k",
+    "emerald": "Zumrad",
+    "graphite": "Grafit",
+    "sunset": "Quyosh botishi"
+  },
+  "colorMode": {
+    "label": "Ko'rinish",
+    "light": "Yorug'",
+    "dark": "Qorong'i"
+  },
+  "template": {
+    "label": "Shablon",
+    "classic": "Klassik",
+    "sidebar": "Zamonaviy",
+    "minimal": "Minimal",
+    "timeline": "Vaqt chizig'i",
+    "compact": "Ixcham",
+    "harvard": "Harvard",
+    "executive": "Ijrochi",
+    "consultant": "Konsalting",
+    "academic": "Akademik",
+    "twoColumnPhoto": "Chapda rasm",
+    "darkSidebar": "Qorong'i panel",
+    "functional": "Funksional",
+    "hybrid": "Gibrid",
+    "gradientHeader": "Gradient sarlavha",
+    "swissMinimal": "Shveytsariya uslubi",
+    "elegantSerif": "Nafis",
+    "colorBlock": "Rangli blok",
+    "developer": "Dasturchi",
+    "salesVibrant": "Savdo va marketing",
+    "startup": "Startap",
+    "healthcare": "Salomatlik",
+    "legal": "Yuridik",
+    "nonprofit": "Notijorat",
+    "photoPortrait": "Foto-portret",
+    "twoPage": "Ikki sahifali",
+    "terminal": "Terminal",
+    "poster": "Poster",
+    "editorial": "Jurnal uslubi",
+    "ultraCard": "Vizitka",
+    "diagonal": "Diagonal",
+    "splitDuo": "Ikki bo'lak",
+    "badgeInitials": "Bosh harflar",
+    "cardGrid": "Kartochkalar",
+    "ribbonCorner": "Lenta",
+    "iconRail": "Belgilar paneli",
+    "ledger": "Jadval",
+    "radialTimeline": "Radial vaqt chizig'i",
+    "scrapbook": "Skrapbuk",
+    "dashboardStats": "Boshqaruv paneli",
+    "blueprint": "Chizma"
+  },
+  "templateGallery": {
+    "popular": "Mashhur",
+    "unusual": "G'ayrioddiy",
+    "close": "Yopish"
+  },
+  "design": {
+    "label": "Interfeys dizayni",
+    "classic": "Klassik",
+    "glass": "Apple Glass"
+  },
+  "viewMode": {
+    "label": "Rejim",
+    "document": "Hujjat",
+    "site": "Mini-sayt"
+  },
+  "language": {
+    "label": "Til",
+    "ru": "Русский",
+    "en": "English",
+    "uz": "O'zbekcha"
+  },
+  "landing": {
+    "title": "Bir necha daqiqada rezyume va portfolio",
+    "subtitle": "Qisqa shaklni to'ldiring — sun'iy intellekt tavsifni o'zi yozadi va kuchli tomonlaringizni ta'kidlaydi. Shablon va rangni tanlang, so'ng PDF sifatida yuklab oling yoki portfolio mini-sayt sifatida ulashing.",
+    "cta": "Bepul boshlash",
+    "featureAi": "AI tavsifni siz uchun yozadi",
+    "featureTemplates": "Bir nechta tayyor shablonlar",
+    "featureExport": "Chop etish va PDF eksporti"
+  },
+  "errors": {
+    "generic": "Nimadir xato ketdi. Qaytadan urinib ko'ring.",
+    "restoreFailed": "Saqlangan ma'lumotlarni tiklab bo'lmadi — shakl tozalandi.",
+    "pdfFailed": "PDF yaratib bo'lmadi. Qaytadan urinib ko'ring."
+  }
+}

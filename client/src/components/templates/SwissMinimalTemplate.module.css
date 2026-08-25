@@ -1,0 +1,128 @@
+.page {
+  background: var(--color-surface);
+  color: var(--color-text);
+  padding: 48px 40px;
+  max-width: 760px;
+  margin-inline: auto;
+  width: 100%;
+  font-family:
+    Helvetica,
+    Arial,
+    -apple-system,
+    sans-serif;
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 32px 20px;
+  }
+}
+
+.header {
+  margin-bottom: 40px;
+}
+
+.name {
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+
+.jobTitle {
+  color: var(--color-primary);
+  font-size: 1rem;
+  margin-bottom: 16px;
+}
+
+.contactGrid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 20px;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  border-top: 1px solid var(--color-primary);
+  padding-top: 10px;
+}
+
+.birthDate {
+  color: var(--color-text-muted);
+}
+
+.page :global(.resume-section) {
+  margin-bottom: 34px;
+}
+
+.page :global(.resume-section) h3 {
+  display: inline-block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-primary);
+  background: var(--color-accent-soft);
+  padding: 5px 12px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.summaryText {
+  line-height: 1.7;
+  max-width: 560px;
+}
+
+.strengthList {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+}
+
+.strengthList li::marker {
+  color: var(--color-primary);
+}
+
+/* Real 2-zone grid per entry: a narrow label column carrying only the date
+   range, and a wide content column carrying position/institution and
+   description — not a global page sidebar, just how each entry lays out. */
+.entry {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.entryDate {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  padding-top: 2px;
+}
+
+.entryContent {
+  border-left: 2px solid var(--color-primary);
+  padding-left: 20px;
+}
+
+.entrySub {
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+  margin-top: 2px;
+}
+
+.entryDescription {
+  margin-top: 6px;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.pillRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

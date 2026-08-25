@@ -1,0 +1,195 @@
+.page {
+  display: grid;
+  grid-template-columns: 1fr;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  width: 100%;
+}
+
+.document {
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.site {
+  max-width: 1100px;
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .page {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.left {
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+  padding: 36px 28px;
+  text-align: center;
+}
+
+.right {
+  padding: 36px 28px;
+}
+
+.photoWrap {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 16px;
+  background: rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid rgba(255, 255, 255, 0.35);
+}
+
+.photoWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photoPlaceholder {
+  font-size: 0.7rem;
+  padding: 8px;
+  opacity: 0.8;
+}
+
+.name {
+  font-size: 1.6rem;
+  margin-bottom: 4px;
+}
+
+.jobTitle {
+  opacity: 0.85;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.contactBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.contacts {
+  justify-content: center;
+}
+
+.birthDate {
+  font-size: 0.88rem;
+  opacity: 0.85;
+  margin: 4px 0 0;
+}
+
+.leftSection {
+  text-align: left;
+}
+
+.left :global(.resume-section) {
+  margin-top: 28px;
+  text-align: left;
+}
+
+.left :global(.resume-section) h3 {
+  display: inline-block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  opacity: 0.8;
+  background: rgba(255, 255, 255, 0.16);
+  padding: 5px 12px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.pillRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pillRow :global(.skill-pill),
+.pillRow :global(.language-badge) {
+  background: rgba(255, 255, 255, 0.16);
+  color: inherit;
+}
+
+.pillRow :global(.language-badge) :global(.level) {
+  background: rgba(255, 255, 255, 0.3);
+  color: inherit;
+}
+
+.right :global(.resume-section) {
+  margin-bottom: 28px;
+}
+
+.right :global(.resume-section) h3 {
+  display: inline-block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-primary);
+  background: var(--color-accent-soft);
+  padding: 5px 12px;
+  border-radius: 6px;
+  margin-bottom: 14px;
+}
+
+.summaryText {
+  line-height: 1.7;
+}
+
+.strengthList {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 6px;
+}
+
+.strengthList li::marker {
+  color: var(--color-primary);
+}
+
+.entry {
+  margin-bottom: 18px;
+  border-left: 3px solid var(--color-primary);
+  padding-left: 14px;
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.entryHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.entryDate {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.entrySub {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  margin-top: 2px;
+}
+
+.entryDescription {
+  margin-top: 8px;
+  line-height: 1.6;
+  white-space: pre-line;
+}

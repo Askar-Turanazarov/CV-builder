@@ -1,0 +1,90 @@
+{
+  "steps": {
+    "personal": "Shaxsiy ma'lumotlar",
+    "contacts": "Aloqa ma'lumotlari",
+    "experience": "Ish tajribasi",
+    "education": "Ta'lim",
+    "skills": "Ko'nikmalar",
+    "languages": "Tillar",
+    "review": "Ko'rib chiqish va AI"
+  },
+  "personal": {
+    "fullName": { "label": "Ism-familiya", "placeholder": "Masalan, Diyora Karimova" },
+    "jobTitle": { "label": "Lavozim", "placeholder": "Masalan, Frontend dasturchi" },
+    "birthDate": { "label": "Tug'ilgan sana" },
+    "photo": { "label": "Fotosurat", "hint": "JPG yoki PNG — rasm avtomatik ravishda kichraytiriladi" }
+  },
+  "contacts": {
+    "email": { "label": "Email", "placeholder": "you@example.com" },
+    "phone": { "label": "Telefon", "placeholder": "+998 90 123 45 67" },
+    "location": { "label": "Shahar", "placeholder": "Toshkent, O'zbekiston" },
+    "website": { "label": "Veb-sayt", "placeholder": "https://" },
+    "linkedin": { "label": "LinkedIn" },
+    "telegram": { "label": "Telegram" },
+    "github": { "label": "GitHub" }
+  },
+  "experience": {
+    "company": { "label": "Kompaniya" },
+    "position": { "label": "Lavozim" },
+    "startDate": { "label": "Boshlanish sanasi" },
+    "endDate": { "label": "Tugash sanasi" },
+    "isCurrent": { "label": "Hozirda shu yerda ishlayman" },
+    "location": { "label": "Shahar" },
+    "description": {
+      "label": "Vazifalar va yutuqlar",
+      "placeholder": "Nima bilan shug'ullanganingizni va qanday natijalarga erishganingizni qisqacha yozing"
+    },
+    "addEntry": "Ish joyi qo'shish",
+    "empty": "Hozircha birorta ham ish joyi qo'shilmagan"
+  },
+  "education": {
+    "institution": { "label": "Ta'lim muassasasi" },
+    "degree": { "label": "Daraja yoki malaka" },
+    "fieldOfStudy": { "label": "Mutaxassislik" },
+    "startDate": { "label": "Boshlanish sanasi" },
+    "endDate": { "label": "Tugash sanasi" },
+    "description": { "label": "Qo'shimcha ma'lumot" },
+    "addEntry": "Ta'lim qo'shish",
+    "empty": "Hozircha birorta ham ta'lim joyi qo'shilmagan"
+  },
+  "skills": {
+    "name": { "label": "Ko'nikma", "placeholder": "Masalan, React" },
+    "level": { "label": "Daraja" },
+    "addEntry": "Ko'nikma qo'shish",
+    "empty": "Bir nechta asosiy ko'nikmangizni qo'shing",
+    "levels": {
+      "1": "Boshlang'ich",
+      "2": "Oddiy",
+      "3": "O'rta",
+      "4": "Yuqori",
+      "5": "Ekspert"
+    }
+  },
+  "languages": {
+    "name": { "label": "Til", "placeholder": "Masalan, Ingliz tili" },
+    "level": { "label": "Bilim darajasi" },
+    "addEntry": "Til qo'shish",
+    "empty": "Biladigan tillaringizni qo'shing",
+    "levels": {
+      "A1": "A1 — boshlang'ich",
+      "A2": "A2 — elementar",
+      "B1": "B1 — o'rta",
+      "B2": "B2 — o'rtadan yuqori",
+      "C1": "C1 — yuqori",
+      "C2": "C2 — mukammal",
+      "native": "ona tili"
+    }
+  },
+  "review": {
+    "title": "Ma'lumotlarni tekshiring va tavsifni yarating",
+    "subtitle": "Kiritilgan ma'lumotlar asosida AI professional tavsif yozadi va kuchli tomonlaringizni ta'kidlaydi",
+    "summaryLabel": "Tavsif",
+    "strengthsLabel": "Kuchli tomonlar",
+    "editHint": "Yaratilgandan so'ng matnni erkin tahrirlashingiz mumkin",
+    "aiIdleHint": "Tayyor tavsif olish uchun «AI yordamida yaratish» tugmasini bosing"
+  },
+  "validation": {
+    "required": "Majburiy maydon",
+    "invalidEmail": "Email manzili noto'g'ri"
+  }
+}

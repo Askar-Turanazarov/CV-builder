@@ -1,0 +1,114 @@
+/*
+ * Templates never hardcode colors — every color a template uses comes from
+ * these custom properties. Switching [data-theme]/[data-color-mode] on the
+ * wrapper re-paints whichever template is mounted with no React re-render.
+ */
+
+:root {
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f1f5f9;
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+  --color-border: #e2e8f0;
+  --color-primary: #4338ca;
+  --color-primary-contrast: #ffffff;
+  --color-accent-soft: #eef2ff;
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+/* ---------- Синий / Blue ---------- */
+[data-theme='blue'][data-color-mode='light'] {
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f1f5f9;
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+  --color-border: #e2e8f0;
+  --color-primary: #4338ca;
+  --color-primary-contrast: #ffffff;
+  --color-accent-soft: #eef2ff;
+}
+[data-theme='blue'][data-color-mode='dark'] {
+  --color-bg: #0f172a;
+  --color-surface: #1e293b;
+  --color-surface-alt: #16213a;
+  --color-text: #f1f5f9;
+  --color-text-muted: #94a3b8;
+  --color-border: #334155;
+  --color-primary: #818cf8;
+  --color-primary-contrast: #1e1b4b;
+  --color-accent-soft: #1e1b4b;
+}
+
+/* ---------- Изумруд / Emerald ---------- */
+[data-theme='emerald'][data-color-mode='light'] {
+  --color-bg: #f8faf9;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f0f7f4;
+  --color-text: #0f1f19;
+  --color-text-muted: #5b6b64;
+  --color-border: #dce8e2;
+  --color-primary: #059669;
+  --color-primary-contrast: #ffffff;
+  --color-accent-soft: #ecfdf5;
+}
+[data-theme='emerald'][data-color-mode='dark'] {
+  --color-bg: #0b1a15;
+  --color-surface: #142722;
+  --color-surface-alt: #102019;
+  --color-text: #ecfdf5;
+  --color-text-muted: #8fada2;
+  --color-border: #24413a;
+  --color-primary: #34d399;
+  --color-primary-contrast: #052e21;
+  --color-accent-soft: #0f3b2c;
+}
+
+/* ---------- Графит / Graphite ---------- */
+[data-theme='graphite'][data-color-mode='light'] {
+  --color-bg: #f7f7f8;
+  --color-surface: #ffffff;
+  --color-surface-alt: #eef0f2;
+  --color-text: #1e2126;
+  --color-text-muted: #667085;
+  --color-border: #e3e5e8;
+  --color-primary: #475569;
+  --color-primary-contrast: #ffffff;
+  --color-accent-soft: #eef1f4;
+}
+[data-theme='graphite'][data-color-mode='dark'] {
+  --color-bg: #14161a;
+  --color-surface: #1e2126;
+  --color-surface-alt: #191b20;
+  --color-text: #f1f2f4;
+  --color-text-muted: #9aa1ac;
+  --color-border: #2c2f36;
+  --color-primary: #b0b8c4;
+  --color-primary-contrast: #14161a;
+  --color-accent-soft: #262a31;
+}
+
+/* ---------- Закат / Sunset ---------- */
+[data-theme='sunset'][data-color-mode='light'] {
+  --color-bg: #fffaf6;
+  --color-surface: #ffffff;
+  --color-surface-alt: #fdf1e6;
+  --color-text: #271507;
+  --color-text-muted: #8a6a53;
+  --color-border: #f1ddc9;
+  --color-primary: #ea580c;
+  --color-primary-contrast: #ffffff;
+  --color-accent-soft: #fff7ed;
+}
+[data-theme='sunset'][data-color-mode='dark'] {
+  --color-bg: #1c1310;
+  --color-surface: #2a1c15;
+  --color-surface-alt: #24170f;
+  --color-text: #fff1e4;
+  --color-text-muted: #c7a48d;
+  --color-border: #43291a;
+  --color-primary: #fb923c;
+  --color-primary-contrast: #2a1300;
+  --color-accent-soft: #3a2213;
+}

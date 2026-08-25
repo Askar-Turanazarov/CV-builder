@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "summary": "About",
+    "strengths": "Strengths",
+    "experience": "Experience",
+    "education": "Education",
+    "skills": "Skills",
+    "languages": "Languages",
+    "contacts": "Contact"
+  },
+  "present": "present",
+  "noPhoto": "No photo uploaded",
+  "ledger": {
+    "period": "Period",
+    "position": "Position",
+    "degree": "Degree",
+    "company": "Company",
+    "institution": "Institution",
+    "details": "Details"
+  }
+}

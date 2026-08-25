@@ -1,0 +1,132 @@
+.page {
+  background: var(--color-surface);
+  color: var(--color-text);
+  padding: 44px 40px;
+  max-width: 760px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 32px 20px;
+  }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.name {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 2.1rem;
+  letter-spacing: 0.03em;
+  margin-bottom: 6px;
+}
+
+.jobTitle {
+  color: var(--color-primary);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.rule {
+  width: 64px;
+  height: 3px;
+  background: var(--color-primary);
+  margin: 18px auto;
+}
+
+.contactRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 6px 16px;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.birthDate {
+  color: var(--color-text-muted);
+}
+
+.page :global(.resume-section) {
+  margin-bottom: 30px;
+}
+
+.page :global(.resume-section) h3 {
+  width: fit-content;
+  margin: 0 auto 14px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-primary);
+  background: var(--color-accent-soft);
+  padding: 5px 12px;
+  border-radius: 6px;
+}
+
+.summaryText {
+  line-height: 1.8;
+  text-align: center;
+}
+
+.strengthList {
+  margin: 0 auto;
+  max-width: 560px;
+  padding-left: 20px;
+  display: grid;
+  gap: 8px;
+}
+
+.strengthList li::marker {
+  color: var(--color-primary);
+}
+
+.entry {
+  margin-bottom: 20px;
+  border-left: 3px solid var(--color-primary);
+  padding-left: 14px;
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.entryHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 1.02rem;
+}
+
+.entryDate {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.entrySub {
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-top: 2px;
+}
+
+.entryDescription {
+  margin-top: 8px;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.pillRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}

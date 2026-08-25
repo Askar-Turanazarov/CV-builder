@@ -1,0 +1,49 @@
+/*
+ * "Документ" vs "Мини-сайт" — applied uniformly across ALL resume templates
+ * via shared plain classes every template attaches to its own elements
+ * (`.resume-document`, `.resume-section`, `.resume-name`, `.resume-photo`,
+ * `.contact-links` — the same pattern print.css already uses), scoped by
+ * `[data-view-mode]` on PreviewPage's stage wrapper. This is what lets a
+ * handful of rules affect all 40 templates without editing each one
+ * individually for the *visual* half of the difference.
+ *
+ * The other half — the actual FUNCTIONAL difference — lives in
+ * shared/ContactLinks.tsx: in Site mode every template renders contacts as
+ * real clickable pill buttons (variant="buttons") instead of plain text
+ * (variant="plain"). Document mode keeps contacts as inert text suited to
+ * a printed page; Site mode turns them into a "get in touch" call to
+ * action, because that's the entire point of a portfolio mini-site.
+ */
+
+[data-view-mode='site'] {
+  background: radial-gradient(circle at 15% 0%, var(--color-accent-soft), transparent 55%), var(--color-bg) !important;
+  padding-block: 40px !important;
+}
+
+[data-view-mode='site'] .resume-document {
+  max-width: min(1080px, 94vw) !important;
+  box-shadow:
+    0 24px 60px -20px rgba(0, 0, 0, 0.25),
+    0 2px 8px rgba(0, 0, 0, 0.06) !important;
+}
+
+[data-view-mode='site'] .resume-section {
+  margin-bottom: 34px !important;
+}
+
+/* Hero treatment: the name/photo every template already renders just gets
+   bigger and more confident — no second, duplicate header is introduced. */
+[data-view-mode='site'] .resume-name {
+  font-size: 1.2em !important;
+}
+
+[data-view-mode='site'] .resume-photo {
+  transform: scale(1.15);
+}
+
+[data-view-mode='document'] .contact-links.buttons {
+  /* Safety net: PrintPreviewPage always forces viewMode to 'document', so
+     this should never actually be reached, but keeps Document mode's
+     contacts inert even if a template is ever misconfigured. */
+  pointer-events: none;
+}

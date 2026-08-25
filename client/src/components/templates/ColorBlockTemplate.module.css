@@ -1,0 +1,139 @@
+.page {
+  background: var(--color-surface);
+  color: var(--color-text);
+  max-width: 760px;
+  margin-inline: auto;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.block {
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+  padding: 36px 28px;
+  position: relative;
+}
+
+.block::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.name {
+  font-size: 1.7rem;
+  margin-bottom: 4px;
+}
+
+.jobTitle {
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.body {
+  padding: 28px 28px 32px;
+}
+
+.contactRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 16px;
+  margin: 0 0 24px;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.birthDate {
+  color: var(--color-text-muted);
+}
+
+.body :global(.resume-section) {
+  margin-bottom: 24px;
+}
+
+.body :global(.resume-section) h3 {
+  display: inline-block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-primary);
+  background: var(--color-accent-soft);
+  margin-bottom: 12px;
+  padding: 5px 12px 5px 24px;
+  border-radius: 6px;
+  position: relative;
+}
+
+.body :global(.resume-section) h3::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: var(--color-primary);
+}
+
+.summaryText {
+  line-height: 1.7;
+}
+
+.strengthList {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+  list-style: square;
+}
+
+.strengthList li::marker {
+  color: var(--color-primary);
+}
+
+.entry {
+  margin-bottom: 16px;
+  border-left: 3px solid var(--color-primary);
+  padding-left: 14px;
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.entryHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.entryDate {
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.entrySub {
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+}
+
+.entryDescription {
+  margin-top: 6px;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+.pillRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

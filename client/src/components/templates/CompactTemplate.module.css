@@ -1,0 +1,98 @@
+.page {
+  background: var(--color-surface);
+  color: var(--color-text);
+  padding: 28px 24px;
+  max-width: 720px;
+  margin-inline: auto;
+  width: 100%;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+@media (min-width: 640px) {
+  .page {
+    padding: 40px 32px;
+  }
+}
+
+.header {
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid var(--color-primary);
+}
+
+.name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  margin-bottom: 2px;
+}
+
+.jobTitle {
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+.contactLine {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.page :global(.resume-section) {
+  margin-bottom: 14px;
+}
+
+.page :global(.resume-section) h3 {
+  display: inline-block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-weight: 700;
+  color: var(--color-primary);
+  background: var(--color-accent-soft);
+  padding: 3px 10px;
+  border-radius: 5px;
+  margin-bottom: 6px;
+}
+
+.summaryText,
+.inlineList {
+  margin: 0;
+}
+
+.pillRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.entry {
+  margin-bottom: 8px;
+  border-left: 2px solid var(--color-primary);
+  padding-left: 8px;
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.entryLine {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.entryDate {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.entryDescription {
+  margin: 2px 0 0;
+  font-size: 0.85rem;
+  white-space: pre-line;
+}

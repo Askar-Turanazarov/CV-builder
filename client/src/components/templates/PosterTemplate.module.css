@@ -1,0 +1,115 @@
+.page {
+  position: relative;
+  background: var(--color-surface);
+  color: var(--color-text);
+  max-width: 760px;
+  margin-inline: auto;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+}
+
+.fill {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 45%;
+  height: 260px;
+  background: var(--color-primary);
+  border-radius: 0 0 0 100%;
+}
+
+.header {
+  position: relative;
+  padding: 40px 28px 0;
+}
+
+.name {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+  max-width: 80%;
+}
+
+@media (max-width: 480px) {
+  .name {
+    font-size: 2.1rem;
+  }
+}
+
+.jobTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.contactRow {
+  position: relative;
+  padding: 16px 28px 0;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+}
+
+.birthDate {
+  color: var(--color-text-muted);
+}
+
+.content {
+  padding: 28px;
+}
+
+.block {
+  margin-bottom: 26px;
+}
+
+.block h3 {
+  display: inline-block;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  background: var(--color-accent-soft);
+  padding: 4px 12px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.bigList {
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.pillRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.entry {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 8px 0;
+  border-top: 2px solid var(--color-primary);
+  font-size: 0.9rem;
+}
+
+.entryTitle {
+  font-weight: 700;
+}
+
+.entryDate {
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}

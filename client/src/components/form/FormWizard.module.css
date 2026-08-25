@@ -1,0 +1,20 @@
+.wizard {
+  width: 100%;
+  max-width: 720px;
+  margin-inline: auto;
+  padding-block: 24px 64px;
+}
+
+.stepBody {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+}
+
+@media (min-width: 768px) {
+  .stepBody {
+    padding: 32px;
+  }
+}

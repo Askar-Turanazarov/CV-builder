@@ -1,0 +1,156 @@
+.page {
+  background: var(--color-surface);
+  color: var(--color-text);
+  padding: 36px 32px;
+  max-width: 700px;
+  margin-inline: auto;
+  width: 100%;
+  font-family: Georgia, 'Times New Roman', serif;
+  line-height: 1.6;
+}
+
+.header {
+  margin-bottom: 24px;
+  border-bottom: 2px double var(--color-text);
+  padding-bottom: 12px;
+}
+
+.name {
+  font-size: 1.5rem;
+  margin-bottom: 2px;
+}
+
+.jobTitle {
+  font-style: italic;
+  color: var(--color-text-muted);
+  margin-bottom: 6px;
+}
+
+.contactLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 16px;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.birthDate {
+  color: var(--color-text-muted);
+}
+
+.page :global(.resume-section) {
+  margin-bottom: 22px;
+}
+
+.page :global(.resume-section) h3 {
+  display: inline-block;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: var(--color-primary);
+  background: var(--color-accent-soft);
+  padding: 5px 12px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.summaryText {
+  line-height: 1.7;
+}
+
+.strengthList {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 6px;
+}
+
+.strengthList li::marker {
+  color: var(--color-primary);
+}
+
+/* Experience keeps the plain stacked-entry layout; only Education gets the
+   table treatment below. */
+.entry {
+  margin-bottom: 16px;
+  border-left: 3px solid var(--color-primary);
+  padding-left: 14px;
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.entryHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.entryDate {
+  font-style: italic;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.entrySub {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.entryDescription {
+  margin-top: 6px;
+  white-space: pre-line;
+}
+
+.pillRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Compact table-like layout for Education: Degree | Institution | Years as
+   three real grid columns per row, instead of stacked paragraph entries. */
+.eduTable {
+  display: grid;
+  gap: 2px;
+}
+
+.eduRow {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr auto;
+  align-items: baseline;
+  column-gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.eduRow:last-child {
+  border-bottom: none;
+}
+
+.eduField {
+  color: var(--color-text-muted);
+}
+
+.eduInstitution {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+.eduYears {
+  color: var(--color-primary);
+  font-style: italic;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.eduDescription {
+  grid-column: 1 / -1;
+  margin: 6px 0 0;
+  white-space: pre-line;
+}

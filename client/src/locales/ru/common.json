@@ -1,0 +1,115 @@
+{
+  "appName": "Конструктор резюме",
+  "nav": {
+    "home": "Главная",
+    "editor": "Редактор",
+    "preview": "Просмотр"
+  },
+  "actions": {
+    "next": "Далее",
+    "back": "Назад",
+    "print": "Печать",
+    "printHint": "Откроется системный диалог печати",
+    "downloadPdf": "Скачать PDF",
+    "downloadingPdf": "Формируем PDF…",
+    "generateAi": "Сгенерировать с ИИ",
+    "regenerateAi": "Сгенерировать заново",
+    "generating": "Генерируем описание…",
+    "startOver": "Начать заново",
+    "getStarted": "Создать резюме",
+    "addPhoto": "Загрузить фото",
+    "removePhoto": "Удалить фото",
+    "add": "Добавить",
+    "remove": "Удалить",
+    "finish": "Готово, к просмотру"
+  },
+  "theme": {
+    "label": "Цветовая тема",
+    "blue": "Синий",
+    "emerald": "Изумруд",
+    "graphite": "Графит",
+    "sunset": "Закат"
+  },
+  "colorMode": {
+    "label": "Оформление",
+    "light": "Светлое",
+    "dark": "Тёмное"
+  },
+  "template": {
+    "label": "Шаблон",
+    "classic": "Классический",
+    "sidebar": "Модерн",
+    "minimal": "Минимал",
+    "timeline": "Таймлайн",
+    "compact": "Компакт",
+    "harvard": "Harvard",
+    "executive": "Executive",
+    "consultant": "Консалтинг",
+    "academic": "Академический",
+    "twoColumnPhoto": "Фото слева",
+    "darkSidebar": "Тёмный сайдбар",
+    "functional": "Функциональный",
+    "hybrid": "Гибрид",
+    "gradientHeader": "Градиент",
+    "swissMinimal": "Швейцарский",
+    "elegantSerif": "Элегантный",
+    "colorBlock": "Цветовой блок",
+    "developer": "Developer",
+    "salesVibrant": "Sales & Marketing",
+    "startup": "Стартап",
+    "healthcare": "Healthcare",
+    "legal": "Юридический",
+    "nonprofit": "Некоммерческий",
+    "photoPortrait": "Фотопортрет",
+    "twoPage": "На две страницы",
+    "terminal": "Терминал",
+    "poster": "Постер",
+    "editorial": "Журнальный",
+    "ultraCard": "Визитка",
+    "diagonal": "Диагональ",
+    "splitDuo": "Дуо-раздел",
+    "badgeInitials": "Инициалы",
+    "cardGrid": "Карточки",
+    "ribbonCorner": "Лента",
+    "iconRail": "Иконки-рейка",
+    "ledger": "Гроссбух",
+    "radialTimeline": "Радиальный таймлайн",
+    "scrapbook": "Скрапбук",
+    "dashboardStats": "Дашборд",
+    "blueprint": "Чертёж"
+  },
+  "templateGallery": {
+    "popular": "Популярные",
+    "unusual": "Необычные",
+    "close": "Закрыть"
+  },
+  "design": {
+    "label": "Дизайн интерфейса",
+    "classic": "Классический",
+    "glass": "Apple Glass"
+  },
+  "viewMode": {
+    "label": "Вид",
+    "document": "Документ",
+    "site": "Мини-сайт"
+  },
+  "language": {
+    "label": "Язык",
+    "ru": "Русский",
+    "en": "English",
+    "uz": "O'zbekcha"
+  },
+  "landing": {
+    "title": "Резюме и портфолио за пару минут",
+    "subtitle": "Заполните форму — ИИ сам напишет описание и подчеркнёт ваши сильные стороны. Выберите шаблон и цвет, скачайте PDF или откройте как мини-сайт портфолио.",
+    "cta": "Начать бесплатно",
+    "featureAi": "ИИ пишет описание за вас",
+    "featureTemplates": "Несколько шаблонов оформления",
+    "featureExport": "Печать и экспорт в PDF"
+  },
+  "errors": {
+    "generic": "Что-то пошло не так. Попробуйте ещё раз.",
+    "restoreFailed": "Не удалось восстановить сохранённые данные — форма сброшена.",
+    "pdfFailed": "Не удалось сформировать PDF. Попробуйте, пожалуйста, ещё раз."
+  }
+}

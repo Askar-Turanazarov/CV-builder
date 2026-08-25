@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "summary": "О себе",
+    "strengths": "Сильные стороны",
+    "experience": "Опыт работы",
+    "education": "Образование",
+    "skills": "Навыки",
+    "languages": "Языки",
+    "contacts": "Контакты"
+  },
+  "present": "по настоящее время",
+  "noPhoto": "Фото не загружено",
+  "ledger": {
+    "period": "Период",
+    "position": "Должность",
+    "degree": "Степень",
+    "company": "Компания",
+    "institution": "Учреждение",
+    "details": "Детали"
+  }
+}

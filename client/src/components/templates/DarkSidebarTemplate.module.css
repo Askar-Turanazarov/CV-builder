@@ -1,0 +1,185 @@
+.page {
+  display: grid;
+  grid-template-columns: 1fr;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  max-width: 960px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+@media (min-width: 700px) {
+  .page {
+    grid-template-columns: 260px 1fr;
+  }
+}
+
+/* Fixed dark panel — intentionally NOT using --color-surface/--color-bg,
+   so it stays dark charcoal regardless of the app's light/dark colorMode. */
+.sidebar {
+  background: #1a1d24;
+  color: #e6e8ec;
+  padding: 30px 22px;
+  text-align: center;
+}
+
+.photoWrap {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 3px solid var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photoWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photoPlaceholder {
+  font-size: 0.65rem;
+  opacity: 0.7;
+  padding: 6px;
+}
+
+.name {
+  font-size: 1.2rem;
+  margin-bottom: 2px;
+}
+
+.jobTitle {
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.sidebar :global(.resume-section) {
+  text-align: left;
+  margin-bottom: 22px;
+}
+
+.sidebar :global(.resume-section):last-child {
+  margin-bottom: 0;
+}
+
+.sidebar :global(.resume-section) h3 {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+
+.sidebarContacts {
+  font-size: 0.82rem;
+  word-break: break-word;
+}
+
+.birthDate {
+  opacity: 0.85;
+  font-size: 0.82rem;
+  margin: 6px 0 0;
+}
+
+.pillRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pillRow :global(.skill-pill),
+.pillRow :global(.language-badge) {
+  background: rgba(255, 255, 255, 0.1);
+  color: inherit;
+}
+
+.pillRow :global(.language-badge) :global(.level) {
+  background: rgba(255, 255, 255, 0.25);
+  color: inherit;
+}
+
+.main {
+  padding: 28px 24px;
+  background: var(--color-surface);
+}
+
+@media (min-width: 700px) {
+  .main {
+    padding: 36px 32px;
+  }
+}
+
+.main :global(.resume-section) {
+  margin-bottom: 26px;
+}
+
+.main :global(.resume-section) h3 {
+  display: inline-block;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-primary);
+  background: var(--color-accent-soft);
+  padding: 5px 12px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.summaryText {
+  line-height: 1.7;
+}
+
+.strengthList {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 6px;
+}
+
+.strengthList li::marker {
+  color: var(--color-primary);
+}
+
+.entry {
+  margin-bottom: 16px;
+  border-left: 3px solid var(--color-primary);
+  padding-left: 14px;
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.entryHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.entryDate {
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.entrySub {
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+}
+
+.entryDescription {
+  margin-top: 6px;
+  line-height: 1.55;
+  white-space: pre-line;
+}

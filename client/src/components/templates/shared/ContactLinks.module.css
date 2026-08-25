@@ -1,0 +1,93 @@
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 16px;
+}
+
+/* Document mode: real anchors, but visually still just inline text (so the
+   printed/PDF resume doesn't suddenly look like a web page). */
+.plain li {
+  position: relative;
+  padding-right: 16px;
+  font-size: inherit;
+  color: inherit;
+}
+
+.plain li:last-child {
+  padding-right: 0;
+}
+
+.plain li:not(:last-child)::after {
+  content: '·';
+  position: absolute;
+  right: 0;
+  color: var(--color-text-muted);
+}
+
+.plain a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.plain a:hover {
+  text-decoration: underline;
+}
+
+/* Site mode: real call-to-action buttons — this is the functional payoff
+   of switching to "Мини-сайт". */
+.buttons {
+  gap: 8px;
+}
+
+.buttons a,
+.buttons span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--color-accent-soft);
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.buttons a:hover {
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+  transform: translateY(-1px);
+}
+
+.icon {
+  font-size: 0.9em;
+}
+
+/* Placed on a colored/dark surface (sidebars, banners, terminal panels) —
+   text just inherits the surrounding color instead of forcing the theme's
+   light-surface accent colors, which would be unreadable there. */
+.inverted.plain a,
+.inverted.plain span,
+.inverted.plain li:not(:last-child)::after {
+  color: inherit;
+  opacity: 0.85;
+}
+
+.inverted.buttons a,
+.inverted.buttons span {
+  background: rgba(255, 255, 255, 0.16);
+  color: inherit;
+}
+
+.inverted.buttons a:hover {
+  background: rgba(255, 255, 255, 0.3);
+  color: inherit;
+}

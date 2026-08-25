@@ -1,0 +1,118 @@
+.page {
+  background: var(--color-surface);
+  color: var(--color-text);
+  padding: 34px 30px;
+  max-width: 740px;
+  margin-inline: auto;
+  width: 100%;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 3px solid var(--color-primary);
+}
+
+.name {
+  font-size: 1.55rem;
+  margin-bottom: 4px;
+}
+
+.jobTitle {
+  color: var(--color-primary);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.contactBar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 6px 16px;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+}
+
+.birthDate {
+  color: var(--color-text-muted);
+}
+
+.page :global(.resume-section) {
+  margin-bottom: 22px;
+}
+
+.page :global(.resume-section) h3 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-primary);
+  background: var(--color-accent-soft);
+  padding: 6px 10px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.summaryText {
+  line-height: 1.7;
+}
+
+.checkList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+
+.checkList li::before {
+  content: '✓ ';
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.entry {
+  margin-bottom: 16px;
+  border-left: 3px solid var(--color-primary);
+  padding-left: 14px;
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.entryHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.entryDate {
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.entrySub {
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+}
+
+.entryDescription {
+  margin-top: 6px;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+.pillRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

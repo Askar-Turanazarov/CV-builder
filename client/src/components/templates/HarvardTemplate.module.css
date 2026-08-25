@@ -1,0 +1,102 @@
+.page {
+  background: var(--color-surface);
+  color: var(--color-text);
+  padding: 36px 32px;
+  max-width: 720px;
+  margin-inline: auto;
+  width: 100%;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.name {
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.contactLine {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  justify-content: center;
+}
+
+.page :global(.resume-section) {
+  margin-bottom: 20px;
+}
+
+.page :global(.resume-section) h3 {
+  display: inline-block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: var(--color-primary);
+  background: var(--color-accent-soft);
+  padding: 4px 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.summaryText {
+  margin: 0;
+}
+
+.pillRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.strengthList {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 4px;
+}
+
+.strengthList li::marker {
+  color: var(--color-primary);
+}
+
+.entry {
+  margin-bottom: 12px;
+  border-left: 3px solid var(--color-primary);
+  padding-left: 12px;
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.entryHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 0.92rem;
+}
+
+.entryDate {
+  font-style: italic;
+  white-space: nowrap;
+}
+
+.entrySub {
+  font-style: italic;
+  font-size: 0.88rem;
+}
+
+.entryDescription {
+  margin: 4px 0 0;
+  white-space: pre-line;
+}

@@ -1,0 +1,179 @@
+.page {
+  background: var(--color-surface);
+  color: var(--color-text);
+  max-width: 720px;
+  margin-inline: auto;
+  width: 100%;
+  font-family: 'Times New Roman', Georgia, serif;
+}
+
+.topRule {
+  height: 6px;
+  background: var(--color-primary);
+}
+
+.header {
+  position: relative;
+  text-align: center;
+  padding: 30px 30px 18px;
+  border-bottom: 1px solid var(--color-text);
+  margin-bottom: 22px;
+}
+
+/* Circular accent seal/emblem in the header corner — a CSS-only "letterhead"
+   mark using the theme's primary color as a ring, so it visibly repaints
+   with every color-theme switch instead of staying a fixed decoration. */
+.seal {
+  position: absolute;
+  top: 22px;
+  right: 30px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--color-primary);
+}
+
+.seal::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  border: 1px solid var(--color-primary);
+  opacity: 0.5;
+}
+
+.name {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+.jobTitle {
+  font-style: italic;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+
+.contactLine {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 6px 16px;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.birthDate {
+  color: var(--color-text-muted);
+}
+
+.page :global(.resume-section) {
+  padding: 0 30px;
+  margin-bottom: 20px;
+}
+
+.page :global(.resume-section):last-of-type {
+  padding-bottom: 30px;
+}
+
+.page :global(.resume-section) h3 {
+  display: inline-block;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: var(--color-primary);
+  background: var(--color-accent-soft);
+  padding: 5px 12px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.summaryText {
+  line-height: 1.65;
+}
+
+.strengthList {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+}
+
+.strengthList li::marker {
+  color: var(--color-primary);
+}
+
+.entry {
+  margin-bottom: 14px;
+  border-left: 3px solid var(--color-primary);
+  padding-left: 14px;
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.entryHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.entryDate {
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.entrySub {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.entryDescription {
+  margin-top: 6px;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.pillRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Two-column signature-style footer strip: date on the left, location/name
+   on the right, like the closing block of a formal letter or contract. */
+.signatureStrip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 10px 30px 0;
+  padding: 18px 0 30px;
+  border-top: 1px solid var(--color-border);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.signatureDate {
+  white-space: nowrap;
+}
+
+.signatureName {
+  text-align: right;
+}

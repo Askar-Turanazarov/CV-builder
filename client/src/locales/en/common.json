@@ -1,0 +1,115 @@
+{
+  "appName": "Resume Builder",
+  "nav": {
+    "home": "Home",
+    "editor": "Editor",
+    "preview": "Preview"
+  },
+  "actions": {
+    "next": "Next",
+    "back": "Back",
+    "print": "Print",
+    "printHint": "Opens the system print dialog",
+    "downloadPdf": "Download PDF",
+    "downloadingPdf": "Preparing your PDF…",
+    "generateAi": "Generate with AI",
+    "regenerateAi": "Regenerate",
+    "generating": "Writing your description…",
+    "startOver": "Start over",
+    "getStarted": "Build my resume",
+    "addPhoto": "Upload photo",
+    "removePhoto": "Remove photo",
+    "add": "Add",
+    "remove": "Remove",
+    "finish": "Done — go to preview"
+  },
+  "theme": {
+    "label": "Color theme",
+    "blue": "Blue",
+    "emerald": "Emerald",
+    "graphite": "Graphite",
+    "sunset": "Sunset"
+  },
+  "colorMode": {
+    "label": "Appearance",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "template": {
+    "label": "Template",
+    "classic": "Classic",
+    "sidebar": "Modern",
+    "minimal": "Minimal",
+    "timeline": "Timeline",
+    "compact": "Compact",
+    "harvard": "Harvard",
+    "executive": "Executive",
+    "consultant": "Consultant",
+    "academic": "Academic",
+    "twoColumnPhoto": "Photo Left",
+    "darkSidebar": "Dark Sidebar",
+    "functional": "Functional",
+    "hybrid": "Hybrid",
+    "gradientHeader": "Gradient Header",
+    "swissMinimal": "Swiss Minimal",
+    "elegantSerif": "Elegant Serif",
+    "colorBlock": "Color Block",
+    "developer": "Developer",
+    "salesVibrant": "Sales & Marketing",
+    "startup": "Startup",
+    "healthcare": "Healthcare",
+    "legal": "Legal",
+    "nonprofit": "Nonprofit",
+    "photoPortrait": "Photo Portrait",
+    "twoPage": "Two-Page",
+    "terminal": "Terminal",
+    "poster": "Poster",
+    "editorial": "Editorial",
+    "ultraCard": "Ultra Card",
+    "diagonal": "Diagonal",
+    "splitDuo": "Split Duo",
+    "badgeInitials": "Badge Initials",
+    "cardGrid": "Card Grid",
+    "ribbonCorner": "Ribbon Corner",
+    "iconRail": "Icon Rail",
+    "ledger": "Ledger",
+    "radialTimeline": "Radial Timeline",
+    "scrapbook": "Scrapbook",
+    "dashboardStats": "Dashboard Stats",
+    "blueprint": "Blueprint"
+  },
+  "templateGallery": {
+    "popular": "Popular",
+    "unusual": "Unusual",
+    "close": "Close"
+  },
+  "design": {
+    "label": "Interface design",
+    "classic": "Classic",
+    "glass": "Apple Glass"
+  },
+  "viewMode": {
+    "label": "View",
+    "document": "Document",
+    "site": "Mini-site"
+  },
+  "language": {
+    "label": "Language",
+    "ru": "Русский",
+    "en": "English",
+    "uz": "O'zbekcha"
+  },
+  "landing": {
+    "title": "A resume and portfolio in minutes",
+    "subtitle": "Fill in a short form — AI writes the description and highlights your strengths. Pick a template and color, then download a PDF or share it as a portfolio mini-site.",
+    "cta": "Start for free",
+    "featureAi": "AI writes your description",
+    "featureTemplates": "Several ready-made templates",
+    "featureExport": "Print and export to PDF"
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "restoreFailed": "Couldn't restore your saved data — the form has been reset.",
+    "pdfFailed": "Couldn't generate the PDF. Please try again."
+  }
+}
