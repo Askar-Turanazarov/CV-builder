@@ -23,9 +23,35 @@
   border: 2px solid transparent;
   cursor: pointer;
   padding: 0;
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.swatch:hover {
+  transform: scale(1.15);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.25);
+}
+
+.swatch:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.swatch:active {
+  transform: scale(0.92);
+  transition: transform var(--transition-press);
 }
 
 .active {
   border-color: var(--color-text);
   box-shadow: 0 0 0 2px var(--color-surface);
+}
+
+.active:hover {
+  transform: scale(1.15);
+  box-shadow:
+    0 0 0 2px var(--color-surface),
+    0 2px 8px rgba(15, 23, 42, 0.25);
 }

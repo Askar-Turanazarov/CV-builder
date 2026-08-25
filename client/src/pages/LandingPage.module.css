@@ -1,39 +1,179 @@
-.wrapper {
-  padding-block: 64px 96px;
-  text-align: center;
-  max-width: 720px;
+/* Deliberately NOT reusing the site-wide `.container` (1120px) — the hero
+   gets its own, wider max-width so it fills typical desktop/FullHD widths
+   instead of leaving big empty gutters either side (see `.hero`). */
+.hero {
+  width: 100%;
+  max-width: 1360px;
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    padding-inline: 24px;
+  }
+}
+
+/* Plain, unstyled in Classic mode (padding/spacing come from `.heroCard`
+   itself below) — the `landing-card` marker class is what makes this same
+   element pick up the frosted glass background/padding/radius in Apple
+   Glass mode (see styles/glass.css `[data-design='glass'] .landing-card`).
+   Matches the same two-responsibility split the old markup already used. */
+.heroCard {
+  padding-block: 56px 88px;
+}
+
+.heroGrid {
+  display: grid;
+  gap: 40px;
+  align-items: center;
+}
+
+@media (min-width: 1200px) {
+  .heroGrid {
+    grid-template-columns: 1.05fr 1fr;
+    gap: 48px;
+  }
+}
+
+.heroText {
+  min-width: 0;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--color-accent-soft);
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 20px;
 }
 
 .title {
-  font-size: 2.25rem;
-  margin-bottom: 16px;
+  font-size: 2.5rem;
+  line-height: 1.1;
+  margin-bottom: 20px;
 }
 
 @media (min-width: 768px) {
   .title {
-    font-size: 3rem;
+    font-size: 3.25rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .title {
+    font-size: 3.9rem;
   }
 }
 
 .subtitle {
   color: var(--color-text-muted);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   margin-bottom: 32px;
   line-height: 1.6;
+  max-width: 46ch;
+}
+
+.cta {
+  padding: 15px 30px !important;
+  font-size: 1.05rem !important;
+  border-radius: 12px !important;
 }
 
 .features {
   list-style: none;
   display: grid;
   gap: 12px;
-  margin-top: 48px;
+  margin-top: 40px;
   padding: 0;
   color: var(--color-text-muted);
   font-size: 0.95rem;
 }
 
-@media (min-width: 640px) {
-  .features {
-    grid-template-columns: repeat(3, 1fr);
+/* ---------- Live showcase resumes — desktop only ---------- */
+
+.showcase {
+  display: none;
+  position: relative;
+  height: 460px;
+}
+
+@media (min-width: 1024px) {
+  .showcase {
+    display: block;
   }
+}
+
+.showcaseCard {
+  position: absolute;
+  width: 300px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--color-surface);
+  box-shadow:
+    0 20px 45px -18px rgba(15, 23, 42, 0.35),
+    0 4px 12px rgba(15, 23, 42, 0.08);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.showcaseCard:hover {
+  z-index: 10;
+  box-shadow:
+    0 28px 60px -18px rgba(15, 23, 42, 0.4),
+    0 6px 16px rgba(15, 23, 42, 0.1);
+}
+
+.showcaseCard:nth-child(1) {
+  top: 20px;
+  left: 0;
+  transform: rotate(-7deg);
+  z-index: 1;
+}
+
+.showcaseCard:nth-child(1):hover {
+  transform: rotate(-7deg) translateY(-8px);
+}
+
+.showcaseCard:nth-child(2) {
+  top: 70px;
+  left: 140px;
+  transform: rotate(4deg);
+  z-index: 2;
+}
+
+.showcaseCard:nth-child(2):hover {
+  transform: rotate(4deg) translateY(-8px);
+}
+
+.showcaseCard:nth-child(3) {
+  top: 0;
+  left: 280px;
+  transform: rotate(-3deg);
+  z-index: 3;
+}
+
+.showcaseCard:nth-child(3):hover {
+  transform: rotate(-3deg) translateY(-8px);
+}
+
+.previewFrame {
+  width: 100%;
+  aspect-ratio: 210 / 297;
+  overflow: hidden;
+  background: var(--color-bg);
+  position: relative;
+}
+
+.previewScale {
+  width: 700px;
+  transform: scale(0.42857);
+  transform-origin: top left;
+  pointer-events: none;
 }

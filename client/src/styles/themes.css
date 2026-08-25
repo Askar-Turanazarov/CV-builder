@@ -15,6 +15,13 @@
   --color-primary-contrast: #ffffff;
   --color-accent-soft: #eef2ff;
   --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.06);
+
+  /* Shared hover/press timing for every interactive control in the app
+     chrome (not the resume templates) — reused across Button, theme
+     swatches, toggle pills, and the template gallery so every control
+     feels like one consistent system. */
+  --transition-fast: 0.15s ease;
+  --transition-press: 0.1s ease;
 }
 
 /* ---------- Синий / Blue ---------- */

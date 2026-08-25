@@ -10,8 +10,23 @@
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 .toggle:hover {
   background: var(--color-surface-alt);
+  border-color: var(--color-primary);
+}
+
+.toggle:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.toggle:active {
+  transform: scale(0.96);
+  transition: transform var(--transition-press);
 }

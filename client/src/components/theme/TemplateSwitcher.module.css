@@ -25,16 +25,47 @@
   color: var(--color-text);
   font-size: 0.82rem;
   cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast);
 }
 
+/* Explicit color on every state — never rely on inheritance here, since an
+   ancestor (e.g. the Apple Glass `.preview-controls` panel) sets its own
+   text color and an unstated color on hover/focus can end up unreadable
+   against it. */
 .option:hover {
   background: var(--color-surface-alt);
+  border-color: var(--color-primary);
+  color: var(--color-text);
+}
+
+.option:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  color: var(--color-text);
+}
+
+.option:active {
+  transform: scale(0.96);
+  transition: transform var(--transition-press);
 }
 
 .active {
   background: var(--color-primary);
   color: var(--color-primary-contrast);
   border-color: var(--color-primary);
+}
+
+.active:hover {
+  color: var(--color-primary-contrast);
+}
+
+.active:focus-visible {
+  outline-color: var(--color-primary);
+  color: var(--color-primary-contrast);
 }
 
 .trigger {
@@ -49,10 +80,25 @@
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 .trigger:hover {
   background: var(--color-surface-alt);
+  border-color: var(--color-primary);
+}
+
+.trigger:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.trigger:active {
+  transform: scale(0.97);
+  transition: transform var(--transition-press);
 }
 
 .triggerLabel {

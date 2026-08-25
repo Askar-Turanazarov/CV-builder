@@ -49,6 +49,21 @@
   font-size: 0.88rem;
   font-weight: 600;
   cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.tab:hover {
+  color: var(--color-text);
+  background: var(--color-border);
+}
+
+.tab:active,
+.tabActive:active {
+  transform: scale(0.95);
+  transition: transform var(--transition-press);
 }
 
 .tabActive {
@@ -69,10 +84,19 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition:
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 .closeButton:hover {
   background: var(--color-accent-soft);
+  transform: rotate(90deg);
+}
+
+.closeButton:active {
+  transform: scale(0.9);
+  transition: transform var(--transition-press);
 }
 
 .grid {
@@ -104,10 +128,26 @@
   flex-direction: column;
   gap: 6px;
   text-align: center;
+  transition:
+    border-color var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 .card:hover {
   border-color: var(--color-primary);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.card:active {
+  transform: translateY(-1px) scale(0.98);
+  transition: transform var(--transition-press);
 }
 
 .cardActive {

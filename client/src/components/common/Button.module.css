@@ -10,14 +10,26 @@
   border: 1px solid transparent;
   cursor: pointer;
   transition:
-    background-color 0.15s ease,
-    border-color 0.15s ease,
-    opacity 0.15s ease;
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    opacity var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 .button:disabled {
   opacity: 0.55;
   cursor: not-allowed;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.button:active:not(:disabled) {
+  transform: scale(0.96);
+  transition: transform var(--transition-press);
 }
 
 .primary {
@@ -27,6 +39,7 @@
 
 .primary:hover:not(:disabled) {
   filter: brightness(1.06);
+  box-shadow: 0 4px 14px -4px var(--color-primary);
 }
 
 .secondary {
@@ -37,6 +50,7 @@
 
 .secondary:hover:not(:disabled) {
   background: var(--color-accent-soft);
+  box-shadow: 0 2px 10px -4px var(--color-primary);
 }
 
 .ghost {
