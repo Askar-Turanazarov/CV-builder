@@ -105,7 +105,8 @@
     "cta": "Bepul boshlash",
     "featureAi": "AI tavsifni siz uchun yozadi",
     "featureTemplates": "Bir nechta tayyor shablonlar",
-    "featureExport": "Chop etish va PDF eksporti"
+    "featureExport": "Chop etish va PDF eksporti",
+    "previewResume": "Rezyume namunasini kattalashtirib ko'rish"
   },
   "errors": {
     "generic": "Nimadir xato ketdi. Qaytadan urinib ko'ring.",

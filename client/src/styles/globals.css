@@ -62,7 +62,14 @@ a {
 
 .container {
   width: 100%;
-  max-width: 1120px;
+  /* A vw-relative clamp instead of one fixed number: on a 1920px (FullHD)
+     screen this resolves to the 1760px cap (~80px of gutter per side —
+     deliberate breathing room, not empty space), on 1366/1440 laptops it
+     shrinks fluidly with almost no gutter, and on 2560px+/4K it stays
+     capped so text doesn't stretch into unreadably long lines. Every page
+     that shares this class (header, editor, landing) gets the exact same
+     width for free — no per-page number to keep in sync. */
+  max-width: min(1760px, 95vw);
   margin-inline: auto;
   padding-inline: 16px;
 }

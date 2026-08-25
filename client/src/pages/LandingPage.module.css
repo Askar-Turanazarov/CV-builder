@@ -1,24 +1,12 @@
-/* Deliberately NOT reusing the site-wide `.container` (1120px) — the hero
-   gets its own, wider max-width so it fills typical desktop/FullHD widths
-   instead of leaving big empty gutters either side (see `.hero`). */
-.hero {
-  width: 100%;
-  max-width: 1360px;
-  margin-inline: auto;
-  padding-inline: 16px;
-}
+/* Reuses the shared site-wide `.container` (globals.css) instead of its
+   own bespoke max-width — this is what guarantees the landing page and the
+   editor page always share exactly the same content width; there is only
+   ONE number to keep in sync (`.container`'s), not two. */
 
-@media (min-width: 768px) {
-  .hero {
-    padding-inline: 24px;
-  }
-}
-
-/* Plain, unstyled in Classic mode (padding/spacing come from `.heroCard`
-   itself below) — the `landing-card` marker class is what makes this same
-   element pick up the frosted glass background/padding/radius in Apple
-   Glass mode (see styles/glass.css `[data-design='glass'] .landing-card`).
-   Matches the same two-responsibility split the old markup already used. */
+/* Plain, unstyled in Classic mode (padding/spacing come from here) — the
+   `landing-card` marker class on the same element is what makes it pick up
+   the frosted glass background/padding/radius in Apple Glass mode (see
+   styles/glass.css `[data-design='glass'] .landing-card`). */
 .heroCard {
   padding-block: 56px 88px;
 }
@@ -40,17 +28,21 @@
   min-width: 0;
 }
 
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  background: var(--color-accent-soft);
+/* A real wordmark, not a small chip/badge — bold standalone logotype
+   sitting above the headline. */
+.wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+  margin: 0 0 24px;
+}
+
+.wordmarkAccent {
   color: var(--color-primary);
-  font-weight: 700;
-  font-size: 0.85rem;
-  margin-bottom: 20px;
 }
 
 .title {
@@ -112,22 +104,23 @@
 .showcaseCard {
   position: absolute;
   width: 300px;
+  border: none;
   border-radius: 16px;
   overflow: hidden;
   background: var(--color-surface);
+  padding: 0;
+  cursor: pointer;
   box-shadow:
     0 20px 45px -18px rgba(15, 23, 42, 0.35),
     0 4px 12px rgba(15, 23, 42, 0.08);
   transition:
-    transform var(--transition-fast),
-    box-shadow var(--transition-fast);
+    box-shadow var(--transition-fast),
+    transform var(--transition-bounce);
 }
 
-.showcaseCard:hover {
-  z-index: 10;
-  box-shadow:
-    0 28px 60px -18px rgba(15, 23, 42, 0.4),
-    0 6px 16px rgba(15, 23, 42, 0.1);
+.showcaseCard:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
 }
 
 .showcaseCard:nth-child(1) {
@@ -138,7 +131,16 @@
 }
 
 .showcaseCard:nth-child(1):hover {
-  transform: rotate(-7deg) translateY(-8px);
+  transform: rotate(-7deg) translateY(-10px);
+  z-index: 10;
+  box-shadow:
+    0 28px 60px -18px rgba(15, 23, 42, 0.4),
+    var(--shadow-hover);
+}
+
+.showcaseCard:nth-child(1):active {
+  transform: rotate(-7deg) scale(var(--press-scale));
+  transition: transform var(--transition-press);
 }
 
 .showcaseCard:nth-child(2) {
@@ -149,7 +151,16 @@
 }
 
 .showcaseCard:nth-child(2):hover {
-  transform: rotate(4deg) translateY(-8px);
+  transform: rotate(4deg) translateY(-10px);
+  z-index: 10;
+  box-shadow:
+    0 28px 60px -18px rgba(15, 23, 42, 0.4),
+    var(--shadow-hover);
+}
+
+.showcaseCard:nth-child(2):active {
+  transform: rotate(4deg) scale(var(--press-scale));
+  transition: transform var(--transition-press);
 }
 
 .showcaseCard:nth-child(3) {
@@ -160,7 +171,16 @@
 }
 
 .showcaseCard:nth-child(3):hover {
-  transform: rotate(-3deg) translateY(-8px);
+  transform: rotate(-3deg) translateY(-10px);
+  z-index: 10;
+  box-shadow:
+    0 28px 60px -18px rgba(15, 23, 42, 0.4),
+    var(--shadow-hover);
+}
+
+.showcaseCard:nth-child(3):active {
+  transform: rotate(-3deg) scale(var(--press-scale));
+  transition: transform var(--transition-press);
 }
 
 .previewFrame {

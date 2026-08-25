@@ -18,12 +18,15 @@
   transition:
     background-color var(--transition-fast),
     color var(--transition-fast),
-    transform var(--transition-fast);
+    box-shadow var(--transition-fast),
+    transform var(--transition-bounce);
 }
 
 .option:hover {
   color: var(--color-text);
   background: var(--color-border);
+  transform: scale(var(--hover-scale));
+  box-shadow: var(--shadow-hover);
 }
 
 .option:focus-visible {
@@ -32,7 +35,7 @@
 }
 
 .option:active {
-  transform: scale(0.94);
+  transform: scale(var(--press-scale));
   transition: transform var(--transition-press);
 }
 
@@ -45,4 +48,6 @@
 .active:hover {
   background: var(--color-surface);
   color: var(--color-primary);
+  transform: scale(var(--hover-scale));
+  box-shadow: var(--shadow-card), var(--shadow-hover);
 }

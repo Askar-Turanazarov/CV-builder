@@ -16,12 +16,22 @@
   --color-accent-soft: #eef2ff;
   --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.06);
 
-  /* Shared hover/press timing for every interactive control in the app
-     chrome (not the resume templates) — reused across Button, theme
-     swatches, toggle pills, and the template gallery so every control
-     feels like one consistent system. */
+  /* Shared hover/press animation system for every interactive control in
+     the app chrome (not the resume templates) — reused across Button,
+     theme swatches, toggle pills, and the template gallery so every
+     control shares literally the same numbers, not five independent
+     guesses. `--transition-bounce` is used specifically for the hover
+     transform (a small springy overshoot so it reads as an intentional
+     animation, not a flat instant color swap); everything else (color/
+     background/border changes, the press-down) stays a quick linear-ish
+     ease so it doesn't feel sluggish. */
   --transition-fast: 0.15s ease;
-  --transition-press: 0.1s ease;
+  --transition-press: 0.1s ease-out;
+  --transition-bounce: 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --press-scale: 0.95;
+  --hover-scale: 1.04;
+  --hover-scale-sm: 1.12;
+  --shadow-hover: 0 8px 20px -6px rgba(15, 23, 42, 0.28);
 }
 
 /* ---------- Синий / Blue ---------- */

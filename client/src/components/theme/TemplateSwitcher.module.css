@@ -29,7 +29,8 @@
     background-color var(--transition-fast),
     border-color var(--transition-fast),
     color var(--transition-fast),
-    transform var(--transition-fast);
+    box-shadow var(--transition-fast),
+    transform var(--transition-bounce);
 }
 
 /* Explicit color on every state — never rely on inheritance here, since an
@@ -40,6 +41,8 @@
   background: var(--color-surface-alt);
   border-color: var(--color-primary);
   color: var(--color-text);
+  transform: scale(var(--hover-scale));
+  box-shadow: var(--shadow-hover);
 }
 
 .option:focus-visible {
@@ -49,7 +52,7 @@
 }
 
 .option:active {
-  transform: scale(0.96);
+  transform: scale(var(--press-scale));
   transition: transform var(--transition-press);
 }
 
@@ -59,7 +62,15 @@
   border-color: var(--color-primary);
 }
 
+/* Must re-declare every property `.option:hover` also touches (background,
+   border-color) — not just `color` — otherwise the cascade resolves each
+   property independently: with equal specificity, `.option:hover`'s
+   background would win on its own (since nothing here overrode it),
+   leaving light text on a now-light background. This exact gap is what
+   caused the white-on-white regression on the already-selected pill. */
 .active:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
   color: var(--color-primary-contrast);
 }
 
@@ -83,12 +94,15 @@
   transition:
     background-color var(--transition-fast),
     border-color var(--transition-fast),
-    transform var(--transition-fast);
+    box-shadow var(--transition-fast),
+    transform var(--transition-bounce);
 }
 
 .trigger:hover {
   background: var(--color-surface-alt);
   border-color: var(--color-primary);
+  transform: scale(var(--hover-scale));
+  box-shadow: var(--shadow-hover);
 }
 
 .trigger:focus-visible {
@@ -97,7 +111,7 @@
 }
 
 .trigger:active {
-  transform: scale(0.97);
+  transform: scale(var(--press-scale));
   transition: transform var(--transition-press);
 }
 

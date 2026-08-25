@@ -13,12 +13,15 @@
   transition:
     background-color var(--transition-fast),
     border-color var(--transition-fast),
-    transform var(--transition-fast);
+    box-shadow var(--transition-fast),
+    transform var(--transition-bounce);
 }
 
 .toggle:hover {
   background: var(--color-surface-alt);
   border-color: var(--color-primary);
+  transform: scale(var(--hover-scale));
+  box-shadow: var(--shadow-hover);
 }
 
 .toggle:focus-visible {
@@ -27,6 +30,6 @@
 }
 
 .toggle:active {
-  transform: scale(0.96);
+  transform: scale(var(--press-scale));
   transition: transform var(--transition-press);
 }

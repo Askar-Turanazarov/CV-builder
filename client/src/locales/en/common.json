@@ -105,7 +105,8 @@
     "cta": "Start for free",
     "featureAi": "AI writes your description",
     "featureTemplates": "Several ready-made templates",
-    "featureExport": "Print and export to PDF"
+    "featureExport": "Print and export to PDF",
+    "previewResume": "Open this resume example full-size"
   },
   "errors": {
     "generic": "Something went wrong. Please try again.",

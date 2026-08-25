@@ -52,17 +52,20 @@
   transition:
     background-color var(--transition-fast),
     color var(--transition-fast),
-    transform var(--transition-fast);
+    box-shadow var(--transition-fast),
+    transform var(--transition-bounce);
 }
 
 .tab:hover {
   color: var(--color-text);
   background: var(--color-border);
+  transform: scale(var(--hover-scale));
+  box-shadow: var(--shadow-hover);
 }
 
 .tab:active,
 .tabActive:active {
-  transform: scale(0.95);
+  transform: scale(var(--press-scale));
   transition: transform var(--transition-press);
 }
 
@@ -86,16 +89,18 @@
   flex-shrink: 0;
   transition:
     background-color var(--transition-fast),
-    transform var(--transition-fast);
+    transform var(--transition-bounce);
 }
 
+/* Deliberate exception to the shared scale-hover recipe — a rotate reads
+   better for a close/× icon (playful, still same timing/press-scale). */
 .closeButton:hover {
   background: var(--color-accent-soft);
   transform: rotate(90deg);
 }
 
 .closeButton:active {
-  transform: scale(0.9);
+  transform: scale(var(--press-scale));
   transition: transform var(--transition-press);
 }
 
@@ -130,14 +135,18 @@
   text-align: center;
   transition:
     border-color var(--transition-fast),
-    transform var(--transition-fast),
-    box-shadow var(--transition-fast);
+    box-shadow var(--transition-fast),
+    transform var(--transition-bounce);
 }
 
+/* Deliberate exception to the shared scale-hover recipe — a card lifting
+   off the stack (translateY) reads better here than a scale, since these
+   sit in a dense grid; timing/press-scale still come from the shared
+   tokens like everywhere else. */
 .card:hover {
   border-color: var(--color-primary);
   transform: translateY(-3px);
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-hover);
 }
 
 .card:focus-visible {
@@ -146,7 +155,7 @@
 }
 
 .card:active {
-  transform: translateY(-1px) scale(0.98);
+  transform: scale(var(--press-scale));
   transition: transform var(--transition-press);
 }
 

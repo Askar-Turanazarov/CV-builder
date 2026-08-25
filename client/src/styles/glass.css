@@ -128,12 +128,13 @@
   backdrop-filter: blur(var(--glass-blur-soft)) saturate(var(--glass-saturate));
   -webkit-backdrop-filter: blur(var(--glass-blur-soft)) saturate(var(--glass-saturate));
   transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease;
+    transform var(--transition-bounce),
+    box-shadow var(--transition-fast);
 }
 
 [data-design='glass'] .btn:active {
-  transform: scale(0.97);
+  transform: scale(var(--press-scale));
+  transition: transform var(--transition-press);
 }
 
 [data-design='glass'] .btn-primary {

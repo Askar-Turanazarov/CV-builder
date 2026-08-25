@@ -24,14 +24,17 @@
   cursor: pointer;
   padding: 0;
   transition:
-    transform var(--transition-fast),
     box-shadow var(--transition-fast),
-    border-color var(--transition-fast);
+    border-color var(--transition-fast),
+    transform var(--transition-bounce);
 }
 
+/* Small circular target — a bigger scale factor (--hover-scale-sm) than
+   the shared button/pill scale so the lift is actually perceptible at
+   this size, same underlying recipe as everything else. */
 .swatch:hover {
-  transform: scale(1.15);
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.25);
+  transform: scale(var(--hover-scale-sm));
+  box-shadow: var(--shadow-hover);
 }
 
 .swatch:focus-visible {
@@ -40,7 +43,7 @@
 }
 
 .swatch:active {
-  transform: scale(0.92);
+  transform: scale(var(--press-scale));
   transition: transform var(--transition-press);
 }
 
@@ -50,8 +53,12 @@
 }
 
 .active:hover {
-  transform: scale(1.15);
+  transform: scale(var(--hover-scale-sm));
   box-shadow:
     0 0 0 2px var(--color-surface),
-    0 2px 8px rgba(15, 23, 42, 0.25);
+    var(--shadow-hover);
+}
+
+.active:active {
+  transform: scale(var(--press-scale));
 }
