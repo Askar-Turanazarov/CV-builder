@@ -1,0 +1,26 @@
+.panel {
+  display: none;
+  min-width: 0;
+}
+
+@media (min-width: 1200px) {
+  .panel {
+    display: block;
+  }
+}
+
+.sticky {
+  position: sticky;
+  /* Roughly the app header's own rendered height (it's `position: sticky;
+     top: 0` itself) plus a small gap, so this panel settles just below it
+     while scrolling instead of disappearing underneath. */
+  top: 88px;
+  max-height: calc(100vh - 104px);
+  overflow-y: auto;
+  padding-block: 24px;
+}
+
+.frame {
+  max-width: 680px;
+  margin-inline: auto;
+}

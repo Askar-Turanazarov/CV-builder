@@ -1,0 +1,82 @@
+{
+  "panel": {
+    "title": "Resume check",
+    "scoreLabel": "Completeness: {{done}}/{{total}}",
+    "allDone": "Great — every key section is filled in!",
+    "fixButton": "Fix this"
+  },
+  "checklist": {
+    "photo": {
+      "label": "Add a photo",
+      "tip": "A photo makes your resume feel more personal and complete."
+    },
+    "contacts": {
+      "label": "Add your email and phone",
+      "tip": "Without contact info, an employer has no way to reach you."
+    },
+    "experience": {
+      "label": "Add your work experience",
+      "tip": "Even a small amount of experience (internship, project) beats an empty section."
+    },
+    "experienceDescriptions": {
+      "label": "Describe your responsibilities",
+      "tip": "A short description for each role helps show your actual contribution."
+    },
+    "education": {
+      "label": "Add your education",
+      "tip": "List at least one school or program."
+    },
+    "skills": {
+      "label": "Add at least 3 skills",
+      "tip": "A skills list helps you pass automated keyword screening."
+    },
+    "languages": {
+      "label": "Add at least one language",
+      "tip": "Especially important if the role involves working with international colleagues."
+    },
+    "aiContent": {
+      "label": "Generate a description with AI",
+      "tip": "An AI-written summary and strengths make your resume noticeably more persuasive."
+    }
+  },
+  "length": {
+    "title": "Resume length",
+    "fits": "Fits comfortably on one page.",
+    "tight": "Will likely fit on one page, but it's tight.",
+    "overflow": "This will likely spill onto 2+ pages — try a more compact template or shorten your descriptions."
+  },
+  "templateSuggestion": {
+    "title": "Templates for your role",
+    "apply": "Apply"
+  },
+  "jobMatch": {
+    "title": "Job description match",
+    "placeholder": "Paste the job description here…",
+    "button": "Check match",
+    "resultLabel": "Match: {{percent}}%",
+    "missingTitle": "Words from the posting not found in your resume:",
+    "missingHint": "If you actually have this experience or skill, it's worth stating it explicitly.",
+    "noMissing": "Your resume already covers the key words from this posting.",
+    "disclaimer": "A simple word-overlap check, not deep AI analysis — a rough guide, not a precise score."
+  },
+  "coverLetter": {
+    "title": "Cover letter",
+    "subtitle": "AI writes a letter based on your resume data — optionally add a target role and company to make it more specific.",
+    "targetRoleLabel": "Role you're applying for",
+    "targetRolePlaceholder": "e.g. Frontend Developer",
+    "targetCompanyLabel": "Company (optional)",
+    "targetCompanyPlaceholder": "e.g. Acme Inc.",
+    "generate": "Generate letter",
+    "regenerate": "Regenerate",
+    "generating": "Writing your letter…",
+    "editableLabel": "Letter text (editable)",
+    "downloadPdf": "Download PDF",
+    "downloadingPdf": "Preparing your PDF…",
+    "noContentHint": "No letter generated yet — click \"Generate letter\".",
+    "generateError": "Couldn't generate the letter. Please try again.",
+    "downloadError": "Couldn't generate the PDF. Please try again.",
+    "subjectWithCompany": "Application for the {{role}} position at {{company}}",
+    "subjectRoleOnly": "Application for the {{role}} position",
+    "emptyPlaceholder": "The letter text will appear here after generation."
+  }
+}

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslation } from 'react-i18next';
@@ -41,6 +42,12 @@ export default function ExperienceStep({ onNext, onBack, isFirst }: StepComponen
   });
 
   const { fields, append, remove } = useFieldArray({ control, name: 'experience' });
+
+  // Live-preview sync — see PersonalInfoStep for the same pattern.
+  useEffect(() => {
+    const subscription = watch((values) => setExperience((values.experience ?? []) as ExperienceStepFormValues['experience']));
+    return () => subscription.unsubscribe();
+  }, [watch, setExperience]);
 
   const onSubmit = (values: ExperienceStepFormValues) => {
     setExperience(values.experience);

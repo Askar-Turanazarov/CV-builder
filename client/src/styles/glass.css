@@ -65,7 +65,8 @@
 [data-design='glass'] .wizard-step-body,
 [data-design='glass'] .step-indicator,
 [data-design='glass'] .preview-controls,
-[data-design='glass'] .landing-card {
+[data-design='glass'] .landing-card,
+[data-design='glass'] .insights-card {
   background: var(--glass-bg);
   backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
@@ -80,7 +81,8 @@
   [data-design='glass'] .wizard-step-body,
   [data-design='glass'] .step-indicator,
   [data-design='glass'] .preview-controls,
-  [data-design='glass'] .landing-card {
+  [data-design='glass'] .landing-card,
+  [data-design='glass'] .insights-card {
     background: var(--glass-bg);
   }
 }
@@ -93,7 +95,8 @@
 }
 
 [data-design='glass'] .wizard-step-body,
-[data-design='glass'] .preview-controls {
+[data-design='glass'] .preview-controls,
+[data-design='glass'] .insights-card {
   border-radius: var(--glass-radius-lg);
 }
 
@@ -176,14 +179,15 @@
 /* ---------- "Мини-сайт" in Apple Glass: an organic, liquid-glass frame
    around the resume, not a blurred/translucent document. The template's own
    opaque background/text stay exactly as-is (readability first) — only the
-   frame around it gets the same big radius + soft border + glow used by
-   every other glass surface (header, wizard card, controls panel), so Site
-   mode reads as part of the same design language instead of a flat-cornered
-   rectangle dropped on top of it. ---------- */
-[data-design='glass'] [data-view-mode='site'] .resume-document {
-  border-radius: 32px !important;
+   `.resume-frame` wrapper around it (see viewModes.css) gets the same big
+   radius + soft border + glow used by every other glass surface (header,
+   wizard card, controls panel), so Site mode reads as part of the same
+   design language instead of a flat-cornered rectangle dropped on top of
+   it. ---------- */
+[data-design='glass'] [data-view-mode='site'] .resume-frame {
+  border-radius: 32px;
   border: 1px solid var(--glass-border);
   box-shadow:
     var(--glass-shadow),
-    inset 0 1px 0 var(--glass-highlight) !important;
+    inset 0 1px 0 var(--glass-highlight);
 }

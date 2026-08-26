@@ -16,10 +16,15 @@
 }
 
 .brand {
-  font-weight: 700;
-  font-size: 1.05rem;
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: -0.01em;
   color: var(--color-text);
   text-decoration: none;
+}
+
+.brandAccent {
+  color: var(--color-primary);
 }
 
 .nav {

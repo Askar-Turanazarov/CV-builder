@@ -22,9 +22,48 @@
 
 [data-view-mode='site'] .resume-document {
   max-width: min(1080px, 94vw) !important;
+}
+
+/* Baseline "sits on a card" framing for the resume being viewed on screen
+ * — an OUTER wrapper (added once, in PreviewPage.tsx and
+ * LivePreviewPanel.tsx) around whatever template renders inside it,
+ * independent of whether that specific template's own root happens to
+ * define a border-radius/shadow of its own. Several of the more
+ * conservative/ATS templates (Harvard, Legal, and others in that family)
+ * deliberately don't style their own root at all — without this, they'd
+ * render as a flat, shadow-less rectangle while every other template (and
+ * every other card on the page — the toolbar, the wizard step, the landing
+ * hero) has one. This guarantees all 40 templates read as a consistent
+ * card in the on-screen preview, in both Document and Site view and both
+ * UI skins, without editing each template file. Never applied to the
+ * /print/:token PDF-rendering route (a separate page/render tree), so PDF
+ * output is unaffected.
+ */
+.resume-frame {
+  /* This wrapper has no size of its own otherwise — it would simply fill
+     100% of whatever ancestor it's placed in (PreviewPage's `.controls`/
+     content area now shares the same wide `container` as Landing/Editor),
+     stretching a mostly-empty white card edge to edge instead of framing
+     the resume at its own natural reading width. Site mode gets the same
+     wider allowance already used by `.resume-document` above, so the frame
+     never ends up narrower than the resume it's wrapping. */
+  max-width: 1000px;
+  margin-inline: auto;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--color-surface);
+  /* Confident "floating card" shadow in BOTH view modes — the original
+     `--shadow-card` (built for a small UI chip on a plain white page) all
+     but disappeared against the Apple Glass gradient backdrop, which is
+     what made this fix look like it hadn't done anything. */
   box-shadow:
     0 24px 60px -20px rgba(0, 0, 0, 0.25),
-    0 2px 8px rgba(0, 0, 0, 0.06) !important;
+    0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+[data-view-mode='site'] .resume-frame {
+  max-width: min(1080px, 94vw);
+  border-radius: 28px;
 }
 
 [data-view-mode='site'] .resume-section {

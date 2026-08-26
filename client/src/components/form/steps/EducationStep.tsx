@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslation } from 'react-i18next';
@@ -40,6 +41,12 @@ export default function EducationStep({ onNext, onBack, isFirst }: StepComponent
   });
 
   const { fields, append, remove } = useFieldArray({ control, name: 'education' });
+
+  // Live-preview sync — see PersonalInfoStep for the same pattern.
+  useEffect(() => {
+    const subscription = watch((values) => setEducation((values.education ?? []) as EducationStepFormValues['education']));
+    return () => subscription.unsubscribe();
+  }, [watch, setEducation]);
 
   const onSubmit = (values: EducationStepFormValues) => {
     setEducation(values.education);

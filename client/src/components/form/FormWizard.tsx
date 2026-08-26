@@ -1,5 +1,6 @@
 import { useState, type ComponentType } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 import styles from './FormWizard.module.css';
 import StepIndicator from './StepIndicator';
 import PersonalInfoStep from './steps/PersonalInfoStep';
@@ -11,9 +12,11 @@ import LanguagesStep from './steps/LanguagesStep';
 import ReviewAndGenerateStep from './steps/ReviewAndGenerateStep';
 import type { StepComponentProps } from './stepTypes';
 
-const STEP_KEYS = ['personal', 'contacts', 'experience', 'education', 'skills', 'languages', 'review'] as const;
+export const STEP_KEYS = ['personal', 'contacts', 'experience', 'education', 'skills', 'languages', 'review'] as const;
 
-const STEP_COMPONENTS: Record<(typeof STEP_KEYS)[number], ComponentType<StepComponentProps>> = {
+export type StepKey = (typeof STEP_KEYS)[number];
+
+const STEP_COMPONENTS: Record<StepKey, ComponentType<StepComponentProps>> = {
   personal: PersonalInfoStep,
   contacts: ContactsStep,
   experience: ExperienceStep,
@@ -29,7 +32,13 @@ interface FormWizardProps {
 
 export default function FormWizard({ onFinish }: FormWizardProps) {
   const { t } = useTranslation('form');
-  const [stepIndex, setStepIndex] = useState(0);
+  // Lets links from outside the wizard (e.g. the Preview page's "Проверка
+  // резюме" checklist) jump straight to the relevant step instead of
+  // always landing on step 0.
+  const location = useLocation();
+  const requestedStepKey = (location.state as { stepKey?: StepKey } | null)?.stepKey;
+  const requestedIndex = requestedStepKey ? STEP_KEYS.indexOf(requestedStepKey) : -1;
+  const [stepIndex, setStepIndex] = useState(requestedIndex >= 0 ? requestedIndex : 0);
 
   const stepKey = STEP_KEYS[stepIndex];
   const StepComponent = STEP_COMPONENTS[stepKey];

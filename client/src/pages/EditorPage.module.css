@@ -1,0 +1,17 @@
+/* Single column (just the form) below 1200px — same breakpoint the
+   landing page already uses for its own live showcase resumes, so the
+   editor and landing agree on when there's "enough room" for a side panel.
+   `LivePreviewPanel` hides/shows itself at this same breakpoint (see its
+   own `.module.css`); this file only needs to own the grid-column split. */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 1200px) {
+  .grid {
+    grid-template-columns: minmax(0, 720px) 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+}

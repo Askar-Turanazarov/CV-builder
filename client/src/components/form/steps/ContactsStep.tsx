@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslation } from 'react-i18next';
@@ -17,11 +18,18 @@ export default function ContactsStep({ onNext, onBack, isFirst }: StepComponentP
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<ContactsFormValues>({
     resolver: zodResolver(contactsSchema),
     defaultValues: data.contacts,
   });
+
+  // Live-preview sync — see PersonalInfoStep for the same pattern.
+  useEffect(() => {
+    const subscription = watch((values) => setContacts(values as ContactsFormValues));
+    return () => subscription.unsubscribe();
+  }, [watch, setContacts]);
 
   const onSubmit = (values: ContactsFormValues) => {
     setContacts(values);

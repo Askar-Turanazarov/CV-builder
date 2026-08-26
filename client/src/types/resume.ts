@@ -57,6 +57,13 @@ export interface AiGeneratedContent {
   sourceHash: string;
 }
 
+export interface CoverLetterContent {
+  content: string;
+  targetRole: string;
+  targetCompany: string;
+  generatedAt: string | null;
+}
+
 export type TemplateId =
   | 'classic'
   | 'sidebar'
@@ -120,6 +127,7 @@ export interface ResumeData {
   skills: SkillEntry[];
   languages: LanguageEntry[];
   aiContent: AiGeneratedContent | null;
+  coverLetter: CoverLetterContent | null;
   selectedTemplateId: TemplateId;
   selectedThemeId: ThemeId;
   colorMode: ColorMode;
@@ -157,6 +165,7 @@ export function createEmptyResumeData(): ResumeData {
     skills: [],
     languages: [],
     aiContent: null,
+    coverLetter: null,
     selectedTemplateId: 'classic',
     selectedThemeId: 'blue',
     colorMode: 'light',

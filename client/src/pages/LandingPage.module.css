@@ -8,6 +8,12 @@
    the frosted glass background/padding/radius in Apple Glass mode (see
    styles/glass.css `[data-design='glass'] .landing-card`). */
 .heroCard {
+  /* A visible gap from the sticky header above — without it, the header's
+     own rounded bottom corners (Apple Glass: `border-radius: 0 0 24px
+     24px`) sit flush against this card's rounded top corners with zero
+     breathing room, reading as if the hero were sliding in underneath the
+     header rather than as two clearly separate surfaces. */
+  margin-top: 24px;
   padding-block: 56px 88px;
 }
 

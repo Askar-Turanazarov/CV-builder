@@ -1,0 +1,330 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Same "floating card" shadow language as `.controls`/`.resume-frame` —
+   `var(--shadow-card)` alone was the exact same too-subtle-against-Glass
+   mistake fixed there earlier. The `insights-card` plain marker (added
+   alongside this module class in the component) is what lets glass.css
+   give these the same frosted treatment as the wizard card/toolbar. */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  box-shadow:
+    0 24px 60px -20px rgba(0, 0, 0, 0.25),
+    0 2px 8px rgba(0, 0, 0, 0.06);
+  padding: 20px;
+  animation: cardEnter 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+}
+
+.card:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.card:nth-child(2) {
+  animation-delay: 0.06s;
+}
+
+.card:nth-child(3) {
+  animation-delay: 0.12s;
+}
+
+.card:nth-child(4) {
+  animation-delay: 0.18s;
+}
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.scoreRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.scoreRing {
+  flex-shrink: 0;
+  transform: rotate(-90deg);
+}
+
+.scoreRingTrack,
+.scoreRingFill {
+  fill: none;
+  stroke-width: 6;
+}
+
+.scoreRingTrack {
+  stroke: var(--color-surface-alt);
+}
+
+.scoreRingFill {
+  stroke: var(--color-primary);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.scoreRingText {
+  transform: rotate(90deg);
+  transform-origin: center;
+  font-size: 15px;
+  font-weight: 700;
+  fill: var(--color-text);
+}
+
+.scoreLabel {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.allDone {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  animation: allDonePop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes allDonePop {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.checklistItem {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border);
+  overflow: hidden;
+  max-height: 200px;
+  opacity: 1;
+  transition:
+    max-height 0.3s ease,
+    opacity 0.3s ease,
+    padding 0.3s ease,
+    margin 0.3s ease;
+}
+
+.checklistItem:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.checklistItem.completing {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin: 0;
+  border-top-color: transparent;
+}
+
+.checklistLabel {
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.checklistTip {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+.fixButton {
+  flex-shrink: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--color-primary);
+  background: var(--color-accent-soft);
+  color: var(--color-primary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-bounce);
+}
+
+.fixButton:hover:not(:disabled) {
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+  transform: scale(var(--hover-scale));
+  box-shadow: var(--shadow-hover);
+}
+
+.fixButton:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.fixButton:active:not(:disabled) {
+  transform: scale(var(--press-scale));
+  transition: transform var(--transition-press);
+}
+
+.fixButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.lengthVerdict {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--color-text);
+}
+
+.templateList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.templateItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.templateItem span {
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.applyButton {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-alt);
+  color: var(--color-text);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-bounce);
+}
+
+.applyButton:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-primary-contrast);
+  transform: scale(var(--hover-scale));
+  box-shadow: var(--shadow-hover);
+}
+
+.applyButton:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.applyButton:active {
+  transform: scale(var(--press-scale));
+  transition: transform var(--transition-press);
+}
+
+/* ---------- Job-description match ---------- */
+
+.jobMatchInput {
+  width: 100%;
+  resize: vertical;
+  min-height: 100px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-alt);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+  transition: border-color var(--transition-fast);
+}
+
+.jobMatchInput:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+}
+
+.jobMatchResult {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+}
+
+.jobMatchScore {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 10px;
+}
+
+.jobMatchHint {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.jobMatchKeywords {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.jobMatchKeyword {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--color-accent-soft);
+  color: var(--color-primary);
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.jobMatchDisclaimer {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-top: 8px;
+}

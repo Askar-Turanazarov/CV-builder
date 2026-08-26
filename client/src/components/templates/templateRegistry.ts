@@ -41,79 +41,104 @@ import ScrapbookTemplate from './ScrapbookTemplate';
 import DashboardStatsTemplate from './DashboardStatsTemplate';
 import BlueprintTemplate from './BlueprintTemplate';
 
+// Broad, informal "who tends to reach for this template" tags — used only
+// to power the Preview page's lightweight "templates for your role"
+// suggestion (see lib/resumeInsights.ts). Not a strict taxonomy, and a
+// template can carry more than one; `universal` templates simply don't
+// surface in that suggestion (nothing wrong with them, they just don't
+// signal a specific industry).
+export type TemplateAudience =
+  | 'universal'
+  | 'tech'
+  | 'creative'
+  | 'corporate'
+  | 'finance'
+  | 'legal'
+  | 'healthcare'
+  | 'academia'
+  | 'sales-marketing'
+  | 'startup'
+  | 'nonprofit';
+
 export interface TemplateDefinition {
   id: TemplateId;
   labelKey: string;
   component: ComponentType<ResumeTemplateProps>;
   category: 'popular' | 'unusual';
+  audience: TemplateAudience[];
 }
 
 export const templateRegistry: TemplateDefinition[] = [
-  { id: 'classic', labelKey: 'template.classic', component: ClassicTemplate, category: 'popular' },
-  { id: 'sidebar', labelKey: 'template.sidebar', component: SidebarTemplate, category: 'popular' },
-  { id: 'minimal', labelKey: 'template.minimal', component: MinimalTemplate, category: 'popular' },
-  { id: 'timeline', labelKey: 'template.timeline', component: TimelineTemplate, category: 'popular' },
-  { id: 'compact', labelKey: 'template.compact', component: CompactTemplate, category: 'popular' },
-  { id: 'harvard', labelKey: 'template.harvard', component: HarvardTemplate, category: 'popular' },
-  { id: 'executive', labelKey: 'template.executive', component: ExecutiveTemplate, category: 'popular' },
-  { id: 'consultant', labelKey: 'template.consultant', component: ConsultantTemplate, category: 'popular' },
-  { id: 'academic', labelKey: 'template.academic', component: AcademicTemplate, category: 'popular' },
+  { id: 'classic', labelKey: 'template.classic', component: ClassicTemplate, category: 'popular', audience: ['universal'] },
+  { id: 'sidebar', labelKey: 'template.sidebar', component: SidebarTemplate, category: 'popular', audience: ['universal'] },
+  { id: 'minimal', labelKey: 'template.minimal', component: MinimalTemplate, category: 'popular', audience: ['universal', 'creative'] },
+  { id: 'timeline', labelKey: 'template.timeline', component: TimelineTemplate, category: 'popular', audience: ['universal'] },
+  { id: 'compact', labelKey: 'template.compact', component: CompactTemplate, category: 'popular', audience: ['universal'] },
+  { id: 'harvard', labelKey: 'template.harvard', component: HarvardTemplate, category: 'popular', audience: ['corporate', 'academia', 'legal', 'finance'] },
+  { id: 'executive', labelKey: 'template.executive', component: ExecutiveTemplate, category: 'popular', audience: ['corporate'] },
+  { id: 'consultant', labelKey: 'template.consultant', component: ConsultantTemplate, category: 'popular', audience: ['corporate', 'finance'] },
+  { id: 'academic', labelKey: 'template.academic', component: AcademicTemplate, category: 'popular', audience: ['academia'] },
   {
     id: 'two-column-photo',
     labelKey: 'template.twoColumnPhoto',
     component: TwoColumnPhotoTemplate,
     category: 'popular',
+    audience: ['universal'],
   },
-  { id: 'dark-sidebar', labelKey: 'template.darkSidebar', component: DarkSidebarTemplate, category: 'popular' },
-  { id: 'functional', labelKey: 'template.functional', component: FunctionalTemplate, category: 'popular' },
-  { id: 'hybrid', labelKey: 'template.hybrid', component: HybridTemplate, category: 'popular' },
+  { id: 'dark-sidebar', labelKey: 'template.darkSidebar', component: DarkSidebarTemplate, category: 'popular', audience: ['tech', 'creative'] },
+  { id: 'functional', labelKey: 'template.functional', component: FunctionalTemplate, category: 'popular', audience: ['universal'] },
+  { id: 'hybrid', labelKey: 'template.hybrid', component: HybridTemplate, category: 'popular', audience: ['universal'] },
   {
     id: 'gradient-header',
     labelKey: 'template.gradientHeader',
     component: GradientHeaderTemplate,
     category: 'popular',
+    audience: ['creative', 'sales-marketing', 'startup'],
   },
-  { id: 'swiss-minimal', labelKey: 'template.swissMinimal', component: SwissMinimalTemplate, category: 'popular' },
-  { id: 'elegant-serif', labelKey: 'template.elegantSerif', component: ElegantSerifTemplate, category: 'popular' },
-  { id: 'color-block', labelKey: 'template.colorBlock', component: ColorBlockTemplate, category: 'popular' },
-  { id: 'developer', labelKey: 'template.developer', component: DeveloperTemplate, category: 'popular' },
-  { id: 'sales-vibrant', labelKey: 'template.salesVibrant', component: SalesVibrantTemplate, category: 'popular' },
-  { id: 'startup', labelKey: 'template.startup', component: StartupTemplate, category: 'popular' },
-  { id: 'healthcare', labelKey: 'template.healthcare', component: HealthcareTemplate, category: 'popular' },
-  { id: 'legal', labelKey: 'template.legal', component: LegalTemplate, category: 'popular' },
-  { id: 'nonprofit', labelKey: 'template.nonprofit', component: NonprofitTemplate, category: 'popular' },
+  { id: 'swiss-minimal', labelKey: 'template.swissMinimal', component: SwissMinimalTemplate, category: 'popular', audience: ['creative'] },
+  { id: 'elegant-serif', labelKey: 'template.elegantSerif', component: ElegantSerifTemplate, category: 'popular', audience: ['universal', 'academia'] },
+  { id: 'color-block', labelKey: 'template.colorBlock', component: ColorBlockTemplate, category: 'popular', audience: ['creative', 'sales-marketing'] },
+  { id: 'developer', labelKey: 'template.developer', component: DeveloperTemplate, category: 'popular', audience: ['tech'] },
+  { id: 'sales-vibrant', labelKey: 'template.salesVibrant', component: SalesVibrantTemplate, category: 'popular', audience: ['sales-marketing'] },
+  { id: 'startup', labelKey: 'template.startup', component: StartupTemplate, category: 'popular', audience: ['startup', 'tech'] },
+  { id: 'healthcare', labelKey: 'template.healthcare', component: HealthcareTemplate, category: 'popular', audience: ['healthcare'] },
+  { id: 'legal', labelKey: 'template.legal', component: LegalTemplate, category: 'popular', audience: ['legal'] },
+  { id: 'nonprofit', labelKey: 'template.nonprofit', component: NonprofitTemplate, category: 'popular', audience: ['nonprofit'] },
   {
     id: 'photo-portrait',
     labelKey: 'template.photoPortrait',
     component: PhotoPortraitTemplate,
     category: 'popular',
+    audience: ['creative'],
   },
-  { id: 'two-page', labelKey: 'template.twoPage', component: TwoPageTemplate, category: 'popular' },
-  { id: 'terminal', labelKey: 'template.terminal', component: TerminalTemplate, category: 'unusual' },
-  { id: 'poster', labelKey: 'template.poster', component: PosterTemplate, category: 'unusual' },
-  { id: 'editorial', labelKey: 'template.editorial', component: EditorialTemplate, category: 'unusual' },
-  { id: 'ultra-card', labelKey: 'template.ultraCard', component: UltraCardTemplate, category: 'unusual' },
-  { id: 'diagonal', labelKey: 'template.diagonal', component: DiagonalTemplate, category: 'unusual' },
-  { id: 'split-duo', labelKey: 'template.splitDuo', component: SplitDuoTemplate, category: 'popular' },
-  { id: 'badge-initials', labelKey: 'template.badgeInitials', component: BadgeInitialsTemplate, category: 'popular' },
-  { id: 'card-grid', labelKey: 'template.cardGrid', component: CardGridTemplate, category: 'popular' },
-  { id: 'ribbon-corner', labelKey: 'template.ribbonCorner', component: RibbonCornerTemplate, category: 'popular' },
-  { id: 'icon-rail', labelKey: 'template.iconRail', component: IconRailTemplate, category: 'popular' },
-  { id: 'ledger', labelKey: 'template.ledger', component: LedgerTemplate, category: 'popular' },
+  { id: 'two-page', labelKey: 'template.twoPage', component: TwoPageTemplate, category: 'popular', audience: ['corporate', 'academia'] },
+  { id: 'terminal', labelKey: 'template.terminal', component: TerminalTemplate, category: 'unusual', audience: ['tech'] },
+  { id: 'poster', labelKey: 'template.poster', component: PosterTemplate, category: 'unusual', audience: ['creative'] },
+  { id: 'editorial', labelKey: 'template.editorial', component: EditorialTemplate, category: 'unusual', audience: ['creative', 'sales-marketing'] },
+  { id: 'ultra-card', labelKey: 'template.ultraCard', component: UltraCardTemplate, category: 'unusual', audience: ['universal', 'startup'] },
+  { id: 'diagonal', labelKey: 'template.diagonal', component: DiagonalTemplate, category: 'unusual', audience: ['creative'] },
+  { id: 'split-duo', labelKey: 'template.splitDuo', component: SplitDuoTemplate, category: 'popular', audience: ['creative', 'startup'] },
+  { id: 'badge-initials', labelKey: 'template.badgeInitials', component: BadgeInitialsTemplate, category: 'popular', audience: ['universal', 'corporate'] },
+  { id: 'card-grid', labelKey: 'template.cardGrid', component: CardGridTemplate, category: 'popular', audience: ['tech', 'startup'] },
+  { id: 'ribbon-corner', labelKey: 'template.ribbonCorner', component: RibbonCornerTemplate, category: 'popular', audience: ['creative', 'sales-marketing'] },
+  { id: 'icon-rail', labelKey: 'template.iconRail', component: IconRailTemplate, category: 'popular', audience: ['tech', 'startup'] },
+  { id: 'ledger', labelKey: 'template.ledger', component: LedgerTemplate, category: 'popular', audience: ['finance'] },
   {
     id: 'radial-timeline',
     labelKey: 'template.radialTimeline',
     component: RadialTimelineTemplate,
     category: 'unusual',
+    audience: ['creative'],
   },
-  { id: 'scrapbook', labelKey: 'template.scrapbook', component: ScrapbookTemplate, category: 'unusual' },
+  { id: 'scrapbook', labelKey: 'template.scrapbook', component: ScrapbookTemplate, category: 'unusual', audience: ['creative', 'academia'] },
   {
     id: 'dashboard-stats',
     labelKey: 'template.dashboardStats',
     component: DashboardStatsTemplate,
     category: 'unusual',
+    audience: ['tech', 'finance'],
   },
-  { id: 'blueprint', labelKey: 'template.blueprint', component: BlueprintTemplate, category: 'unusual' },
+  { id: 'blueprint', labelKey: 'template.blueprint', component: BlueprintTemplate, category: 'unusual', audience: ['tech'] },
 ];
 
 export function getTemplateComponent(id: TemplateId): ComponentType<ResumeTemplateProps> {

@@ -1,25 +1,12 @@
-import { GoogleGenAI, Type } from '@google/genai';
-import { ResumeGenerationSchema } from '../resumePrompt.js';
+import { GoogleGenAI } from '@google/genai';
 import type { AiGenerateParams, AiProvider } from './aiProvider.types.js';
 import { RetryableAiError } from './aiProvider.types.js';
 
 const client = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
 
-const RESPONSE_SCHEMA = {
-  type: Type.OBJECT,
-  properties: {
-    summary: { type: Type.STRING },
-    strengths: {
-      type: Type.ARRAY,
-      items: { type: Type.STRING },
-    },
-  },
-  required: ['summary', 'strengths'],
-};
-
 export const geminiProvider: AiProvider = {
   id: 'gemini',
-  async generate({ systemPrompt, userPrompt, model }: AiGenerateParams) {
+  async generate<T>({ systemPrompt, userPrompt, model, task }: AiGenerateParams<T>): Promise<T> {
     let response;
     try {
       response = await client.models.generateContent({
@@ -28,7 +15,7 @@ export const geminiProvider: AiProvider = {
         config: {
           systemInstruction: systemPrompt,
           responseMimeType: 'application/json',
-          responseSchema: RESPONSE_SCHEMA,
+          responseSchema: task.geminiResponseSchema,
         },
       });
     } catch (err) {
@@ -52,6 +39,6 @@ export const geminiProvider: AiProvider = {
       throw new RetryableAiError(`gemini:${model} returned invalid JSON`);
     }
 
-    return ResumeGenerationSchema.parse(parsed);
+    return task.resultSchema.parse(parsed);
   },
 };

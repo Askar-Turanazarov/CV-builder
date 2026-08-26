@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useResumeStore } from '../../../store/resumeStore';
 import type { LanguageEntry, LanguageLevel } from '../../../types/resume';
@@ -19,6 +19,12 @@ export default function LanguagesStep({ onNext, onBack, isFirst }: StepComponent
   const [name, setName] = useState('');
   const [level, setLevel] = useState<LanguageLevel>('B1');
   const [error, setError] = useState<string | null>(null);
+
+  // Live-preview sync — see SkillsStep for the same pattern (plain local
+  // state here, no react-hook-form instance to watch()).
+  useEffect(() => {
+    setLanguages(languages);
+  }, [languages, setLanguages]);
 
   const addLanguage = () => {
     const trimmed = name.trim();

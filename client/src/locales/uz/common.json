@@ -2,8 +2,10 @@
   "appName": "CV Forge",
   "nav": {
     "home": "Bosh sahifa",
+    "resumes": "Rezyumelarim",
     "editor": "Muharrir",
-    "preview": "Ko'rib chiqish"
+    "preview": "Ko'rib chiqish",
+    "coverLetter": "Xat"
   },
   "actions": {
     "next": "Keyingisi",
@@ -21,7 +23,10 @@
     "removePhoto": "Rasmni o'chirish",
     "add": "Qo'shish",
     "remove": "O'chirish",
-    "finish": "Tayyor — ko'rib chiqishga o'tish"
+    "finish": "Tayyor — ko'rib chiqishga o'tish",
+    "copyText": "Matn sifatida nusxalash",
+    "copied": "Nusxalandi",
+    "copyFailed": "Nusxalab bo'lmadi"
   },
   "theme": {
     "label": "Rang mavzusi",
@@ -112,5 +117,15 @@
     "generic": "Nimadir xato ketdi. Qaytadan urinib ko'ring.",
     "restoreFailed": "Saqlangan ma'lumotlarni tiklab bo'lmadi — shakl tozalandi.",
     "pdfFailed": "PDF yaratib bo'lmadi. Qaytadan urinib ko'ring."
+  },
+  "resumes": {
+    "title": "Rezyumelarim",
+    "create": "+ Yangi rezyume",
+    "defaultName": "Rezyume {{count}}",
+    "copyName": "{{name}} (nusxa)",
+    "open": "Ochish",
+    "duplicate": "Nusxalash",
+    "delete": "O'chirish",
+    "confirmDelete": "Rostdan o'chirilsinmi?"
   }
 }

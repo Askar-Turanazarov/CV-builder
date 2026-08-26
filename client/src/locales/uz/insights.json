@@ -1,0 +1,82 @@
+{
+  "panel": {
+    "title": "Rezyumeni tekshirish",
+    "scoreLabel": "To'ldirilganlik: {{done}}/{{total}}",
+    "allDone": "Ajoyib — barcha asosiy bo'limlar to'ldirilgan!",
+    "fixButton": "To'ldirish"
+  },
+  "checklist": {
+    "photo": {
+      "label": "Rasm qo'shing",
+      "tip": "Rasmli rezyume shaxsiyroq va yakunlangan ko'rinadi."
+    },
+    "contacts": {
+      "label": "Email va telefon raqamini kiriting",
+      "tip": "Aloqa ma'lumotlarisiz ish beruvchi siz bilan bog'lana olmaydi."
+    },
+    "experience": {
+      "label": "Ish tajribangizni qo'shing",
+      "tip": "Kichik tajriba (amaliyot, loyiha) ham bo'sh bo'limdan yaxshiroq."
+    },
+    "experienceDescriptions": {
+      "label": "Har bir lavozim uchun tavsif yozing",
+      "tip": "Qisqa tavsif sizning hissangizni ko'rsatishga yordam beradi."
+    },
+    "education": {
+      "label": "Ta'limingizni qo'shing",
+      "tip": "Kamida bitta o'quv muassasasini ko'rsating."
+    },
+    "skills": {
+      "label": "Kamida 3 ta ko'nikma qo'shing",
+      "tip": "Ko'nikmalar ro'yxati avtomatik saralashdan o'tishga yordam beradi."
+    },
+    "languages": {
+      "label": "Kamida bitta tilni ko'rsating",
+      "tip": "Ayniqsa xorijiy hamkasblar bilan ishlash talab qilinsa muhim."
+    },
+    "aiContent": {
+      "label": "AI yordamida tavsif yarating",
+      "tip": "AI tavsifi va kuchli tomonlar rezyumeni ancha ishonarli qiladi."
+    }
+  },
+  "length": {
+    "title": "Rezyume uzunligi",
+    "fits": "Bitta sahifaga bemalol sig'adi.",
+    "tight": "Ehtimol, bitta sahifaga sig'adi, lekin zich bo'ladi.",
+    "overflow": "Ehtimol, 2+ sahifaga cho'ziladi — ixchamroq shablon tanlang yoki tavsiflarni qisqartiring."
+  },
+  "templateSuggestion": {
+    "title": "Kasbingiz uchun shablonlar",
+    "apply": "Qo'llash"
+  },
+  "jobMatch": {
+    "title": "Vakansiyaga moslik",
+    "placeholder": "Vakansiya matnini shu yerga joylashtiring…",
+    "button": "Tekshirish",
+    "resultLabel": "Moslik: {{percent}}%",
+    "missingTitle": "Vakansiyada bor, lekin rezyumeda yo'q so'zlar:",
+    "missingHint": "Agar bu tajriba yoki ko'nikma sizda mavjud bo'lsa — uni aniq ko'rsating.",
+    "noMissing": "Rezyumeingiz vakansiyaning asosiy so'zlarini allaqachon qamrab olgan.",
+    "disclaimer": "Bu shunchaki so'zlarni solishtirish, chuqur AI tahlili emas — aniq baho emas, taxminiy yo'nalish."
+  },
+  "coverLetter": {
+    "title": "Kuzatuv xati",
+    "subtitle": "AI rezyume ma'lumotlaringiz asosida xat yozadi — aniqroq bo'lishi uchun maqsadli lavozim va kompaniyani ko'rsatishingiz mumkin.",
+    "targetRoleLabel": "Murojaat qilayotgan lavozimingiz",
+    "targetRolePlaceholder": "Masalan, Frontend dasturchi",
+    "targetCompanyLabel": "Kompaniya (ixtiyoriy)",
+    "targetCompanyPlaceholder": "Masalan, \"Romashka\" MChJ",
+    "generate": "Xat yaratish",
+    "regenerate": "Qayta yaratish",
+    "generating": "Xat yozilmoqda…",
+    "editableLabel": "Xat matni (tahrirlash mumkin)",
+    "downloadPdf": "PDF yuklab olish",
+    "downloadingPdf": "PDF tayyorlanmoqda…",
+    "noContentHint": "Hali xat yaratilmagan — \"Xat yaratish\" tugmasini bosing.",
+    "generateError": "Xatni yaratib bo'lmadi. Qaytadan urinib ko'ring.",
+    "downloadError": "PDF yaratib bo'lmadi. Qaytadan urinib ko'ring.",
+    "subjectWithCompany": "{{company}} kompaniyasidagi {{role}} lavozimiga nomzodlik",
+    "subjectRoleOnly": "{{role}} lavozimiga nomzodlik",
+    "emptyPlaceholder": "Xat matni yaratilgandan so'ng shu yerda paydo bo'ladi."
+  }
+}

@@ -4,6 +4,8 @@ import cors from 'cors';
 import helmet from 'helmet';
 import { generateResumeRouter } from './routes/generateResume.route.js';
 import { exportPdfRouter } from './routes/exportPdf.route.js';
+import { generateCoverLetterRouter } from './routes/generateCoverLetter.route.js';
+import { exportCoverLetterPdfRouter } from './routes/exportCoverLetterPdf.route.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
 const app = express();
@@ -22,6 +24,8 @@ app.get('/api/health', (_req, res) => {
 
 app.use('/api/generate-resume', generateResumeRouter);
 app.use('/api/export-pdf', exportPdfRouter);
+app.use('/api/generate-cover-letter', generateCoverLetterRouter);
+app.use('/api/export-cover-letter-pdf', exportCoverLetterPdfRouter);
 
 app.use(errorHandler);
 

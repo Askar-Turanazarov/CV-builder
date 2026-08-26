@@ -1,6 +1,6 @@
 import type { RequestHandler } from 'express';
-import { generateResumeContent } from '../services/aiOrchestrator.js';
-import { SYSTEM_PROMPTS, buildUserPrompt } from '../services/resumePrompt.js';
+import { generateAiContent } from '../services/aiOrchestrator.js';
+import { SYSTEM_PROMPTS, buildUserPrompt, RESUME_TASK } from '../services/resumePrompt.js';
 import type { GenerateResumeRequest } from '../schemas/generateResumeRequest.schema.js';
 
 export const generateResumeController: RequestHandler = async (req, res) => {
@@ -9,7 +9,7 @@ export const generateResumeController: RequestHandler = async (req, res) => {
   const userPrompt = buildUserPrompt(body);
 
   try {
-    const result = await generateResumeContent({ systemPrompt, userPrompt });
+    const result = await generateAiContent({ systemPrompt, userPrompt, task: RESUME_TASK });
     res.json({ ...result, generatedAt: new Date().toISOString() });
   } catch (err) {
     console.error('AI generation failed after exhausting all candidates:', err);

@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useResumeStore } from '../../../store/resumeStore';
 import type { SkillEntry } from '../../../types/resume';
@@ -19,6 +19,14 @@ export default function SkillsStep({ onNext, onBack, isFirst }: StepComponentPro
   const [name, setName] = useState('');
   const [level, setLevel] = useState<(typeof LEVELS)[number]>(3);
   const [error, setError] = useState<string | null>(null);
+
+  // Live-preview sync — this step has no react-hook-form instance to
+  // `watch()` (skills are plain local state), so we mirror the local array
+  // into the store directly whenever it changes, same intent as the
+  // watch()-based steps elsewhere.
+  useEffect(() => {
+    setSkills(skills);
+  }, [skills, setSkills]);
 
   const addSkill = () => {
     const trimmed = name.trim();

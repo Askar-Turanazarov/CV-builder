@@ -9,7 +9,9 @@ import ViewModeToggle from '../components/theme/ViewModeToggle';
 import Button from '../components/common/Button';
 import Spinner from '../components/common/Spinner';
 import ErrorBanner from '../components/common/ErrorBanner';
+import ResumeInsightsPanel from '../components/preview/ResumeInsightsPanel';
 import { printResume, downloadPdf } from '../lib/pdfExport';
+import { copyResumeAsText } from '../lib/textExport';
 import styles from './PreviewPage.module.css';
 
 export default function PreviewPage() {
@@ -20,6 +22,7 @@ export default function PreviewPage() {
 
   const [isDownloading, setIsDownloading] = useState(false);
   const [downloadError, setDownloadError] = useState<string | null>(null);
+  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'error'>('idle');
 
   const handlePrint = () => printResume(data.viewMode, setViewMode);
 
@@ -35,9 +38,20 @@ export default function PreviewPage() {
     }
   };
 
+  const handleCopyText = async () => {
+    try {
+      await copyResumeAsText(data);
+      setCopyState('copied');
+    } catch {
+      setCopyState('error');
+    } finally {
+      setTimeout(() => setCopyState('idle'), 2000);
+    }
+  };
+
   return (
     <div>
-      <div className={`${styles.controls} preview-controls no-print`}>
+      <div className={`container ${styles.controls} preview-controls no-print`}>
         <div className={styles.controlsRow}>
           <TemplateSwitcher />
           <ThemeSwitcher />
@@ -57,6 +71,9 @@ export default function PreviewPage() {
           <Button variant="secondary" onClick={handlePrint} title={t('actions.printHint')}>
             {t('actions.print')}
           </Button>
+          <Button variant="ghost" onClick={handleCopyText}>
+            {copyState === 'copied' ? `✓ ${t('actions.copied')}` : copyState === 'error' ? t('actions.copyFailed') : t('actions.copyText')}
+          </Button>
         </div>
         {downloadError && <ErrorBanner message={downloadError} />}
       </div>
@@ -67,8 +84,13 @@ export default function PreviewPage() {
         data-color-mode={data.colorMode}
         data-view-mode={data.viewMode}
       >
-        <div className={styles.stageInner}>
-          <TemplateComponent data={data} />
+        <div className={`container ${styles.stageGrid}`}>
+          <div className="resume-frame">
+            <TemplateComponent data={data} />
+          </div>
+          <div className={`${styles.insightsColumn} no-print`}>
+            <ResumeInsightsPanel />
+          </div>
         </div>
       </div>
     </div>

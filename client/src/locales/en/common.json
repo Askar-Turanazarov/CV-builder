@@ -2,8 +2,10 @@
   "appName": "CV Forge",
   "nav": {
     "home": "Home",
+    "resumes": "My resumes",
     "editor": "Editor",
-    "preview": "Preview"
+    "preview": "Preview",
+    "coverLetter": "Cover letter"
   },
   "actions": {
     "next": "Next",
@@ -21,7 +23,10 @@
     "removePhoto": "Remove photo",
     "add": "Add",
     "remove": "Remove",
-    "finish": "Done — go to preview"
+    "finish": "Done — go to preview",
+    "copyText": "Copy as text",
+    "copied": "Copied",
+    "copyFailed": "Couldn't copy"
   },
   "theme": {
     "label": "Color theme",
@@ -112,5 +117,15 @@
     "generic": "Something went wrong. Please try again.",
     "restoreFailed": "Couldn't restore your saved data — the form has been reset.",
     "pdfFailed": "Couldn't generate the PDF. Please try again."
+  },
+  "resumes": {
+    "title": "My resumes",
+    "create": "+ New resume",
+    "defaultName": "Resume {{count}}",
+    "copyName": "{{name}} (copy)",
+    "open": "Open",
+    "duplicate": "Duplicate",
+    "delete": "Delete",
+    "confirmDelete": "Confirm delete?"
   }
 }

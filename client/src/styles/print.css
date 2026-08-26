@@ -38,6 +38,13 @@
     border-radius: 0 !important;
   }
 
+  .resume-frame {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+    background: transparent !important;
+  }
+
   .resume-section,
   .resume-entry {
     break-inside: avoid;

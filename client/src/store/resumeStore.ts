@@ -2,7 +2,6 @@ import { create } from 'zustand';
 import { persist, createJSONStorage, type StateStorage } from 'zustand/middleware';
 import {
   createEmptyResumeData,
-  CURRENT_SCHEMA_VERSION,
   type ResumeData,
   type TemplateId,
   type ThemeId,
@@ -15,9 +14,25 @@ import {
   type SkillEntry,
   type LanguageEntry,
   type AiGeneratedContent,
+  type CoverLetterContent,
 } from '../types/resume';
 
+// Bumped independently from `types/resume.ts`'s CURRENT_SCHEMA_VERSION —
+// that one guards ResumeData's own shape; this one guards the STORE's
+// shape (the move from a single `data` to a named `resumes` collection).
+// A version bump here is what makes zustand/persist actually invoke
+// `migrate` below for anyone who saved under the old, single-resume shape.
+const STORE_SCHEMA_VERSION = 2;
+
+const DEFAULT_RESUME_ID = 'default';
+
 interface ResumeStore {
+  resumes: Record<string, ResumeData>;
+  resumeNames: Record<string, string>;
+  activeResumeId: string;
+  /** Always equals `resumes[activeResumeId]` — kept as its own field (not a
+   * derived getter) so every existing consumer that reads `s.data` keeps
+   * working unchanged; every setter below updates both together. */
   data: ResumeData;
   setPersonalInfo: (patch: Partial<ResumeData['personalInfo']>) => void;
   setContacts: (patch: Partial<ResumeData['contacts']>) => void;
@@ -26,6 +41,7 @@ interface ResumeStore {
   setSkills: (entries: SkillEntry[]) => void;
   setLanguages: (entries: LanguageEntry[]) => void;
   setAiContent: (content: AiGeneratedContent | null) => void;
+  setCoverLetter: (content: CoverLetterContent | null) => void;
   setTemplate: (id: TemplateId) => void;
   setTheme: (id: ThemeId) => void;
   setColorMode: (mode: ColorMode) => void;
@@ -33,6 +49,18 @@ interface ResumeStore {
   setUiLanguage: (lang: UiLanguage) => void;
   setUiDesignSystem: (design: UiDesignSystem) => void;
   reset: () => void;
+  /** Creates a new, empty resume with the given display name, makes it the
+   * active one, and returns its id. */
+  createResume: (name: string) => string;
+  /** Copies an existing resume's data under a new name (kept separate,
+   * editing one never touches the other) and returns the new id. Does NOT
+   * switch to it — callers decide whether to. */
+  duplicateResume: (id: string, newName: string) => string;
+  renameResume: (id: string, name: string) => void;
+  /** Deletes a resume. If it was the active one, switches to another
+   * remaining resume, or creates a fresh empty one if it was the last. */
+  deleteResume: (id: string) => void;
+  switchResume: (id: string) => void;
 }
 
 /**
@@ -64,31 +92,126 @@ function createDebouncedStorage(delayMs: number): StateStorage {
 
 export const useResumeStore = create<ResumeStore>()(
   persist(
-    (set) => ({
-      data: createEmptyResumeData(),
-      setPersonalInfo: (patch) =>
-        set((s) => ({ data: { ...s.data, personalInfo: { ...s.data.personalInfo, ...patch } } })),
-      setContacts: (patch) => set((s) => ({ data: { ...s.data, contacts: { ...s.data.contacts, ...patch } } })),
-      setExperience: (entries) => set((s) => ({ data: { ...s.data, experience: entries } })),
-      setEducation: (entries) => set((s) => ({ data: { ...s.data, education: entries } })),
-      setSkills: (entries) => set((s) => ({ data: { ...s.data, skills: entries } })),
-      setLanguages: (entries) => set((s) => ({ data: { ...s.data, languages: entries } })),
-      setAiContent: (content) => set((s) => ({ data: { ...s.data, aiContent: content } })),
-      setTemplate: (id) => set((s) => ({ data: { ...s.data, selectedTemplateId: id } })),
-      setTheme: (id) => set((s) => ({ data: { ...s.data, selectedThemeId: id } })),
-      setColorMode: (mode) => set((s) => ({ data: { ...s.data, colorMode: mode } })),
-      setViewMode: (mode) => set((s) => ({ data: { ...s.data, viewMode: mode } })),
-      setUiLanguage: (lang) => set((s) => ({ data: { ...s.data, uiLanguage: lang } })),
-      setUiDesignSystem: (design) => set((s) => ({ data: { ...s.data, uiDesignSystem: design } })),
-      reset: () => set({ data: createEmptyResumeData() }),
-    }),
+    (set, get) => {
+      /** Shared by every field-level setter: applies `updater` to the
+       * currently active resume's data and writes the result to both
+       * `resumes[activeResumeId]` and the `data` mirror in one `set` call. */
+      const updateActive = (updater: (data: ResumeData) => ResumeData) => {
+        const state = get();
+        const nextData = updater(state.data);
+        set({
+          data: nextData,
+          resumes: { ...state.resumes, [state.activeResumeId]: nextData },
+        });
+      };
+
+      const initialData = createEmptyResumeData();
+
+      return {
+        resumes: { [DEFAULT_RESUME_ID]: initialData },
+        resumeNames: { [DEFAULT_RESUME_ID]: 'Resume 1' },
+        activeResumeId: DEFAULT_RESUME_ID,
+        data: initialData,
+
+        setPersonalInfo: (patch) => updateActive((data) => ({ ...data, personalInfo: { ...data.personalInfo, ...patch } })),
+        setContacts: (patch) => updateActive((data) => ({ ...data, contacts: { ...data.contacts, ...patch } })),
+        setExperience: (entries) => updateActive((data) => ({ ...data, experience: entries })),
+        setEducation: (entries) => updateActive((data) => ({ ...data, education: entries })),
+        setSkills: (entries) => updateActive((data) => ({ ...data, skills: entries })),
+        setLanguages: (entries) => updateActive((data) => ({ ...data, languages: entries })),
+        setAiContent: (content) => updateActive((data) => ({ ...data, aiContent: content })),
+        setCoverLetter: (content) => updateActive((data) => ({ ...data, coverLetter: content })),
+        setTemplate: (id) => updateActive((data) => ({ ...data, selectedTemplateId: id })),
+        setTheme: (id) => updateActive((data) => ({ ...data, selectedThemeId: id })),
+        setColorMode: (mode) => updateActive((data) => ({ ...data, colorMode: mode })),
+        setViewMode: (mode) => updateActive((data) => ({ ...data, viewMode: mode })),
+        setUiLanguage: (lang) => updateActive((data) => ({ ...data, uiLanguage: lang })),
+        setUiDesignSystem: (design) => updateActive((data) => ({ ...data, uiDesignSystem: design })),
+        reset: () => updateActive(() => createEmptyResumeData()),
+
+        createResume: (name) => {
+          const id = crypto.randomUUID();
+          const newData = createEmptyResumeData();
+          set((s) => ({
+            resumes: { ...s.resumes, [id]: newData },
+            resumeNames: { ...s.resumeNames, [id]: name },
+            activeResumeId: id,
+            data: newData,
+          }));
+          return id;
+        },
+
+        duplicateResume: (id, newName) => {
+          const source = get().resumes[id];
+          const newId = crypto.randomUUID();
+          set((s) => ({
+            resumes: { ...s.resumes, [newId]: { ...(source ?? createEmptyResumeData()) } },
+            resumeNames: { ...s.resumeNames, [newId]: newName },
+          }));
+          return newId;
+        },
+
+        renameResume: (id, name) => set((s) => ({ resumeNames: { ...s.resumeNames, [id]: name } })),
+
+        deleteResume: (id) => {
+          set((s) => {
+            const resumes = { ...s.resumes };
+            const resumeNames = { ...s.resumeNames };
+            delete resumes[id];
+            delete resumeNames[id];
+
+            if (s.activeResumeId !== id) {
+              return { resumes, resumeNames };
+            }
+
+            const remainingIds = Object.keys(resumes);
+            if (remainingIds.length > 0) {
+              const nextActiveId = remainingIds[0];
+              return { resumes, resumeNames, activeResumeId: nextActiveId, data: resumes[nextActiveId] };
+            }
+
+            const freshId = crypto.randomUUID();
+            const freshData = createEmptyResumeData();
+            return {
+              resumes: { [freshId]: freshData },
+              resumeNames: { [freshId]: 'Resume 1' },
+              activeResumeId: freshId,
+              data: freshData,
+            };
+          });
+        },
+
+        switchResume: (id) => {
+          set((s) => {
+            const target = s.resumes[id];
+            if (!target) return s;
+            return { activeResumeId: id, data: target };
+          });
+        },
+      };
+    },
     {
       name: 'resume-builder:v1',
-      version: CURRENT_SCHEMA_VERSION,
+      version: STORE_SCHEMA_VERSION,
       storage: createJSONStorage(() => createDebouncedStorage(400)),
-      // Bump CURRENT_SCHEMA_VERSION and add a branch here whenever ResumeData's
-      // shape changes in a way older persisted data can't satisfy as-is.
-      migrate: (persistedState) => persistedState as ResumeStore,
+      // Runs only when a persisted blob's own `version` differs from
+      // STORE_SCHEMA_VERSION — this is where the one-time shape change
+      // (single `data` -> named `resumes` collection) is handled, so
+      // nobody's existing resume disappears when this feature ships.
+      migrate: (persistedState) => {
+        const persisted = persistedState as { data?: ResumeData; resumes?: Record<string, ResumeData> } | undefined;
+        if (!persisted) return persisted;
+        if (!persisted.resumes) {
+          const oldData = persisted.data ?? createEmptyResumeData();
+          return {
+            resumes: { [DEFAULT_RESUME_ID]: oldData },
+            resumeNames: { [DEFAULT_RESUME_ID]: 'Resume 1' },
+            activeResumeId: DEFAULT_RESUME_ID,
+            data: oldData,
+          };
+        }
+        return persisted;
+      },
       // Deep-merge `data` specifically: a field added to ResumeData after a
       // user already has persisted state (e.g. uiDesignSystem) should fall
       // back to the fresh default rather than being `undefined`.
@@ -97,7 +220,9 @@ export const useResumeStore = create<ResumeStore>()(
         return {
           ...currentState,
           ...persisted,
-          data: { ...currentState.data, ...persisted?.data },
+          resumes: persisted?.resumes ?? currentState.resumes,
+          resumeNames: persisted?.resumeNames ?? currentState.resumeNames,
+          data: persisted?.data ? { ...currentState.data, ...persisted.data } : currentState.data,
         };
       },
     },

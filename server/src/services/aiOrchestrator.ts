@@ -1,8 +1,7 @@
-import type { AiProvider } from './providers/aiProvider.types.js';
+import type { AiProvider, AiTaskSpec } from './providers/aiProvider.types.js';
 import { RetryableAiError } from './providers/aiProvider.types.js';
 import { anthropicProvider } from './providers/anthropicProvider.js';
 import { geminiProvider } from './providers/geminiProvider.js';
-import type { ResumeGenerationResult } from './resumePrompt.js';
 
 interface Candidate {
   provider: string;
@@ -54,10 +53,11 @@ function markCooldown(c: Candidate, ms: number): void {
   cooldownUntil.set(candidateKey(c), Date.now() + ms);
 }
 
-export async function generateResumeContent(params: {
+export async function generateAiContent<T>(params: {
   systemPrompt: string;
   userPrompt: string;
-}): Promise<ResumeGenerationResult> {
+  task: AiTaskSpec<T>;
+}): Promise<T> {
   // Re-read AI_PROVIDER_PRIORITY on every call rather than caching it once at
   // module load — guarantees the current .env content is always honored,
   // regardless of process/module-caching quirks across dev-server restarts.
@@ -84,6 +84,7 @@ export async function generateResumeContent(params: {
         systemPrompt: params.systemPrompt,
         userPrompt: params.userPrompt,
         model: candidate.model,
+        task: params.task,
       });
       console.info(`[ai] candidate ${key} succeeded`);
       return result;

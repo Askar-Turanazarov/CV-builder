@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslation } from 'react-i18next';
@@ -26,6 +27,14 @@ export default function PersonalInfoStep({ onNext, isFirst }: StepComponentProps
     resolver: zodResolver(personalInfoSchema),
     defaultValues: data.personalInfo,
   });
+
+  // Mirrors every keystroke into the store — independent of the validated
+  // handleSubmit flow below — so the live preview panel next to the form
+  // reflects changes as they're typed, not only after "Далее".
+  useEffect(() => {
+    const subscription = watch((values) => setPersonalInfo(values as PersonalInfoFormValues));
+    return () => subscription.unsubscribe();
+  }, [watch, setPersonalInfo]);
 
   const photo = watch('photo');
   const { handleFile, isProcessing, error: photoError } = usePhotoUpload((dataUrl) => {
