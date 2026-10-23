@@ -4,7 +4,7 @@
   max-width: 720px;
   margin-inline: auto;
   width: 100%;
-  font-family: 'Times New Roman', Georgia, serif;
+  font-family: 'Times New Roman', Georgia, 'PT Serif', serif, var(--font-symbols);
 }
 
 .topRule {

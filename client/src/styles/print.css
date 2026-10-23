@@ -8,6 +8,11 @@
     display: none !important;
   }
 
+  /* The empty photo frame is an on-screen hint; on paper it is just clutter */
+  :has(> [class*='photoPlaceholder']) {
+    display: none !important;
+  }
+
   @page {
     size: A4;
     margin: 12mm;

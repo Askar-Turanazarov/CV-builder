@@ -108,7 +108,7 @@
 }
 
 .name {
-  font-family: 'Segoe Print', 'Comic Sans MS', cursive;
+  font-family: 'Segoe Print', 'Comic Sans MS', 'Caveat', cursive, var(--font-symbols);
   font-size: 1.9rem;
   margin-bottom: 6px;
   transform: rotate(-1.5deg);
@@ -175,7 +175,7 @@
 
 .page :global(section.resume-section) h3 {
   display: inline-block;
-  font-family: 'Segoe Print', 'Comic Sans MS', cursive;
+  font-family: 'Segoe Print', 'Comic Sans MS', 'Caveat', cursive, var(--font-symbols);
   font-size: 1rem;
   text-transform: none;
   letter-spacing: 0.02em;

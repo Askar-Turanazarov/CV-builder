@@ -5,7 +5,7 @@
   max-width: 700px;
   margin-inline: auto;
   width: 100%;
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: Georgia, 'Times New Roman', 'PT Serif', serif, var(--font-symbols);
   line-height: 1.6;
 }
 

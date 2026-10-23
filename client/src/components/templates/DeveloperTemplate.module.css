@@ -7,7 +7,7 @@
   border-radius: 10px;
   overflow: hidden;
   box-shadow: var(--shadow-card);
-  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, 'PT Mono', monospace, var(--font-symbols);
 }
 
 .tabBar {
@@ -92,7 +92,9 @@
     -apple-system,
     BlinkMacSystemFont,
     'Segoe UI',
-    sans-serif;
+    'Inter Variable',
+    sans-serif,
+    var(--font-symbols);
 }
 
 .pillRow {
@@ -110,7 +112,9 @@
     -apple-system,
     BlinkMacSystemFont,
     'Segoe UI',
-    sans-serif;
+    'Inter Variable',
+    sans-serif,
+    var(--font-symbols);
 }
 
 .strengthList li::marker {
@@ -125,7 +129,9 @@
     -apple-system,
     BlinkMacSystemFont,
     'Segoe UI',
-    sans-serif;
+    'Inter Variable',
+    sans-serif,
+    var(--font-symbols);
 }
 
 .entry:last-child {

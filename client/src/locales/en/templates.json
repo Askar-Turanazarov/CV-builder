@@ -17,5 +17,6 @@
     "company": "Company",
     "institution": "Institution",
     "details": "Details"
-  }
+  },
+  "nativeLanguage": "native"
 }

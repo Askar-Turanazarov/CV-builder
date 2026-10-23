@@ -1,0 +1,21 @@
+/*
+ * Self-hosted fallbacks. Visitors' devices use their own system fonts first;
+ * these matter for the server-side PDF, where headless Chromium ships only
+ * Open Sans and would otherwise render symbols and emoji as empty boxes.
+ * Subsets carry unicode-range, so a browser downloads only what a page uses.
+ */
+@import '@fontsource-variable/inter/index.css';
+@import '@fontsource/pt-serif/400.css';
+@import '@fontsource/pt-serif/400-italic.css';
+@import '@fontsource/pt-serif/700.css';
+@import '@fontsource/pt-serif/700-italic.css';
+@import '@fontsource/pt-mono/400.css';
+@import '@fontsource/caveat/400.css';
+@import '@fontsource/caveat/700.css';
+@import '@fontsource/noto-sans-symbols-2/400.css';
+@import '@fontsource/noto-color-emoji/400.css';
+
+:root {
+  /* Appended to every font stack: local emoji fonts first, web fonts last */
+  --font-symbols: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Sans Symbols 2', 'Noto Color Emoji';
+}
