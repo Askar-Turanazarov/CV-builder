@@ -1,4 +1,4 @@
-import { downloadResumePdf, ApiError } from './api';
+import { downloadResumePdf } from './api';
 import type { ResumeData, ViewMode } from '../types/resume';
 
 /**
@@ -45,5 +45,3 @@ export function saveBlob(blob: Blob, filename: string): void {
   // Give the browser a tick to start the download before revoking.
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
-
-export { ApiError };

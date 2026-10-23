@@ -15,7 +15,7 @@ import formUz from './locales/uz/form.json';
 import templatesUz from './locales/uz/templates.json';
 import insightsUz from './locales/uz/insights.json';
 
-export const resources = {
+const resources = {
   ru: { common: commonRu, form: formRu, templates: templatesRu, insights: insightsRu },
   en: { common: commonEn, form: formEn, templates: templatesEn, insights: insightsEn },
   uz: { common: commonUz, form: formUz, templates: templatesUz, insights: insightsUz },

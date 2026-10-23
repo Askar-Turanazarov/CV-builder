@@ -9,7 +9,7 @@ import { formatDateRange } from '../components/templates/shared/dateFormat';
  * whichever language the resume itself is currently set to (`data.uiLanguage`),
  * not necessarily the browser's current UI language.
  */
-export function buildResumePlainText(data: ResumeData): string {
+function buildResumePlainText(data: ResumeData): string {
   const lng = data.uiLanguage;
   const t = (key: string) => i18n.t(key, { lng, ns: 'templates' });
   const present = t('present');

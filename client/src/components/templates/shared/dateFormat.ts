@@ -48,7 +48,7 @@ function parseYearMonth(value: string): { year: number; month: number } | null {
   return { year, month };
 }
 
-export function formatMonthYear(value: string, uiLanguage: UiLanguage): string {
+function formatMonthYear(value: string, uiLanguage: UiLanguage): string {
   const parsed = parseYearMonth(value);
   if (!parsed) return value;
   return `${MONTH_ABBR[uiLanguage][parsed.month - 1]} ${parsed.year}`;

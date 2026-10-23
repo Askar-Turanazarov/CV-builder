@@ -140,7 +140,7 @@ export interface ResumeTemplateProps {
   data: ResumeData;
 }
 
-export const CURRENT_SCHEMA_VERSION = 1;
+const CURRENT_SCHEMA_VERSION = 1;
 
 export function createEmptyResumeData(): ResumeData {
   return {

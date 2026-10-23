@@ -12,7 +12,7 @@ import LanguagesStep from './steps/LanguagesStep';
 import ReviewAndGenerateStep from './steps/ReviewAndGenerateStep';
 import type { StepComponentProps } from './stepTypes';
 
-export const STEP_KEYS = ['personal', 'contacts', 'experience', 'education', 'skills', 'languages', 'review'] as const;
+const STEP_KEYS = ['personal', 'contacts', 'experience', 'education', 'skills', 'languages', 'review'] as const;
 
 export type StepKey = (typeof STEP_KEYS)[number];
 

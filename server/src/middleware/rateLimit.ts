@@ -1,6 +1,6 @@
 import rateLimit from 'express-rate-limit';
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === 'production' || process.env.VERCEL_ENV === 'production';
 
 /**
  * Per-IP limit over a 10-minute window. The production ceiling is tight

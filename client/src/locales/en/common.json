@@ -116,7 +116,9 @@
   "errors": {
     "generic": "Something went wrong. Please try again.",
     "restoreFailed": "Couldn't restore your saved data — the form has been reset.",
-    "pdfFailed": "Couldn't generate the PDF. Please try again."
+    "pdfFailed": "Couldn't generate the PDF. Please try again.",
+    "rateLimited": "Too many requests. Please wait a few minutes and try again.",
+    "aiUnavailable": "Couldn't generate the text — the AI service is temporarily unavailable. Please try again in a minute."
   },
   "resumes": {
     "title": "My resumes",

@@ -116,7 +116,9 @@
   "errors": {
     "generic": "Nimadir xato ketdi. Qaytadan urinib ko'ring.",
     "restoreFailed": "Saqlangan ma'lumotlarni tiklab bo'lmadi — shakl tozalandi.",
-    "pdfFailed": "PDF yaratib bo'lmadi. Qaytadan urinib ko'ring."
+    "pdfFailed": "PDF yaratib bo'lmadi. Qaytadan urinib ko'ring.",
+    "rateLimited": "So'rovlar juda ko'p. Bir necha daqiqa kutib, qaytadan urinib ko'ring.",
+    "aiUnavailable": "Matnni yaratib bo'lmadi — AI xizmati vaqtincha ishlamayapti. Bir daqiqadan so'ng urinib ko'ring."
   },
   "resumes": {
     "title": "Rezyumelarim",

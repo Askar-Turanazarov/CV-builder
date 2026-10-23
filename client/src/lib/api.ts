@@ -21,50 +21,43 @@ export interface GenerateResumeResponse {
   generatedAt: string;
 }
 
+/** Carries the server's machine-readable error code (e.g. 'rate_limited'), which the UI localizes. */
 export class ApiError extends Error {
   constructor(
-    message: string,
+    public readonly code: string,
     public readonly status: number,
   ) {
-    super(message);
+    super(code);
     this.name = 'ApiError';
   }
 }
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL ?? '';
 
-export async function generateResume(
-  body: GenerateResumeRequestBody,
-  signal?: AbortSignal,
-): Promise<GenerateResumeResponse> {
-  const res = await fetch(`${API_BASE}/api/generate-resume`, {
+async function post(path: string, body: unknown, signal?: AbortSignal): Promise<Response> {
+  const res = await fetch(`${API_BASE}${path}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
     signal,
   });
-
   if (!res.ok) {
-    const payload = (await res.json().catch(() => null)) as { message?: string } | null;
-    throw new ApiError(payload?.message ?? 'Не удалось сгенерировать резюме', res.status);
+    const payload = (await res.json().catch(() => null)) as { error?: string } | null;
+    throw new ApiError(payload?.error ?? 'request_failed', res.status);
   }
+  return res;
+}
 
+export async function generateResume(
+  body: GenerateResumeRequestBody,
+  signal?: AbortSignal,
+): Promise<GenerateResumeResponse> {
+  const res = await post('/api/generate-resume', body, signal);
   return res.json() as Promise<GenerateResumeResponse>;
 }
 
 export async function downloadResumePdf(data: ResumeData, signal?: AbortSignal): Promise<Blob> {
-  const res = await fetch(`${API_BASE}/api/export-pdf`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
-    signal,
-  });
-
-  if (!res.ok) {
-    const payload = (await res.json().catch(() => null)) as { message?: string } | null;
-    throw new ApiError(payload?.message ?? 'Не удалось сформировать PDF', res.status);
-  }
-
+  const res = await post('/api/export-pdf', data, signal);
   return res.blob();
 }
 
@@ -97,18 +90,7 @@ export async function generateCoverLetter(
   body: GenerateCoverLetterRequestBody,
   signal?: AbortSignal,
 ): Promise<GenerateCoverLetterResponse> {
-  const res = await fetch(`${API_BASE}/api/generate-cover-letter`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-    signal,
-  });
-
-  if (!res.ok) {
-    const payload = (await res.json().catch(() => null)) as { message?: string } | null;
-    throw new ApiError(payload?.message ?? 'Не удалось сгенерировать письмо', res.status);
-  }
-
+  const res = await post('/api/generate-cover-letter', body, signal);
   return res.json() as Promise<GenerateCoverLetterResponse>;
 }
 
@@ -126,17 +108,6 @@ export interface ExportCoverLetterPdfBody {
 }
 
 export async function downloadCoverLetterPdf(body: ExportCoverLetterPdfBody, signal?: AbortSignal): Promise<Blob> {
-  const res = await fetch(`${API_BASE}/api/export-cover-letter-pdf`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-    signal,
-  });
-
-  if (!res.ok) {
-    const payload = (await res.json().catch(() => null)) as { message?: string } | null;
-    throw new ApiError(payload?.message ?? 'Не удалось сформировать PDF', res.status);
-  }
-
+  const res = await post('/api/export-cover-letter-pdf', body, signal);
   return res.blob();
 }

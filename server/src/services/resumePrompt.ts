@@ -2,7 +2,7 @@ import { z } from 'zod';
 import type { GenerateResumeRequest } from '../schemas/generateResumeRequest.schema.js';
 import type { AiTaskSpec } from './providers/aiProvider.types.js';
 
-export const ResumeGenerationSchema = z.object({
+const ResumeGenerationSchema = z.object({
   summary: z.string(),
   strengths: z.array(z.string()).min(3).max(6),
 });

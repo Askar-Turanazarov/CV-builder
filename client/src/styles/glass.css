@@ -202,3 +202,8 @@
   backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
 }
+
+[data-design='glass'] .app-footer {
+  border-top-color: var(--glass-border);
+  color: var(--glass-text-muted);
+}

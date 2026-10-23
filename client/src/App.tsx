@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useResumeStore } from './store/resumeStore';
 import AppHeader from './components/common/AppHeader';
+import AppFooter from './components/common/AppFooter';
 import LandingPage from './pages/LandingPage';
 import EditorPage from './pages/EditorPage';
 import PreviewPage from './pages/PreviewPage';
@@ -62,6 +63,7 @@ export default function App() {
         <Route path="/resumes" element={<ResumesPage />} />
         <Route path="/cover-letter" element={<CoverLetterPage />} />
       </Routes>
+      <AppFooter />
     </div>
   );
 }

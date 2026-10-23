@@ -1,10 +1,12 @@
 import { useCallback, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { generateResume, ApiError, type GenerateResumeRequestBody } from '../lib/api';
 import type { AiGeneratedContent } from '../types/resume';
 
 export type AiGenerationStatus = 'idle' | 'loading' | 'success' | 'error';
 
 export function useAiGeneration() {
+  const { t } = useTranslation('common');
   const [status, setStatus] = useState<AiGenerationStatus>('idle');
   const [error, setError] = useState<string | null>(null);
   const abortRef = useRef<AbortController | null>(null);
@@ -32,11 +34,11 @@ export function useAiGeneration() {
           return null;
         }
         setStatus('error');
-        setError(err instanceof ApiError ? err.message : 'Не удалось сгенерировать резюме. Попробуйте ещё раз.');
+        setError(err instanceof ApiError && err.code === 'rate_limited' ? t('errors.rateLimited') : t('errors.aiUnavailable'));
         return null;
       }
     },
-    [],
+    [t],
   );
 
   const cancel = useCallback(() => {

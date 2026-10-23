@@ -2,7 +2,7 @@ import { z } from 'zod';
 import type { GenerateCoverLetterRequest } from '../schemas/generateCoverLetterRequest.schema.js';
 import type { AiTaskSpec } from './providers/aiProvider.types.js';
 
-export const CoverLetterGenerationSchema = z.object({
+const CoverLetterGenerationSchema = z.object({
   content: z.string(),
 });
 

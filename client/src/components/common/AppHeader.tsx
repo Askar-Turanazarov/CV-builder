@@ -12,7 +12,10 @@ export default function AppHeader() {
     <header className={`${styles.header} app-header no-print`}>
       <div className={`container ${styles.inner}`}>
         <Link to="/" className={styles.brand}>
-          <span className={styles.brandAccent}>{brandFirstWord}</span> {brandRest.join(' ')}
+          <span>
+            <span className={styles.brandAccent}>{brandFirstWord}</span> {brandRest.join(' ')}
+          </span>
+          <span className={styles.byline}>by Askar</span>
         </Link>
         <nav className={`${styles.nav} pill-group`}>
           <NavLink to="/resumes" className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}>

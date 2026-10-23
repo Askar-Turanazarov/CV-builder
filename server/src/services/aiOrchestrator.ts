@@ -17,7 +17,7 @@ const PROVIDERS: Record<string, AiProvider> = {
 // Fast flash models first; Claude is skipped while ANTHROPIC_API_KEY is empty.
 // gemini-3.7/3.8-flash are left out on purpose: measured at 80s+ per resume,
 // far over the per-attempt timeout.
-export const DEFAULT_PRIORITY = [
+const DEFAULT_PRIORITY = [
   'gemini:gemini-3.6-flash',
   'gemini:gemini-3.5-flash-lite',
   'gemini:gemini-3.5-flash',
