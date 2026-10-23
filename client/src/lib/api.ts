@@ -111,3 +111,35 @@ export async function downloadCoverLetterPdf(body: ExportCoverLetterPdfBody, sig
   const res = await post('/api/export-cover-letter-pdf', body, signal);
   return res.blob();
 }
+
+export interface TelegramConfig {
+  enabled: boolean;
+  botUsername?: string;
+}
+
+export type TelegramLinkStatus =
+  | { state: 'pending' | 'processing' | 'failed' | 'expired' }
+  | { state: 'delivered'; chatToken: string };
+
+export async function getTelegramConfig(): Promise<TelegramConfig> {
+  const res = await fetch(`${API_BASE}/api/telegram/config`);
+  if (!res.ok) return { enabled: false };
+  return res.json() as Promise<TelegramConfig>;
+}
+
+/** Hands the resume to the server and returns a one-time t.me deep link. */
+export async function createTelegramLink(data: ResumeData): Promise<{ token: string; url: string; expiresIn: number }> {
+  const res = await post('/api/telegram/link', data);
+  return res.json() as Promise<{ token: string; url: string; expiresIn: number }>;
+}
+
+export async function getTelegramLinkStatus(token: string): Promise<TelegramLinkStatus> {
+  const res = await fetch(`${API_BASE}/api/telegram/status?token=${encodeURIComponent(token)}`);
+  if (!res.ok) throw new ApiError('request_failed', res.status);
+  return res.json() as Promise<TelegramLinkStatus>;
+}
+
+/** Sends straight to a chat linked earlier (its signed token lives in localStorage). */
+export async function sendResumeToTelegram(chatToken: string, resume: ResumeData): Promise<void> {
+  await post('/api/telegram/send', { chatToken, resume });
+}

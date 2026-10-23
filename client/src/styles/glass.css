@@ -280,8 +280,9 @@
     inset 0 1px 0 var(--glass-highlight);
 }
 
-/* PDF progress card (PdfProgressOverlay) gets the frosted glass surface. */
-[data-design='glass'] .pdf-progress-card {
+/* PDF progress card and the Telegram dialog get the frosted glass surface. */
+[data-design='glass'] .pdf-progress-card,
+[data-design='glass'] .telegram-card {
   background: var(--glass-bg);
   color: var(--glass-text);
   border-color: var(--glass-border);

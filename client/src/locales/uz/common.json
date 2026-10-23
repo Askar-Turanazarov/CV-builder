@@ -149,5 +149,26 @@
   "settings": {
     "open": "Sozlamalar",
     "close": "Sozlamalarni yopish"
+  },
+  "telegram": {
+    "send": "Telegramga yuborish",
+    "sending": "Yuborilmoqda…",
+    "fillFirst": "Avval rezyumeni to‘ldiring",
+    "title": "Telegramga yuborish",
+    "step1": "Quyidagi tugma orqali botni oching",
+    "step2": "«Start» tugmasini bosing",
+    "step3": "Bir necha soniyada PDF va rezyume matni keladi",
+    "openBot": "Botni ochish",
+    "scanQr": "yoki QR-kodni telefon bilan skanerlang",
+    "waiting": "Start tugmasini bosishingizni kutyapmiz…",
+    "sendingDirect": "PDF tayyorlanib, Telegramingizga yuborilmoqda…",
+    "doneTitle": "Tayyor! Rezyume Telegramda",
+    "doneLinked": "Chat bu qurilmada eslab qolindi — keyingi safar bir bosishda.",
+    "doneDirect": "PDF va matn bot bilan chatingizda.",
+    "ok": "Ajoyib",
+    "unlink": "Telegramni uzish",
+    "expired": "Havola eskirdi — yangisini yaratamiz",
+    "error": "Yuborib bo‘lmadi. Qayta urinib ko‘ring",
+    "retry": "Yangi havola olish"
   }
 }

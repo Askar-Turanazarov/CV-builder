@@ -149,5 +149,26 @@
   "settings": {
     "open": "Settings",
     "close": "Close settings"
+  },
+  "telegram": {
+    "send": "Send to Telegram",
+    "sending": "Sending…",
+    "fillFirst": "Fill in your resume first",
+    "title": "Send to Telegram",
+    "step1": "Open the bot with the button below",
+    "step2": "Tap “Start”",
+    "step3": "In a few seconds you’ll get the PDF and a text version",
+    "openBot": "Open the bot",
+    "scanQr": "or scan the QR code with your phone",
+    "waiting": "Waiting for you to tap Start…",
+    "sendingDirect": "Preparing the PDF and sending it to your Telegram…",
+    "doneTitle": "Done! Your resume is in Telegram",
+    "doneLinked": "This device remembers the chat — next time it’s one click.",
+    "doneDirect": "The PDF and text are already in your chat with the bot.",
+    "ok": "Great",
+    "unlink": "Unlink Telegram",
+    "expired": "The link has expired — let’s make a new one",
+    "error": "Couldn’t send it. Please try again",
+    "retry": "Get a new link"
   }
 }

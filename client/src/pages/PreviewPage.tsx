@@ -10,6 +10,7 @@ import Button from '../components/common/Button';
 import PdfProgressOverlay from '../components/common/PdfProgressOverlay';
 import ErrorBanner from '../components/common/ErrorBanner';
 import ResumeInsightsPanel from '../components/preview/ResumeInsightsPanel';
+import TelegramShare from '../components/preview/TelegramShare';
 import { printResume, downloadPdf } from '../lib/pdfExport';
 import { copyResumeAsText } from '../lib/textExport';
 import { warmUpPdf } from '../lib/api';
@@ -69,6 +70,7 @@ export default function PreviewPage() {
           <Button onClick={handleDownloadPdf} disabled={isDownloading}>
             {isDownloading ? t('actions.downloadingPdf') : t('actions.downloadPdf')}
           </Button>
+          <TelegramShare data={data} disabled={isEmpty} />
           <Button variant="secondary" onClick={handlePrint} title={t('actions.printHint')}>
             {t('actions.print')}
           </Button>
