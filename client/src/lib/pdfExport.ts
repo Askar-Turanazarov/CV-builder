@@ -31,11 +31,14 @@ export function printResume(currentViewMode: ViewMode, setViewMode: (mode: ViewM
  * click.
  */
 export async function downloadPdf(data: ResumeData): Promise<void> {
-  const blob = await downloadResumePdf({ ...data, viewMode: 'document' });
+  saveBlob(await downloadResumePdf({ ...data, viewMode: 'document' }), 'resume.pdf');
+}
+
+export function saveBlob(blob: Blob, filename: string): void {
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
-  link.download = 'resume.pdf';
+  link.download = filename;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);

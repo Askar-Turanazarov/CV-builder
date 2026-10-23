@@ -68,6 +68,14 @@ export async function downloadResumePdf(data: ResumeData, signal?: AbortSignal):
   return res.blob();
 }
 
+/**
+ * Starts the server's headless Chrome ahead of the first PDF download, so the
+ * serverless cold start overlaps with the user looking at the page. Best effort.
+ */
+export function warmUpPdf(): void {
+  void fetch(`${API_BASE}/api/export-pdf/warm`).catch(() => undefined);
+}
+
 export interface GenerateCoverLetterRequestBody {
   uiLanguage: UiLanguage;
   fullName: string;

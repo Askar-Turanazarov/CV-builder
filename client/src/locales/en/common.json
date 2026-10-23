@@ -127,5 +127,13 @@
     "duplicate": "Duplicate",
     "delete": "Delete",
     "confirmDelete": "Confirm delete?"
+  },
+  "pdfProgress": {
+    "title": "Preparing your PDF",
+    "launch": "Starting the PDF engine…",
+    "layout": "Laying out pages…",
+    "finish": "Almost there…",
+    "done": "Done!",
+    "coldStartHint": "The first export after a pause can take up to 15 seconds — the next ones are faster."
   }
 }

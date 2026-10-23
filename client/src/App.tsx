@@ -17,7 +17,7 @@ const STORAGE_KEY = 'resume-builder:v1';
 
 export default function App() {
   const location = useLocation();
-  const isPrintRoute = location.pathname.startsWith('/print/') || location.pathname.startsWith('/print-letter/');
+  const isPrintRoute = location.pathname.startsWith('/print/');
   const { i18n } = useTranslation();
   const uiLanguage = useResumeStore((s) => s.data.uiLanguage);
   const setUiLanguage = useResumeStore((s) => s.setUiLanguage);
@@ -46,8 +46,8 @@ export default function App() {
   if (isPrintRoute) {
     return (
       <Routes>
-        <Route path="/print/:token" element={<PrintPreviewPage />} />
-        <Route path="/print-letter/:token" element={<PrintCoverLetterPage />} />
+        <Route path="/print/resume" element={<PrintPreviewPage />} />
+        <Route path="/print/letter" element={<PrintCoverLetterPage />} />
       </Routes>
     );
   }

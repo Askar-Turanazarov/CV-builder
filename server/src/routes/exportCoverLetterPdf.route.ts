@@ -1,19 +1,17 @@
 import { Router } from 'express';
-import rateLimit from 'express-rate-limit';
+import { createLimiter } from '../middleware/rateLimit.js';
 import { validateBody } from '../middleware/validateBody.js';
 import { exportCoverLetterRequestSchema } from '../schemas/exportCoverLetterRequest.schema.js';
-import { exportCoverLetterPdfController, getCoverLetterPdfDataController } from '../controllers/exportCoverLetterPdf.controller.js';
-
-const isProduction = process.env.NODE_ENV === 'production';
-
-const limiter = rateLimit({
-  windowMs: 10 * 60 * 1000,
-  limit: isProduction ? 15 : 200,
-  standardHeaders: true,
-  legacyHeaders: false,
-  message: { error: 'rate_limited', message: 'Слишком много запросов. Попробуйте позже.' },
-});
+import { createPdfExportController } from '../controllers/exportPdf.controller.js';
 
 export const exportCoverLetterPdfRouter = Router();
-exportCoverLetterPdfRouter.post('/', limiter, validateBody(exportCoverLetterRequestSchema), exportCoverLetterPdfController);
-exportCoverLetterPdfRouter.get('/data/:token', getCoverLetterPdfDataController);
+exportCoverLetterPdfRouter.post(
+  '/',
+  createLimiter(15),
+  validateBody(exportCoverLetterRequestSchema),
+  createPdfExportController({
+    printPath: '/print/letter',
+    filename: 'cover-letter.pdf',
+    margin: { top: '18mm', bottom: '18mm', left: '18mm', right: '18mm' },
+  }),
+);

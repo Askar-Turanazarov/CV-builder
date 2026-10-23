@@ -1,0 +1,145 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: fadeIn 0.2s ease;
+  transition: opacity 0.35s ease;
+}
+
+.overlay[data-leaving] {
+  opacity: 0;
+  transition-delay: 0.1s;
+}
+
+.card {
+  width: 100%;
+  max-width: 380px;
+  padding: 28px 28px 22px;
+  border-radius: 22px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 24px 60px -20px rgba(15, 23, 42, 0.45);
+  text-align: center;
+  animation: rise 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.icon {
+  position: relative;
+  width: 44px;
+  height: 54px;
+  margin: 0 auto 16px;
+}
+
+.sheet {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  border: 2px solid var(--color-primary);
+  background: var(--color-surface);
+  animation: shuffle 1.6s ease-in-out infinite;
+}
+
+.sheet:first-child {
+  background: var(--color-accent-soft);
+  animation-delay: -0.8s;
+}
+
+.title {
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.stage {
+  margin: 0 0 16px;
+  min-height: 1.4em;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.track {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--color-surface-alt);
+  overflow: hidden;
+}
+
+.bar {
+  position: relative;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--color-primary);
+  transition: width 0.3s ease-out;
+  overflow: hidden;
+}
+
+/* A soft sheen running along the filled part, so it reads as "working". */
+.bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: translateX(-100%);
+  animation: sheen 1.4s ease-in-out infinite;
+}
+
+.hint {
+  margin: 14px 0 0;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+  opacity: 0;
+  max-height: 0;
+  transition:
+    opacity 0.4s ease,
+    max-height 0.4s ease;
+}
+
+.hint[data-shown] {
+  opacity: 1;
+  max-height: 4em;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+}
+
+@keyframes shuffle {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(-6deg);
+  }
+  50% {
+    transform: translate(6px, -4px) rotate(6deg);
+  }
+}
+
+@keyframes sheen {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet,
+  .bar::after {
+    animation: none;
+  }
+}

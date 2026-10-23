@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useResumeStore } from '../store/resumeStore';
 import { getTemplateComponent } from '../components/templates/templateRegistry';
@@ -7,11 +7,12 @@ import ThemeSwitcher from '../components/theme/ThemeSwitcher';
 import ColorModeToggle from '../components/theme/ColorModeToggle';
 import ViewModeToggle from '../components/theme/ViewModeToggle';
 import Button from '../components/common/Button';
-import Spinner from '../components/common/Spinner';
+import PdfProgressOverlay from '../components/common/PdfProgressOverlay';
 import ErrorBanner from '../components/common/ErrorBanner';
 import ResumeInsightsPanel from '../components/preview/ResumeInsightsPanel';
 import { printResume, downloadPdf } from '../lib/pdfExport';
 import { copyResumeAsText } from '../lib/textExport';
+import { warmUpPdf } from '../lib/api';
 import styles from './PreviewPage.module.css';
 
 export default function PreviewPage() {
@@ -23,6 +24,8 @@ export default function PreviewPage() {
   const [isDownloading, setIsDownloading] = useState(false);
   const [downloadError, setDownloadError] = useState<string | null>(null);
   const [copyState, setCopyState] = useState<'idle' | 'copied' | 'error'>('idle');
+
+  useEffect(warmUpPdf, []);
 
   const handlePrint = () => printResume(data.viewMode, setViewMode);
 
@@ -60,13 +63,7 @@ export default function PreviewPage() {
         </div>
         <div className={styles.pdfActions}>
           <Button onClick={handleDownloadPdf} disabled={isDownloading}>
-            {isDownloading ? (
-              <>
-                <Spinner /> {t('actions.downloadingPdf')}
-              </>
-            ) : (
-              t('actions.downloadPdf')
-            )}
+            {isDownloading ? t('actions.downloadingPdf') : t('actions.downloadPdf')}
           </Button>
           <Button variant="secondary" onClick={handlePrint} title={t('actions.printHint')}>
             {t('actions.print')}
@@ -76,6 +73,7 @@ export default function PreviewPage() {
           </Button>
         </div>
         {downloadError && <ErrorBanner message={downloadError} />}
+        <PdfProgressOverlay active={isDownloading} />
       </div>
 
       <div

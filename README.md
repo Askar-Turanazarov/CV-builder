@@ -34,3 +34,16 @@ npm run dev
 npm run build
 npm start
 ```
+
+## Деплой (Vercel)
+
+Проект деплоится на Vercel из GitHub как одно приложение: статика клиента из `client/dist` и Express-API как одна serverless-функция (`api/index.mjs` → `server/dist/app.js`). Настройки — в `vercel.json`.
+
+Переменные окружения в Vercel → Settings → Environment Variables:
+
+- `GOOGLE_API_KEY` — обязательно (хотя бы один ключ ИИ)
+- `ANTHROPIC_API_KEY` — необязательно; без него модели Claude пропускаются
+- `AI_PROVIDER_PRIORITY` — необязательно, по умолчанию лёгкие Gemini, затем Claude
+- `PUPPETEER_SKIP_DOWNLOAD=1` — не скачивать полный Chrome при сборке
+
+PDF на Vercel рендерится через `puppeteer-core` + `@sparticuz/chromium` (локально — обычный `puppeteer`). Первый PDF после простоя может занять несколько секунд (холодный старт), поэтому клиент заранее «прогревает» браузер при открытии превью.

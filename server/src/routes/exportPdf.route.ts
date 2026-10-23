@@ -1,21 +1,19 @@
 import { Router } from 'express';
-import rateLimit from 'express-rate-limit';
+import { createLimiter } from '../middleware/rateLimit.js';
 import { validateBody } from '../middleware/validateBody.js';
 import { exportPdfRequestSchema } from '../schemas/exportPdfRequest.schema.js';
-import { exportPdfController, getExportPdfDataController } from '../controllers/exportPdf.controller.js';
-
-const isProduction = process.env.NODE_ENV === 'production';
-
-// PDF rendering (headless Chrome) is meaningfully more expensive per-request
-// than the AI proxy route, so the production ceiling is a bit stricter.
-const limiter = rateLimit({
-  windowMs: 10 * 60 * 1000,
-  limit: isProduction ? 15 : 200,
-  standardHeaders: true,
-  legacyHeaders: false,
-  message: { error: 'rate_limited', message: 'Слишком много запросов. Попробуйте позже.' },
-});
+import { createPdfExportController, warmUpPdfController } from '../controllers/exportPdf.controller.js';
 
 export const exportPdfRouter = Router();
-exportPdfRouter.post('/', limiter, validateBody(exportPdfRequestSchema), exportPdfController);
-exportPdfRouter.get('/data/:token', getExportPdfDataController);
+exportPdfRouter.get('/warm', createLimiter(30), warmUpPdfController);
+exportPdfRouter.post(
+  '/',
+  // Headless Chrome is pricier per request than the AI proxy, hence its own limit.
+  createLimiter(15),
+  validateBody(exportPdfRequestSchema),
+  createPdfExportController({
+    printPath: '/print/resume',
+    filename: 'resume.pdf',
+    margin: { top: '12mm', bottom: '12mm', left: '12mm', right: '12mm' },
+  }),
+);

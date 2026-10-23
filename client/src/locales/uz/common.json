@@ -127,5 +127,13 @@
     "duplicate": "Nusxalash",
     "delete": "O'chirish",
     "confirmDelete": "Rostdan o'chirilsinmi?"
+  },
+  "pdfProgress": {
+    "title": "PDF tayyorlanmoqda",
+    "launch": "PDF dvigateli ishga tushirilmoqda…",
+    "layout": "Sahifalar joylashtirilmoqda…",
+    "finish": "Deyarli tayyor…",
+    "done": "Tayyor!",
+    "coldStartHint": "Tanaffusdan keyingi birinchi eksport 15 soniyagacha davom etishi mumkin — keyingilari tezroq bo'ladi."
   }
 }

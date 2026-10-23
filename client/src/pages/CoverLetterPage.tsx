@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useResumeStore } from '../store/resumeStore';
-import { generateCoverLetter } from '../lib/api';
+import { generateCoverLetter, warmUpPdf } from '../lib/api';
 import { downloadCoverLetter } from '../lib/coverLetterExport';
 import CoverLetterDocument from '../components/coverLetter/CoverLetterDocument';
 import Button from '../components/common/Button';
 import Spinner from '../components/common/Spinner';
 import ErrorBanner from '../components/common/ErrorBanner';
+import PdfProgressOverlay from '../components/common/PdfProgressOverlay';
 import type { CoverLetterContent } from '../types/resume';
 import styles from './CoverLetterPage.module.css';
 
@@ -24,6 +25,8 @@ export default function CoverLetterPage() {
   const [generateError, setGenerateError] = useState<string | null>(null);
   const [isDownloading, setIsDownloading] = useState(false);
   const [downloadError, setDownloadError] = useState<string | null>(null);
+
+  useEffect(warmUpPdf, []);
 
   const patchCoverLetter = (patch: Partial<CoverLetterContent>) => {
     const base: CoverLetterContent = coverLetter ?? { content: '', targetRole: '', targetCompany: '', generatedAt: null };
@@ -136,16 +139,11 @@ export default function CoverLetterPage() {
 
         <div className={styles.actions}>
           <Button variant="secondary" onClick={handleDownload} disabled={isDownloading || content.trim() === ''}>
-            {isDownloading ? (
-              <>
-                <Spinner /> {t('coverLetter.downloadingPdf')}
-              </>
-            ) : (
-              t('coverLetter.downloadPdf')
-            )}
+            {isDownloading ? t('coverLetter.downloadingPdf') : t('coverLetter.downloadPdf')}
           </Button>
         </div>
         {downloadError && <ErrorBanner message={downloadError} />}
+        <PdfProgressOverlay active={isDownloading} />
       </div>
 
       <div className={styles.previewColumn}>
