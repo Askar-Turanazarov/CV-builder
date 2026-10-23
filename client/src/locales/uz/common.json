@@ -86,12 +86,15 @@
   "templateGallery": {
     "popular": "Mashhur",
     "unusual": "G'ayrioddiy",
-    "close": "Yopish"
+    "close": "Yopish",
+    "title": "Rezyume shablonlari",
+    "subtitle": "{{count}} ta shablon — tanlash uchun bosing",
+    "current": "joriy"
   },
   "design": {
     "label": "Interfeys dizayni",
-    "classic": "Klassik",
-    "glass": "Apple Glass"
+    "classic": "Oddiy",
+    "glass": "Glass"
   },
   "viewMode": {
     "label": "Rejim",
@@ -111,7 +114,8 @@
     "featureAi": "AI tavsifni siz uchun yozadi",
     "featureTemplates": "Bir nechta tayyor shablonlar",
     "featureExport": "Chop etish va PDF eksporti",
-    "previewResume": "Rezyume namunasini kattalashtirib ko'rish"
+    "previewResume": "Rezyume namunasini kattalashtirib ko'rish",
+    "browseTemplates": "Shablonlarni ko‘rish"
   },
   "errors": {
     "generic": "Nimadir xato ketdi. Qaytadan urinib ko'ring.",
@@ -137,5 +141,9 @@
     "finish": "Deyarli tayyor…",
     "done": "Tayyor!",
     "coldStartHint": "Tanaffusdan keyingi birinchi eksport 15 soniyagacha davom etishi mumkin — keyingilari tezroq bo'ladi."
+  },
+  "samplePreview": {
+    "banner": "Bu namuna: ma’lumotlaringiz shablonda shunday ko‘rinadi.",
+    "cta": "Rezyumeni to‘ldirish"
   }
 }

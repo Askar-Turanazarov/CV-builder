@@ -7,6 +7,20 @@
   justify-content: center;
   padding: 16px;
   z-index: 1000;
+  animation: overlay-in 0.2s ease both;
+}
+
+@keyframes overlay-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
 }
 
 .modal {
@@ -20,58 +34,17 @@
   flex-direction: column;
   overflow: hidden;
   box-shadow: var(--shadow-card);
+  animation: modal-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
   padding: 16px 20px;
   border-bottom: 1px solid var(--color-border);
   flex-shrink: 0;
-}
-
-.tabs {
-  display: flex;
-  gap: 6px;
-  background: var(--color-surface-alt);
-  padding: 4px;
-  border-radius: 999px;
-}
-
-.tab,
-.tabActive {
-  padding: 7px 16px;
-  border-radius: 999px;
-  border: none;
-  background: transparent;
-  color: var(--color-text-muted);
-  font-size: 0.88rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition:
-    background-color var(--transition-fast),
-    color var(--transition-fast),
-    box-shadow var(--transition-fast),
-    transform var(--transition-bounce);
-}
-
-.tab:hover {
-  color: var(--color-text);
-  background: var(--color-border);
-  transform: scale(var(--hover-scale));
-  box-shadow: var(--shadow-hover);
-}
-
-.tab:active,
-.tabActive:active {
-  transform: scale(var(--press-scale));
-  transition: transform var(--transition-press);
-}
-
-.tabActive {
-  background: var(--color-primary);
-  color: var(--color-primary-contrast);
 }
 
 .closeButton {
@@ -112,7 +85,7 @@
   /* auto-fill so column count adapts to whatever width the modal actually
      has (no manual breakpoint list needed) — this is what keeps every
      column filled instead of leaving a lopsided empty strip. */
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
   gap: 14px;
   align-content: start;
 }
@@ -164,25 +137,37 @@
   box-shadow: 0 0 0 2px var(--color-accent-soft);
 }
 
-.previewFrame {
-  width: 100%;
-  aspect-ratio: 210 / 297;
-  overflow: hidden;
-  border-radius: 6px;
-  background: var(--color-bg);
-  position: relative;
-}
-
-.previewScale {
-  width: 700px;
-  transform: scale(0.26);
-  transform-origin: top left;
-  pointer-events: none;
-}
-
 .cardLabel {
-  font-size: 0.76rem;
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
   color: var(--color-text);
-  padding-bottom: 2px;
+  padding: 2px 4px 4px;
+}
+
+.currentBadge {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.heading {
+  margin-right: auto;
+}
+
+.title {
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.subtitle {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
 }

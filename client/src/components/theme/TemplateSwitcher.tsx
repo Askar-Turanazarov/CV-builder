@@ -19,7 +19,7 @@ export default function TemplateSwitcher() {
         <span>{current ? t(current.labelKey) : ''}</span>
         <span aria-hidden="true">▾</span>
       </button>
-      {isOpen && <TemplateGalleryModal data={data} onClose={() => setIsOpen(false)} />}
+      {isOpen && <TemplateGalleryModal onClose={() => setIsOpen(false)} />}
     </>
   );
 }

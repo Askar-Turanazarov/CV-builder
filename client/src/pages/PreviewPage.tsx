@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useResumeStore } from '../store/resumeStore';
 import { getTemplateComponent } from '../components/templates/templateRegistry';
 import TemplateSwitcher from '../components/theme/TemplateSwitcher';
 import ThemeSwitcher from '../components/theme/ThemeSwitcher';
-import ColorModeToggle from '../components/theme/ColorModeToggle';
 import ViewModeToggle from '../components/theme/ViewModeToggle';
 import Button from '../components/common/Button';
 import PdfProgressOverlay from '../components/common/PdfProgressOverlay';
@@ -13,6 +13,7 @@ import ResumeInsightsPanel from '../components/preview/ResumeInsightsPanel';
 import { printResume, downloadPdf } from '../lib/pdfExport';
 import { copyResumeAsText } from '../lib/textExport';
 import { warmUpPdf } from '../lib/api';
+import { getSampleResume, isResumeEmpty } from '../data/sampleResume';
 import styles from './PreviewPage.module.css';
 
 export default function PreviewPage() {
@@ -20,6 +21,10 @@ export default function PreviewPage() {
   const data = useResumeStore((s) => s.data);
   const setViewMode = useResumeStore((s) => s.setViewMode);
   const TemplateComponent = getTemplateComponent(data.selectedTemplateId);
+  // An empty resume renders as a blank page; show the chosen template with
+  // sample content instead, clearly marked as an example.
+  const isEmpty = isResumeEmpty(data);
+  const shownData = useMemo(() => (isEmpty ? getSampleResume(data.uiLanguage, data) : data), [isEmpty, data]);
 
   const [isDownloading, setIsDownloading] = useState(false);
   const [downloadError, setDownloadError] = useState<string | null>(null);
@@ -58,7 +63,6 @@ export default function PreviewPage() {
         <div className={styles.controlsRow}>
           <TemplateSwitcher />
           <ThemeSwitcher />
-          <ColorModeToggle />
           <ViewModeToggle />
         </div>
         <div className={styles.pdfActions}>
@@ -82,9 +86,19 @@ export default function PreviewPage() {
         data-color-mode={data.colorMode}
         data-view-mode={data.viewMode}
       >
+        {isEmpty && (
+          <div className={`container no-print`}>
+            <div className={styles.sampleBanner}>
+              <span>👀 {t('samplePreview.banner')}</span>
+              <Link to="/editor">
+                <Button variant="secondary">{t('samplePreview.cta')}</Button>
+              </Link>
+            </div>
+          </div>
+        )}
         <div className={`container ${styles.stageGrid}`}>
           <div className="resume-frame">
-            <TemplateComponent data={data} />
+            <TemplateComponent data={shownData} />
           </div>
           <div className={`${styles.insightsColumn} no-print`}>
             <ResumeInsightsPanel />

@@ -86,12 +86,15 @@
   "templateGallery": {
     "popular": "Popular",
     "unusual": "Unusual",
-    "close": "Close"
+    "close": "Close",
+    "title": "Resume templates",
+    "subtitle": "{{count}} templates — click one to choose it",
+    "current": "current"
   },
   "design": {
     "label": "Interface design",
-    "classic": "Classic",
-    "glass": "Apple Glass"
+    "classic": "Simple",
+    "glass": "Glass"
   },
   "viewMode": {
     "label": "View",
@@ -111,7 +114,8 @@
     "featureAi": "AI writes your description",
     "featureTemplates": "Several ready-made templates",
     "featureExport": "Print and export to PDF",
-    "previewResume": "Open this resume example full-size"
+    "previewResume": "Open this resume example full-size",
+    "browseTemplates": "Browse templates"
   },
   "errors": {
     "generic": "Something went wrong. Please try again.",
@@ -137,5 +141,9 @@
     "finish": "Almost there…",
     "done": "Done!",
     "coldStartHint": "The first export after a pause can take up to 15 seconds — the next ones are faster."
+  },
+  "samplePreview": {
+    "banner": "This is a sample: your data will look like this in the template.",
+    "cta": "Fill in my resume"
   }
 }
