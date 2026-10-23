@@ -145,5 +145,9 @@
   "samplePreview": {
     "banner": "Bu namuna: ma’lumotlaringiz shablonda shunday ko‘rinadi.",
     "cta": "Rezyumeni to‘ldirish"
+  },
+  "settings": {
+    "open": "Sozlamalar",
+    "close": "Sozlamalarni yopish"
   }
 }

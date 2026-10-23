@@ -47,7 +47,7 @@
   margin-left: 24px;
 }
 
-.controls {
+.controlsInner {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -70,5 +70,127 @@
 
   .nav::-webkit-scrollbar {
     display: none;
+  }
+}
+
+/* ---------- Settings button + collapsing header (mobile only) ---------- */
+.settingsButton,
+.headerSpacer {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .header {
+    position: fixed;
+    left: 0;
+    right: 0;
+  }
+
+  .headerSpacer {
+    display: block;
+  }
+
+  .inner {
+    gap: 10px;
+    padding-block: 12px;
+    transition: padding-block var(--transition-smooth);
+  }
+
+  .brand {
+    order: 1;
+    transition:
+      font-size var(--transition-smooth),
+      transform var(--transition-bounce);
+  }
+
+  .byline {
+    max-height: 1.2em;
+    transition:
+      opacity var(--transition-smooth),
+      max-height var(--transition-smooth);
+  }
+
+  .settingsButton {
+    order: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    margin-left: auto;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface-alt);
+    color: var(--color-text);
+    font-size: 1rem;
+    cursor: pointer;
+    opacity: 0;
+    transform: scale(0.6) rotate(-90deg);
+    pointer-events: none;
+    transition:
+      opacity var(--transition-smooth),
+      transform var(--transition-slide);
+  }
+
+  .controls {
+    order: 3;
+    width: 100%;
+    /* grid rows 1fr -> 0fr animates to the content's real height */
+    display: grid;
+    grid-template-rows: 1fr;
+    transition:
+      grid-template-rows var(--transition-smooth),
+      opacity var(--transition-smooth),
+      transform var(--transition-smooth),
+      margin var(--transition-smooth);
+  }
+
+  .controlsInner {
+    min-height: 0;
+    overflow: hidden;
+    /* room for the hover scale and focus ring inside the clipped area */
+    padding: 4px;
+    margin: -4px;
+  }
+
+  .nav {
+    order: 4;
+  }
+
+  /* Collapsed: compact brand, controls tucked under the bar, settings button shown */
+  .header[data-collapsed] .inner {
+    padding-block: 8px;
+  }
+
+  .header[data-collapsed] .brand {
+    font-size: 1rem;
+  }
+
+  .header[data-collapsed] .byline {
+    opacity: 0;
+    max-height: 0;
+  }
+
+  .header[data-collapsed] .settingsButton {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .header[data-collapsed] .settingsButton:active {
+    transform: scale(var(--press-scale));
+  }
+
+  .header[data-collapsed]:not([data-panel-open]) .controls {
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transform: translateY(-10px);
+    margin-block: -5px;
+    pointer-events: none;
+  }
+
+  /* Opened from the settings button: drops down below the nav, over the page */
+  .header[data-collapsed][data-panel-open] .controls {
+    order: 5;
   }
 }

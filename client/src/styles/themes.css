@@ -34,6 +34,8 @@
   --shadow-hover: 0 8px 20px -6px rgba(15, 23, 42, 0.28);
   /* Springy slide for segmented-control indicators */
   --transition-slide: 0.42s cubic-bezier(0.34, 1.32, 0.5, 1);
+  /* Layout changes (collapsing header): no overshoot */
+  --transition-smooth: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Derived tokens: redeclared on every themed scope so they're computed from
@@ -49,6 +51,7 @@
   :root {
     --transition-bounce: 0.01s linear;
     --transition-slide: 0.01s linear;
+    --transition-smooth: 0.01s linear;
     --hover-scale: 1;
     --hover-scale-sm: 1;
   }

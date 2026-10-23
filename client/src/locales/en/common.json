@@ -145,5 +145,9 @@
   "samplePreview": {
     "banner": "This is a sample: your data will look like this in the template.",
     "cta": "Fill in my resume"
+  },
+  "settings": {
+    "open": "Settings",
+    "close": "Close settings"
   }
 }
