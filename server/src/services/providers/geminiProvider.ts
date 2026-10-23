@@ -1,44 +1,39 @@
-import { GoogleGenAI } from '@google/genai';
+import { ApiError, GoogleGenAI, ThinkingLevel } from '@google/genai';
 import type { AiGenerateParams, AiProvider } from './aiProvider.types.js';
-import { RetryableAiError } from './aiProvider.types.js';
+import { AiProviderError, failureKindForStatus, parseTaskOutput } from './aiProvider.types.js';
 
-const client = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
+let client: GoogleGenAI | null = null;
+
+function getClient(): GoogleGenAI {
+  client ??= new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
+  return client;
+}
 
 export const geminiProvider: AiProvider = {
   id: 'gemini',
-  async generate<T>({ systemPrompt, userPrompt, model, task }: AiGenerateParams<T>): Promise<T> {
-    let response;
+  isConfigured: () => Boolean(process.env.GOOGLE_API_KEY),
+  async generate<T>({ systemPrompt, userPrompt, model, task, signal }: AiGenerateParams<T>): Promise<T> {
+    const label = `gemini:${model}`;
+    let text: string | undefined;
     try {
-      response = await client.models.generateContent({
+      const response = await getClient().models.generateContent({
         model,
         contents: userPrompt,
         config: {
           systemInstruction: systemPrompt,
           responseMimeType: 'application/json',
-          responseSchema: task.geminiResponseSchema,
+          responseJsonSchema: task.jsonSchema,
+          // Copywriting from given facts doesn't need reasoning — low (MINIMAL is
+          // rejected by gemini-3.7+/3.8 flash) keeps latency near a non-thinking model.
+          thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
+          abortSignal: signal,
         },
       });
+      text = response.text;
     } catch (err) {
-      const status = (err as { status?: number; error?: { code?: number } })?.status
-        ?? (err as { error?: { code?: number } })?.error?.code;
-      if (status === 429 || status === 503 || status === 500) {
-        throw new RetryableAiError(`gemini:${model} unavailable`, err);
-      }
-      throw err;
+      const status = err instanceof ApiError ? err.status : undefined;
+      throw new AiProviderError(`${label} request failed`, failureKindForStatus(status), { cause: err });
     }
-
-    const text = response.text;
-    if (!text) {
-      throw new RetryableAiError(`gemini:${model} returned empty response`);
-    }
-
-    let parsed: unknown;
-    try {
-      parsed = JSON.parse(text);
-    } catch {
-      throw new RetryableAiError(`gemini:${model} returned invalid JSON`);
-    }
-
-    return task.resultSchema.parse(parsed);
+    return parseTaskOutput(label, text, task);
   },
 };

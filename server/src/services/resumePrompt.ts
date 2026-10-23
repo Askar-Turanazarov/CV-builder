@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { Type } from '@google/genai';
 import type { GenerateResumeRequest } from '../schemas/generateResumeRequest.schema.js';
 import type { AiTaskSpec } from './providers/aiProvider.types.js';
 
@@ -11,34 +10,22 @@ export const ResumeGenerationSchema = z.object({
 export type ResumeGenerationResult = z.infer<typeof ResumeGenerationSchema>;
 
 export const RESUME_TASK: AiTaskSpec<ResumeGenerationResult> = {
-  toolName: 'submit_resume_content',
-  toolDescription: 'Отправить сформированное описание резюме и сильные стороны кандидата в структурированном виде.',
-  anthropicInputSchema: {
+  name: 'resume',
+  jsonSchema: {
+    type: 'object',
     properties: {
       summary: {
-        type: 'string' as const,
+        type: 'string',
         description: 'Профессиональное описание кандидата, 3-5 предложений.',
       },
       strengths: {
-        type: 'array' as const,
-        items: { type: 'string' as const },
-        minItems: 3,
-        maxItems: 6,
-        description: 'Сильные стороны кандидата, каждая опирается на конкретный факт из входных данных.',
+        type: 'array',
+        items: { type: 'string' },
+        description: 'От 3 до 6 сильных сторон кандидата, каждая опирается на конкретный факт из входных данных.',
       },
     },
     required: ['summary', 'strengths'],
-  },
-  geminiResponseSchema: {
-    type: Type.OBJECT,
-    properties: {
-      summary: { type: Type.STRING },
-      strengths: {
-        type: Type.ARRAY,
-        items: { type: Type.STRING },
-      },
-    },
-    required: ['summary', 'strengths'],
+    additionalProperties: false,
   },
   resultSchema: ResumeGenerationSchema,
 };

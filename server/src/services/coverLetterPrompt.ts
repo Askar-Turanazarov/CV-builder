@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { Type } from '@google/genai';
 import type { GenerateCoverLetterRequest } from '../schemas/generateCoverLetterRequest.schema.js';
 import type { AiTaskSpec } from './providers/aiProvider.types.js';
 
@@ -10,23 +9,17 @@ export const CoverLetterGenerationSchema = z.object({
 export type CoverLetterGenerationResult = z.infer<typeof CoverLetterGenerationSchema>;
 
 export const COVER_LETTER_TASK: AiTaskSpec<CoverLetterGenerationResult> = {
-  toolName: 'submit_cover_letter',
-  toolDescription: 'Отправить готовый текст сопроводительного письма.',
-  anthropicInputSchema: {
+  name: 'cover_letter',
+  jsonSchema: {
+    type: 'object',
     properties: {
       content: {
-        type: 'string' as const,
+        type: 'string',
         description: 'Полный текст сопроводительного письма, готовый к отправке работодателю.',
       },
     },
     required: ['content'],
-  },
-  geminiResponseSchema: {
-    type: Type.OBJECT,
-    properties: {
-      content: { type: Type.STRING },
-    },
-    required: ['content'],
+    additionalProperties: false,
   },
   resultSchema: CoverLetterGenerationSchema,
 };

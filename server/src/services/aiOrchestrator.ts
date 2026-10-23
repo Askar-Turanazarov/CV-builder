@@ -1,11 +1,12 @@
-import type { AiProvider, AiTaskSpec } from './providers/aiProvider.types.js';
-import { RetryableAiError } from './providers/aiProvider.types.js';
+import type { AiFailureKind, AiProvider, AiTaskSpec } from './providers/aiProvider.types.js';
+import { AiProviderError } from './providers/aiProvider.types.js';
 import { anthropicProvider } from './providers/anthropicProvider.js';
 import { geminiProvider } from './providers/geminiProvider.js';
 
 interface Candidate {
-  provider: string;
+  provider: AiProvider;
   model: string;
+  key: string;
 }
 
 const PROVIDERS: Record<string, AiProvider> = {
@@ -13,44 +14,46 @@ const PROVIDERS: Record<string, AiProvider> = {
   gemini: geminiProvider,
 };
 
-const DEFAULT_PRIORITY =
-  'anthropic:claude-opus-5,anthropic:claude-sonnet-5,gemini:gemini-3.6-flash,gemini:gemini-3.5-flash';
+// Fast flash models first; Claude is skipped while ANTHROPIC_API_KEY is empty.
+// gemini-3.7/3.8-flash are left out on purpose: measured at 80s+ per resume,
+// far over the per-attempt timeout.
+export const DEFAULT_PRIORITY = [
+  'gemini:gemini-3.6-flash',
+  'gemini:gemini-3.5-flash-lite',
+  'gemini:gemini-3.5-flash',
+  'anthropic:claude-haiku-5-5',
+  'anthropic:claude-sonnet-5-5',
+].join(',');
 
-function hasKeyFor(provider: string): boolean {
-  if (provider === 'anthropic') return Boolean(process.env.ANTHROPIC_API_KEY);
-  if (provider === 'gemini') return Boolean(process.env.GOOGLE_API_KEY);
-  return true;
-}
+// One attempt may not eat the whole request: a hung model must leave time
+// for the next candidate. The total stays under the serverless maxDuration.
+const ATTEMPT_TIMEOUT_MS = Number(process.env.AI_ATTEMPT_TIMEOUT_MS ?? 20_000);
+const REQUEST_DEADLINE_MS = Number(process.env.AI_REQUEST_DEADLINE_MS ?? 50_000);
+const MIN_ATTEMPT_MS = 3_000;
+
+// Cooldown cache: a candidate that just failed is skipped on the following
+// requests instead of being retried and timing out every time — this is what
+// makes the fallback instant rather than "slow, then eventually falls back".
+const COOLDOWN_MS: Record<AiFailureKind, number> = {
+  transient: 60_000,
+  config: 10 * 60_000,
+  invalid_output: 15_000,
+};
+const cooldowns = new Map<string, { until: number; kind: AiFailureKind }>();
 
 function parsePriority(raw: string | undefined): Candidate[] {
-  return (raw ?? DEFAULT_PRIORITY)
+  return (raw?.trim() || DEFAULT_PRIORITY)
     .split(',')
     .map((entry) => {
-      const [provider, model] = entry.trim().split(':');
-      return { provider, model };
+      const [providerId, model] = entry.trim().split(':');
+      return { provider: PROVIDERS[providerId], model, key: `${providerId}:${model}` };
     })
-    .filter((c): c is Candidate => Boolean(c.provider && c.model && PROVIDERS[c.provider]))
-    .filter((c) => hasKeyFor(c.provider));
+    .filter((c): c is Candidate => Boolean(c.provider && c.model && c.provider.isConfigured()));
 }
 
-// Cooldown cache: a candidate that just failed with a retryable error is
-// skipped immediately on subsequent requests instead of being retried and
-// timing out every time — this is what makes the fallback feel instant to
-// the user rather than "slow, then eventually falls back".
-const COOLDOWN_MS = 60_000;
-const cooldownUntil = new Map<string, number>();
-
-function candidateKey(c: Candidate): string {
-  return `${c.provider}:${c.model}`;
-}
-
-function isCoolingDown(c: Candidate): boolean {
-  const until = cooldownUntil.get(candidateKey(c));
-  return typeof until === 'number' && until > Date.now();
-}
-
-function markCooldown(c: Candidate, ms: number): void {
-  cooldownUntil.set(candidateKey(c), Date.now() + ms);
+function cooldownOf(c: Candidate): AiFailureKind | null {
+  const entry = cooldowns.get(c.key);
+  return entry && entry.until > Date.now() ? entry.kind : null;
 }
 
 export async function generateAiContent<T>(params: {
@@ -58,41 +61,43 @@ export async function generateAiContent<T>(params: {
   userPrompt: string;
   task: AiTaskSpec<T>;
 }): Promise<T> {
-  // Re-read AI_PROVIDER_PRIORITY on every call rather than caching it once at
-  // module load — guarantees the current .env content is always honored,
-  // regardless of process/module-caching quirks across dev-server restarts.
+  // Re-read on every call so .env edits apply without a module reload.
   const candidates = parsePriority(process.env.AI_PROVIDER_PRIORITY);
-
   if (candidates.length === 0) {
     throw new Error('no_ai_candidates_configured');
   }
 
-  const warm = candidates.filter((c) => !isCoolingDown(c));
-  // If literally every candidate is cooling down (e.g. a brief blip across
-  // providers), try the full list anyway rather than failing outright.
-  const pool = warm.length > 0 ? warm : candidates;
+  const warm = candidates.filter((c) => cooldownOf(c) === null);
+  // If every candidate is cooling down (a brief blip across providers), retry
+  // the ones that failed transiently rather than failing outright — but not
+  // those with config errors (bad model id/key), which won't fix themselves.
+  const retryable = candidates.filter((c) => cooldownOf(c) !== 'config');
+  const pool = warm.length > 0 ? warm : retryable.length > 0 ? retryable : candidates;
+  const deadline = Date.now() + REQUEST_DEADLINE_MS;
 
   const attempted: string[] = [];
   let lastError: unknown;
   for (const candidate of pool) {
-    const provider = PROVIDERS[candidate.provider];
-    const key = candidateKey(candidate);
-    attempted.push(key);
-    console.info(`[ai] trying candidate ${key}`);
+    const remaining = deadline - Date.now();
+    if (remaining < MIN_ATTEMPT_MS) break;
+
+    attempted.push(candidate.key);
+    const startedAt = Date.now();
     try {
-      const result = await provider.generate({
-        systemPrompt: params.systemPrompt,
-        userPrompt: params.userPrompt,
+      const result = await candidate.provider.generate({
+        ...params,
         model: candidate.model,
-        task: params.task,
+        signal: AbortSignal.timeout(Math.min(ATTEMPT_TIMEOUT_MS, remaining)),
       });
-      console.info(`[ai] candidate ${key} succeeded`);
+      console.info(`[ai] ${params.task.name} via ${candidate.key} ok in ${Date.now() - startedAt}ms`);
       return result;
     } catch (err) {
       lastError = err;
-      const cooldown = err instanceof RetryableAiError ? COOLDOWN_MS : 15_000;
-      markCooldown(candidate, cooldown);
-      console.warn(`[ai] candidate ${key} failed, falling through:`, err instanceof Error ? err.message : err);
+      const kind: AiFailureKind = err instanceof AiProviderError ? err.kind : 'transient';
+      cooldowns.set(candidate.key, { until: Date.now() + COOLDOWN_MS[kind], kind });
+      const cause = err instanceof Error && err.cause instanceof Error ? ` — ${err.cause.message}` : '';
+      const reason = (err instanceof Error ? err.message : String(err)) + cause;
+      console.warn(`[ai] ${candidate.key} failed (${kind}) after ${Date.now() - startedAt}ms: ${reason}`);
     }
   }
 

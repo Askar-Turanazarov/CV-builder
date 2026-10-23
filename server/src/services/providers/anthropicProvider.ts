@@ -1,48 +1,47 @@
 import Anthropic from '@anthropic-ai/sdk';
 import type { AiGenerateParams, AiProvider } from './aiProvider.types.js';
-import { RetryableAiError } from './aiProvider.types.js';
+import { AiProviderError, failureKindForStatus, parseTaskOutput } from './aiProvider.types.js';
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+let client: Anthropic | null = null;
 
-// Tool-use forcing (not free-text parsing) so the response is always a
-// structured, schema-shaped JSON object regardless of model chatter.
+// Created lazily so a missing key never matters until Claude is actually
+// in the priority list. maxRetries: 0 — retrying is the orchestrator's job
+// (it moves on to the next candidate instead of waiting on backoff).
+function getClient(): Anthropic {
+  client ??= new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY, maxRetries: 0 });
+  return client;
+}
+
+// Structured outputs (output_config.format) rather than forced tool use:
+// current models (Sonnet 5.5, Opus 5.5) reject tool_choice "tool"/"any".
 export const anthropicProvider: AiProvider = {
   id: 'anthropic',
-  async generate<T>({ systemPrompt, userPrompt, model, task }: AiGenerateParams<T>): Promise<T> {
-    const tool = {
-      name: task.toolName,
-      description: task.toolDescription,
-      input_schema: {
-        type: 'object' as const,
-        ...task.anthropicInputSchema,
-      },
-    };
-
-    let response;
+  isConfigured: () => Boolean(process.env.ANTHROPIC_API_KEY),
+  async generate<T>({ systemPrompt, userPrompt, model, task, signal }: AiGenerateParams<T>): Promise<T> {
+    const label = `anthropic:${model}`;
+    let response: Anthropic.Message;
     try {
-      response = await client.messages.create({
-        model,
-        max_tokens: 2000,
-        system: systemPrompt,
-        tools: [tool],
-        tool_choice: { type: 'tool', name: task.toolName },
-        messages: [{ role: 'user', content: userPrompt }],
-      });
+      response = await getClient().messages.create(
+        {
+          model,
+          max_tokens: 4000,
+          system: systemPrompt,
+          // Short copywriting task: low effort keeps latency close to a
+          // non-reasoning model without disabling thinking (a 400 on some models).
+          output_config: { effort: 'low', format: { type: 'json_schema', schema: task.jsonSchema } },
+          messages: [{ role: 'user', content: userPrompt }],
+        },
+        { signal },
+      );
     } catch (err) {
-      const status = (err as { status?: number })?.status;
-      if (status === 429 || status === 503 || status === 529 || status === 500) {
-        throw new RetryableAiError(`anthropic:${model} unavailable`, err);
-      }
-      throw err;
+      const status = err instanceof Anthropic.APIError ? err.status : undefined;
+      throw new AiProviderError(`${label} request failed`, failureKindForStatus(status), { cause: err });
     }
 
-    const toolUse = response.content.find(
-      (block): block is Anthropic.ToolUseBlock => block.type === 'tool_use',
-    );
-    if (!toolUse) {
-      throw new RetryableAiError(`anthropic:${model} returned no structured output`);
+    if (response.stop_reason === 'refusal' || response.stop_reason === 'max_tokens') {
+      throw new AiProviderError(`${label} stopped with ${response.stop_reason}`, 'invalid_output');
     }
-
-    return task.resultSchema.parse(toolUse.input);
+    const text = response.content.find((block): block is Anthropic.TextBlock => block.type === 'text')?.text;
+    return parseTaskOutput(label, text, task);
   },
 };
