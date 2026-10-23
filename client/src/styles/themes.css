@@ -32,6 +32,33 @@
   --hover-scale: 1.04;
   --hover-scale-sm: 1.12;
   --shadow-hover: 0 8px 20px -6px rgba(15, 23, 42, 0.28);
+  /* Springy slide for segmented-control indicators */
+  --transition-slide: 0.42s cubic-bezier(0.34, 1.32, 0.5, 1);
+}
+
+/* Derived tokens: redeclared on every themed scope so they're computed from
+   that scope's colours (a var() inside a custom property resolves where it's
+   declared, not where it's used). */
+:root,
+[data-theme] {
+  --color-hover-tint: color-mix(in srgb, var(--color-text) 8%, transparent);
+  --color-hint-ring: color-mix(in srgb, var(--color-primary) 35%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-bounce: 0.01s linear;
+    --transition-slide: 0.01s linear;
+    --hover-scale: 1;
+    --hover-scale-sm: 1;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
 
 /* ---------- Синий / Blue ---------- */

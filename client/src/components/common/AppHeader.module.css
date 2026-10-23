@@ -17,6 +17,7 @@
 
 .brand {
   display: inline-flex;
+  transition: transform var(--transition-bounce);
   flex-direction: column;
   line-height: 1.15;
   font-weight: 800;
@@ -24,6 +25,10 @@
   letter-spacing: -0.01em;
   color: var(--color-text);
   text-decoration: none;
+}
+
+.brand:hover {
+  transform: scale(var(--hover-scale));
 }
 
 .byline {
@@ -38,8 +43,6 @@
 }
 
 .nav {
-  display: flex;
-  gap: 8px;
   margin-right: auto;
   margin-left: 24px;
 }
@@ -47,29 +50,25 @@
 .controls {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
-.link,
-.activeLink {
-  padding: 6px 12px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-size: 0.9rem;
+.navItem {
+  font-size: 0.88rem;
   font-weight: 600;
-  color: var(--color-text-muted);
-}
-
-.activeLink {
-  color: var(--color-primary);
-  background: var(--color-accent-soft);
 }
 
 @media (max-width: 480px) {
   .nav {
     margin-left: 0;
     order: 3;
-    width: 100%;
-    justify-content: center;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav::-webkit-scrollbar {
+    display: none;
   }
 }

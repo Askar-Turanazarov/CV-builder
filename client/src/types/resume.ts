@@ -171,6 +171,6 @@ export function createEmptyResumeData(): ResumeData {
     colorMode: 'light',
     viewMode: 'document',
     uiLanguage: 'ru',
-    uiDesignSystem: 'classic',
+    uiDesignSystem: 'glass',
   };
 }

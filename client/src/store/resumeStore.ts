@@ -22,9 +22,24 @@ import {
 // shape (the move from a single `data` to a named `resumes` collection).
 // A version bump here is what makes zustand/persist actually invoke
 // `migrate` below for anyone who saved under the old, single-resume shape.
-const STORE_SCHEMA_VERSION = 2;
+const STORE_SCHEMA_VERSION = 3;
 
 const DEFAULT_RESUME_ID = 'default';
+
+type UiPrefKey = 'uiLanguage' | 'uiDesignSystem' | 'colorMode';
+
+function pickUiPrefs(data: ResumeData): Pick<ResumeData, UiPrefKey> {
+  return { uiLanguage: data.uiLanguage, uiDesignSystem: data.uiDesignSystem, colorMode: data.colorMode };
+}
+
+function toGlassDefault<T extends { data?: ResumeData; resumes?: Record<string, ResumeData> }>(state: T): T {
+  const glass = (data: ResumeData): ResumeData => ({ ...data, uiDesignSystem: 'glass' });
+  return {
+    ...state,
+    data: state.data && glass(state.data),
+    resumes: state.resumes && Object.fromEntries(Object.entries(state.resumes).map(([id, d]) => [id, glass(d)])),
+  };
+}
 
 interface ResumeStore {
   resumes: Record<string, ResumeData>;
@@ -105,6 +120,17 @@ export const useResumeStore = create<ResumeStore>()(
         });
       };
 
+      /** Interface preferences (language, design, light/dark) live on each
+       * resume's data for historical reasons, but they're app-wide: a change
+       * is applied to every resume so switching resumes doesn't flip the UI. */
+      const updateUiPrefs = (patch: Partial<Pick<ResumeData, UiPrefKey>>) => {
+        const state = get();
+        const resumes = Object.fromEntries(
+          Object.entries(state.resumes).map(([id, data]) => [id, { ...data, ...patch }]),
+        );
+        set({ resumes, data: { ...state.data, ...patch } });
+      };
+
       const initialData = createEmptyResumeData();
 
       return {
@@ -123,15 +149,15 @@ export const useResumeStore = create<ResumeStore>()(
         setCoverLetter: (content) => updateActive((data) => ({ ...data, coverLetter: content })),
         setTemplate: (id) => updateActive((data) => ({ ...data, selectedTemplateId: id })),
         setTheme: (id) => updateActive((data) => ({ ...data, selectedThemeId: id })),
-        setColorMode: (mode) => updateActive((data) => ({ ...data, colorMode: mode })),
+        setColorMode: (mode) => updateUiPrefs({ colorMode: mode }),
         setViewMode: (mode) => updateActive((data) => ({ ...data, viewMode: mode })),
-        setUiLanguage: (lang) => updateActive((data) => ({ ...data, uiLanguage: lang })),
-        setUiDesignSystem: (design) => updateActive((data) => ({ ...data, uiDesignSystem: design })),
-        reset: () => updateActive(() => createEmptyResumeData()),
+        setUiLanguage: (lang) => updateUiPrefs({ uiLanguage: lang }),
+        setUiDesignSystem: (design) => updateUiPrefs({ uiDesignSystem: design }),
+        reset: () => updateActive((data) => ({ ...createEmptyResumeData(), ...pickUiPrefs(data) })),
 
         createResume: (name) => {
           const id = crypto.randomUUID();
-          const newData = createEmptyResumeData();
+          const newData = { ...createEmptyResumeData(), ...pickUiPrefs(get().data) };
           set((s) => ({
             resumes: { ...s.resumes, [id]: newData },
             resumeNames: { ...s.resumeNames, [id]: name },
@@ -171,7 +197,7 @@ export const useResumeStore = create<ResumeStore>()(
             }
 
             const freshId = crypto.randomUUID();
-            const freshData = createEmptyResumeData();
+            const freshData = { ...createEmptyResumeData(), ...pickUiPrefs(s.data) };
             return {
               resumes: { [freshId]: freshData },
               resumeNames: { [freshId]: 'Resume 1' },
@@ -198,9 +224,12 @@ export const useResumeStore = create<ResumeStore>()(
       // STORE_SCHEMA_VERSION — this is where the one-time shape change
       // (single `data` -> named `resumes` collection) is handled, so
       // nobody's existing resume disappears when this feature ships.
-      migrate: (persistedState) => {
-        const persisted = persistedState as { data?: ResumeData; resumes?: Record<string, ResumeData> } | undefined;
+      migrate: (persistedState, version) => {
+        let persisted = persistedState as { data?: ResumeData; resumes?: Record<string, ResumeData> } | undefined;
         if (!persisted) return persisted;
+        // v3: Glass became the default interface design; the old default
+        // (classic) was almost never an explicit choice, so move everyone over.
+        if (version < 3) persisted = toGlassDefault(persisted);
         if (!persisted.resumes) {
           const oldData = persisted.data ?? createEmptyResumeData();
           return {

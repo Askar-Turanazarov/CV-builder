@@ -12,6 +12,47 @@ body,
 
 .app-root {
   min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: var(--color-text);
+}
+
+/* Glass paints its own backdrop (glass.css); the plain design follows the
+   theme's light/dark background. */
+.app-root:not([data-design='glass']) {
+  background: var(--color-bg);
+}
+
+/* Overscroll areas, scrollbars and native form controls follow dark mode */
+:root:has(.app-root[data-color-mode='dark']) {
+  color-scheme: dark;
+}
+
+:root:has(.app-root[data-color-mode='dark']) body {
+  background: #131316;
+}
+
+/* Every route fades/slides in; keyed by pathname in App.tsx */
+.page-transition {
+  flex: 1;
+  animation: page-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Staggered entrance for card grids: set --stagger-index on each child */
+.stagger-in > * {
+  animation: page-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--stagger-index, 0) * 60ms);
 }
 
 body {

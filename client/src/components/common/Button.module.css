@@ -1,4 +1,7 @@
 .button {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -29,7 +32,23 @@
 }
 
 .button:hover:not(:disabled) {
-  transform: scale(var(--hover-scale));
+  transform: translateY(-2px) scale(var(--hover-scale));
+}
+
+/* Light sweep across the button on hover */
+.button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
+.button:hover:not(:disabled)::after {
+  transform: translateX(120%);
+  transition: transform 0.7s ease;
 }
 
 .button:active:not(:disabled) {

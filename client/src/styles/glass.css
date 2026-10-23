@@ -15,6 +15,7 @@
 [data-design='glass'] {
   --glass-blur: 28px;
   --glass-blur-soft: 16px;
+  --glass-blur-header: 36px;
   --glass-saturate: 1.35;
   --glass-bg: rgba(255, 255, 255, 0.72);
   --glass-bg-soft: rgba(255, 255, 255, 0.5);
@@ -87,11 +88,60 @@
   }
 }
 
+/* Liquid Glass top bar: thinner tint than the other surfaces but a much
+   stronger blur, plus a specular sheen on top and a refraction rim at the
+   bottom edge, so the page scrolling underneath reads as "behind glass". */
 [data-design='glass'] .app-header {
+  --header-tint-top: rgba(255, 255, 255, 0.36);
+  --header-tint-bottom: rgba(255, 255, 255, 0.16);
+  --header-rim: rgba(255, 255, 255, 0.75);
+
   border-left: none;
   border-right: none;
   border-top: none;
   border-radius: 0 0 24px 24px;
+  background: linear-gradient(180deg, var(--header-tint-top), var(--header-tint-bottom));
+  backdrop-filter: blur(var(--glass-blur-header)) saturate(1.8) brightness(1.05);
+  -webkit-backdrop-filter: blur(var(--glass-blur-header)) saturate(1.8) brightness(1.05);
+  box-shadow:
+    0 10px 40px rgba(20, 30, 60, 0.1),
+    inset 0 1px 0 var(--header-rim),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.28);
+}
+
+[data-design='glass'][data-color-mode='dark'] .app-header {
+  --header-tint-top: rgba(58, 58, 66, 0.42);
+  --header-tint-bottom: rgba(28, 28, 32, 0.26);
+  --header-rim: rgba(255, 255, 255, 0.18);
+}
+
+[data-design='glass'] .app-header::before,
+[data-design='glass'] .app-header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Specular sheen sliding across the upper half of the glass */
+[data-design='glass'] .app-header::before {
+  background:
+    radial-gradient(120% 140% at 12% -40%, rgba(255, 255, 255, 0.45), transparent 55%),
+    radial-gradient(90% 120% at 88% -60%, rgba(255, 255, 255, 0.25), transparent 60%);
+  mix-blend-mode: soft-light;
+}
+
+/* Refraction rim along the rounded bottom edge */
+[data-design='glass'] .app-header::after {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55) 30%, rgba(160, 200, 255, 0.5) 70%, transparent)
+    bottom / 100% 1px no-repeat;
+  opacity: 0.7;
+}
+
+[data-design='glass'] .app-header > * {
+  position: relative;
+  z-index: 1;
 }
 
 [data-design='glass'] .wizard-step-body,
@@ -135,6 +185,12 @@
     box-shadow var(--transition-fast);
 }
 
+[data-design='glass'] .btn:hover:not(:disabled) {
+  box-shadow:
+    0 10px 28px -8px rgba(10, 60, 140, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
 [data-design='glass'] .btn:active {
   transform: scale(var(--press-scale));
   transition: transform var(--transition-press);
@@ -164,11 +220,43 @@
   color: var(--glass-text) !important;
 }
 
-/* ---------- Nav pill group in header ---------- */
-[data-design='glass'] .pill-group {
+/* ---------- Segmented pill groups in header (nav, design, language) ---------- */
+[data-design='glass'] .segmented {
   background: var(--glass-bg-soft);
   border-radius: var(--glass-radius-pill);
-  padding: 4px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+[data-design='glass'] .segmented-indicator {
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow:
+    0 4px 14px rgba(20, 40, 90, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+[data-design='glass'][data-color-mode='dark'] .segmented-indicator {
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+[data-design='glass'] .segmented-item {
+  color: var(--glass-text-muted);
+}
+
+[data-design='glass'] .segmented-item:hover {
+  color: var(--glass-text);
+}
+
+[data-design='glass'] .segmented-item[data-active='true'],
+[data-design='glass'] .segmented-item[aria-current='page'] {
+  color: var(--glass-accent);
+}
+
+[data-design='glass'] .color-mode-toggle {
+  background: var(--glass-bg-soft);
+  border-color: var(--glass-border);
 }
 
 /* ---------- Step indicator badges/labels adapt to glass text color ---------- */

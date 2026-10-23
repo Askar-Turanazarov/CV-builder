@@ -41,6 +41,7 @@ export default function App() {
 
   const uiDesignSystem = useResumeStore((s) => s.data.uiDesignSystem);
   const colorMode = useResumeStore((s) => s.data.colorMode);
+  const themeId = useResumeStore((s) => s.data.selectedThemeId);
 
   // Headless PDF snapshot route: bare page, no app chrome, no glass skin —
   // just the chosen resume template (see PrintPreviewPage for why).
@@ -54,15 +55,17 @@ export default function App() {
   }
 
   return (
-    <div className="app-root" data-design={uiDesignSystem} data-color-mode={colorMode}>
+    <div className="app-root" data-design={uiDesignSystem} data-theme={themeId} data-color-mode={colorMode}>
       <AppHeader />
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/editor" element={<EditorPage />} />
-        <Route path="/preview" element={<PreviewPage />} />
-        <Route path="/resumes" element={<ResumesPage />} />
-        <Route path="/cover-letter" element={<CoverLetterPage />} />
-      </Routes>
+      <div key={location.pathname} className="page-transition">
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/editor" element={<EditorPage />} />
+          <Route path="/preview" element={<PreviewPage />} />
+          <Route path="/resumes" element={<ResumesPage />} />
+          <Route path="/cover-letter" element={<CoverLetterPage />} />
+        </Routes>
+      </div>
       <AppFooter />
     </div>
   );
