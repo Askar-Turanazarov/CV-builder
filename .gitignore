@@ -1,7 +1,25 @@
+# Dependencies & build output
 node_modules/
 dist/
+*.tsbuildinfo
+
+# Environment / secrets
 .env
+.env.*
+!.env.example
 *.local
-.DS_Store
-npm-debug.log*
+
+# Deployment
+.vercel/
+
+# Tooling, working notes, plans (not part of the project)
 .claude/
+tasks/
+PROGRESS_NOTES.md
+scratch/
+coverage/
+
+# OS / logs
+.DS_Store
+Thumbs.db
+npm-debug.log*
