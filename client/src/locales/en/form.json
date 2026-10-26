@@ -9,7 +9,7 @@
     "review": "Review & AI"
   },
   "personal": {
-    "fullName": { "label": "Full name", "placeholder": "e.g. Jane Carter" },
+    "fullName": { "label": "Full name", "placeholder": "e.g. {{name}}", "placeholderPair": "e.g. {{name}} or {{other}}" },
     "jobTitle": { "label": "Job title", "placeholder": "e.g. Frontend Developer" },
     "birthDate": { "label": "Date of birth" },
     "photo": { "label": "Photo", "hint": "JPG or PNG — the image will be resized automatically" }

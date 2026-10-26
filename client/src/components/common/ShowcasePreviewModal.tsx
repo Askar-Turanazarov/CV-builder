@@ -1,6 +1,6 @@
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
-import { getTemplateComponent } from '../templates/templateRegistry';
+import ResumeTemplate from '../templates/ResumeTemplate';
 import type { ResumeData } from '../../types/resume';
 import styles from './ShowcasePreviewModal.module.css';
 
@@ -14,7 +14,6 @@ interface ShowcasePreviewModalProps {
 // TemplateGalleryModal, but simpler: one resume, no tabs, no picking.
 export default function ShowcasePreviewModal({ resume, onClose }: ShowcasePreviewModalProps) {
   const { t } = useTranslation('common');
-  const TemplateComponent = getTemplateComponent(resume.selectedTemplateId);
 
   return createPortal(
     <div className={`${styles.overlay} no-print`} onClick={onClose}>
@@ -24,7 +23,7 @@ export default function ShowcasePreviewModal({ resume, onClose }: ShowcasePrevie
         </button>
         <div className={styles.scroll}>
           <div data-theme={resume.selectedThemeId} data-color-mode="light">
-            <TemplateComponent data={resume} />
+            <ResumeTemplate data={resume} />
           </div>
         </div>
       </div>

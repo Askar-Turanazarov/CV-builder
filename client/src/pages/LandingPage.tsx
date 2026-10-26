@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Button from '../components/common/Button';
 import ShowcasePreviewModal from '../components/common/ShowcasePreviewModal';
 import TemplateGalleryModal from '../components/theme/TemplateGalleryModal';
-import { getTemplateComponent } from '../components/templates/templateRegistry';
+import ResumeTemplate from '../components/templates/ResumeTemplate';
 import { getShowcaseResumes } from '../data/showcaseResumes';
 import { useResumeStore } from '../store/resumeStore';
 import type { ResumeData } from '../types/resume';
@@ -46,7 +46,6 @@ export default function LandingPage() {
 
           <div className={styles.showcase}>
             {showcaseResumes.map((resume, index) => {
-              const TemplateComponent = getTemplateComponent(resume.selectedTemplateId);
               return (
                 <button
                   key={resume.selectedTemplateId}
@@ -62,7 +61,7 @@ export default function LandingPage() {
                       data-theme={resume.selectedThemeId}
                       data-color-mode="light"
                     >
-                      <TemplateComponent data={resume} />
+                      <ResumeTemplate data={resume} />
                     </div>
                   </div>
                 </button>

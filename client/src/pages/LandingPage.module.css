@@ -99,23 +99,40 @@
   font-size: 0.95rem;
 }
 
-/* ---------- Live showcase resumes — desktop only ---------- */
+/* ---------- Live showcase resumes ---------- */
 
+/* Phones and tablets: a swipeable row under the hero copy */
 .showcase {
-  display: none;
-  position: relative;
-  height: 460px;
+  display: flex;
+  gap: 16px;
+  margin-inline: -16px;
+  padding: 8px 16px 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
 }
 
+.showcase::-webkit-scrollbar {
+  display: none;
+}
+
+/* Desktop: the fanned stack of three cards */
 @media (min-width: 1024px) {
   .showcase {
     display: block;
+    position: relative;
+    height: 460px;
+    margin-inline: 0;
+    padding: 0;
+    overflow: visible;
   }
 }
 
 .showcaseCard {
-  position: absolute;
-  width: 300px;
+  /* Card width must equal 700px x the preview scale */
+  --preview-scale: 0.342857;
+  flex: 0 0 240px;
+  scroll-snap-align: center;
   border: none;
   border-radius: 16px;
   overflow: hidden;
@@ -135,64 +152,72 @@
   outline-offset: 3px;
 }
 
-.showcaseCard:nth-child(1) {
-  top: 20px;
-  left: 0;
-  transform: rotate(-7deg);
-  z-index: 1;
-}
+@media (min-width: 1024px) {
+  .showcaseCard {
+    --preview-scale: 0.42857;
+    position: absolute;
+    width: 300px;
+  }
 
-.showcaseCard:nth-child(1):hover {
-  transform: rotate(-7deg) translateY(-10px);
-  z-index: 10;
-  box-shadow:
-    0 28px 60px -18px rgba(15, 23, 42, 0.4),
-    var(--shadow-hover);
-}
+  .showcaseCard:nth-child(1) {
+    top: 20px;
+    left: 0;
+    transform: rotate(-7deg);
+    z-index: 1;
+  }
 
-.showcaseCard:nth-child(1):active {
-  transform: rotate(-7deg) scale(var(--press-scale));
-  transition: transform var(--transition-press);
-}
+  .showcaseCard:nth-child(1):hover {
+    transform: rotate(-7deg) translateY(-10px);
+    z-index: 10;
+    box-shadow:
+      0 28px 60px -18px rgba(15, 23, 42, 0.4),
+      var(--shadow-hover);
+  }
 
-.showcaseCard:nth-child(2) {
-  top: 70px;
-  left: 140px;
-  transform: rotate(4deg);
-  z-index: 2;
-}
+  .showcaseCard:nth-child(1):active {
+    transform: rotate(-7deg) scale(var(--press-scale));
+    transition: transform var(--transition-press);
+  }
 
-.showcaseCard:nth-child(2):hover {
-  transform: rotate(4deg) translateY(-10px);
-  z-index: 10;
-  box-shadow:
-    0 28px 60px -18px rgba(15, 23, 42, 0.4),
-    var(--shadow-hover);
-}
+  .showcaseCard:nth-child(2) {
+    top: 70px;
+    left: 140px;
+    transform: rotate(4deg);
+    z-index: 2;
+  }
 
-.showcaseCard:nth-child(2):active {
-  transform: rotate(4deg) scale(var(--press-scale));
-  transition: transform var(--transition-press);
-}
+  .showcaseCard:nth-child(2):hover {
+    transform: rotate(4deg) translateY(-10px);
+    z-index: 10;
+    box-shadow:
+      0 28px 60px -18px rgba(15, 23, 42, 0.4),
+      var(--shadow-hover);
+  }
 
-.showcaseCard:nth-child(3) {
-  top: 0;
-  left: 280px;
-  transform: rotate(-3deg);
-  z-index: 3;
-}
+  .showcaseCard:nth-child(2):active {
+    transform: rotate(4deg) scale(var(--press-scale));
+    transition: transform var(--transition-press);
+  }
 
-.showcaseCard:nth-child(3):hover {
-  transform: rotate(-3deg) translateY(-10px);
-  z-index: 10;
-  box-shadow:
-    0 28px 60px -18px rgba(15, 23, 42, 0.4),
-    var(--shadow-hover);
-}
+  .showcaseCard:nth-child(3) {
+    top: 0;
+    left: 280px;
+    transform: rotate(-3deg);
+    z-index: 3;
+  }
 
-.showcaseCard:nth-child(3):active {
-  transform: rotate(-3deg) scale(var(--press-scale));
-  transition: transform var(--transition-press);
+  .showcaseCard:nth-child(3):hover {
+    transform: rotate(-3deg) translateY(-10px);
+    z-index: 10;
+    box-shadow:
+      0 28px 60px -18px rgba(15, 23, 42, 0.4),
+      var(--shadow-hover);
+  }
+
+  .showcaseCard:nth-child(3):active {
+    transform: rotate(-3deg) scale(var(--press-scale));
+    transition: transform var(--transition-press);
+  }
 }
 
 .previewFrame {
@@ -205,7 +230,7 @@
 
 .previewScale {
   width: 700px;
-  transform: scale(0.42857);
+  transform: scale(var(--preview-scale));
   transform-origin: top left;
   pointer-events: none;
 }

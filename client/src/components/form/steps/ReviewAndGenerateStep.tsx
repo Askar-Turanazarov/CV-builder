@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useResumeStore } from '../../../store/resumeStore';
 import { useAiGeneration } from '../../../hooks/useAiGeneration';
 import type { GenerateResumeRequestBody } from '../../../lib/api';
-import type { ResumeData } from '../../../types/resume';
+import { getResumeLanguage, type ResumeData } from '../../../types/resume';
 import Button from '../../common/Button';
 import Spinner from '../../common/Spinner';
 import ErrorBanner from '../../common/ErrorBanner';
@@ -15,7 +15,7 @@ import type { StepComponentProps } from '../stepTypes';
 
 function buildRequestBody(data: ResumeData): GenerateResumeRequestBody {
   return {
-    uiLanguage: data.uiLanguage,
+    uiLanguage: getResumeLanguage(data),
     jobTitle: data.personalInfo.jobTitle,
     experience: data.experience.map((e) => ({
       position: e.position,

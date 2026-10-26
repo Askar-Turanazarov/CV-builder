@@ -74,6 +74,7 @@ export const exportPdfRequestSchema = z.object({
   colorMode: z.enum(['light', 'dark']),
   viewMode: z.enum(['document', 'site']),
   uiLanguage: z.enum(['ru', 'en', 'uz']),
+  resumeLanguage: z.enum(['ru', 'en', 'uz']).optional(),
   uiDesignSystem: z.enum(['classic', 'glass']),
 });
 

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useResumeStore } from '../store/resumeStore';
-import { getTemplateComponent } from '../components/templates/templateRegistry';
+import ResumeTemplate from '../components/templates/ResumeTemplate';
 import Button from '../components/common/Button';
 import styles from './ResumesPage.module.css';
 
@@ -69,7 +69,6 @@ export default function ResumesPage() {
       <div className={styles.grid}>
         {ids.map((id) => {
           const resumeData = resumes[id];
-          const TemplateComponent = getTemplateComponent(resumeData.selectedTemplateId);
           const isActive = id === activeResumeId;
           const isConfirmingDelete = confirmingDeleteId === id;
 
@@ -99,7 +98,7 @@ export default function ResumesPage() {
                   data-theme={resumeData.selectedThemeId}
                   data-color-mode="light"
                 >
-                  <TemplateComponent data={resumeData} />
+                  <ResumeTemplate data={resumeData} />
                 </div>
               </div>
 

@@ -2,10 +2,11 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useResumeStore } from '../store/resumeStore';
-import { getTemplateComponent } from '../components/templates/templateRegistry';
+import ResumeTemplate from '../components/templates/ResumeTemplate';
 import TemplateSwitcher from '../components/theme/TemplateSwitcher';
 import ThemeSwitcher from '../components/theme/ThemeSwitcher';
 import ViewModeToggle from '../components/theme/ViewModeToggle';
+import ResumeLanguageToggle from '../components/theme/ResumeLanguageToggle';
 import Button from '../components/common/Button';
 import PdfProgressOverlay from '../components/common/PdfProgressOverlay';
 import ErrorBanner from '../components/common/ErrorBanner';
@@ -15,17 +16,17 @@ import { printResume, downloadPdf } from '../lib/pdfExport';
 import { copyResumeAsText } from '../lib/textExport';
 import { warmUpPdf } from '../lib/api';
 import { getSampleResume, isResumeEmpty } from '../data/sampleResume';
+import { getResumeLanguage } from '../types/resume';
 import styles from './PreviewPage.module.css';
 
 export default function PreviewPage() {
   const { t } = useTranslation('common');
   const data = useResumeStore((s) => s.data);
   const setViewMode = useResumeStore((s) => s.setViewMode);
-  const TemplateComponent = getTemplateComponent(data.selectedTemplateId);
   // An empty resume renders as a blank page; show the chosen template with
   // sample content instead, clearly marked as an example.
   const isEmpty = isResumeEmpty(data);
-  const shownData = useMemo(() => (isEmpty ? getSampleResume(data.uiLanguage, data) : data), [isEmpty, data]);
+  const shownData = useMemo(() => (isEmpty ? getSampleResume(getResumeLanguage(data), data) : data), [isEmpty, data]);
 
   const [isDownloading, setIsDownloading] = useState(false);
   const [downloadError, setDownloadError] = useState<string | null>(null);
@@ -65,6 +66,7 @@ export default function PreviewPage() {
           <TemplateSwitcher />
           <ThemeSwitcher />
           <ViewModeToggle />
+          <ResumeLanguageToggle />
         </div>
         <div className={styles.pdfActions}>
           <Button onClick={handleDownloadPdf} disabled={isDownloading}>
@@ -100,7 +102,7 @@ export default function PreviewPage() {
         )}
         <div className={`container ${styles.stageGrid}`}>
           <div className="resume-frame">
-            <TemplateComponent data={shownData} />
+            <ResumeTemplate data={shownData} />
           </div>
           <div className={`${styles.insightsColumn} no-print`}>
             <ResumeInsightsPanel />

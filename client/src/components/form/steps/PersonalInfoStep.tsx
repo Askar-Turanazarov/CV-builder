@@ -5,15 +5,17 @@ import { useTranslation } from 'react-i18next';
 import { useResumeStore } from '../../../store/resumeStore';
 import { personalInfoSchema, type PersonalInfoFormValues } from '../../../validation/resumeSchemas';
 import { usePhotoUpload } from '../../../hooks/usePhotoUpload';
+import { getSampleNames } from '../../../data/sampleNames';
 import FormField from '../../common/FormField';
 import PhotoUpload from '../../common/PhotoUpload';
 import WizardNav from '../WizardNav';
 import fc from '../../common/formControls.module.css';
 import layout from './StepLayout.module.css';
 import type { StepComponentProps } from '../stepTypes';
+import type { UiLanguage } from '../../../types/resume';
 
 export default function PersonalInfoStep({ onNext, isFirst }: StepComponentProps) {
-  const { t } = useTranslation('form');
+  const { t, i18n } = useTranslation('form');
   const data = useResumeStore((s) => s.data);
   const setPersonalInfo = useResumeStore((s) => s.setPersonalInfo);
 
@@ -41,6 +43,12 @@ export default function PersonalInfoStep({ onNext, isFirst }: StepComponentProps
     setValue('photo', dataUrl, { shouldValidate: true });
   });
 
+  // Wide screens have room for two example names
+  const [name, other] = getSampleNames(i18n.language as UiLanguage);
+  const namePlaceholder = window.matchMedia('(min-width: 640px)').matches
+    ? t('personal.fullName.placeholderPair', { name, other })
+    : t('personal.fullName.placeholder', { name });
+
   const onSubmit = (values: PersonalInfoFormValues) => {
     setPersonalInfo(values);
     onNext();
@@ -62,7 +70,7 @@ export default function PersonalInfoStep({ onNext, isFirst }: StepComponentProps
         <input
           id="fullName"
           className={fc.input}
-          placeholder={t('personal.fullName.placeholder')}
+          placeholder={namePlaceholder}
           {...register('fullName')}
         />
       </FormField>

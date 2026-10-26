@@ -1,4 +1,4 @@
-import { getTemplateComponent } from '../components/templates/templateRegistry';
+import ResumeTemplate from '../components/templates/ResumeTemplate';
 import { usePrintData } from '../hooks/usePrintData';
 import type { ResumeData } from '../types/resume';
 
@@ -13,11 +13,9 @@ export default function PrintPreviewPage() {
   const data = usePrintData<ResumeData>();
   if (!data) return null;
 
-  const TemplateComponent = getTemplateComponent(data.selectedTemplateId);
-
   return (
     <div data-theme={data.selectedThemeId} data-color-mode={data.colorMode}>
-      <TemplateComponent data={{ ...data, viewMode: 'document' }} />
+      <ResumeTemplate data={{ ...data, viewMode: 'document' }} />
     </div>
   );
 }

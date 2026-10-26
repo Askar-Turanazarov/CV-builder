@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useResumeStore } from '../../store/resumeStore';
 import { templateRegistry } from '../templates/templateRegistry';
 import { getSampleResume } from '../../data/sampleResume';
-import type { TemplateId } from '../../types/resume';
+import { getResumeLanguage, type TemplateId } from '../../types/resume';
 import SegmentedControl from '../common/SegmentedControl';
 import TemplateThumbnail from './TemplateThumbnail';
 import styles from './TemplateGalleryModal.module.css';
@@ -26,8 +26,8 @@ export default function TemplateGalleryModal({ onClose, onSelect }: TemplateGall
   // Thumbnails always show a filled-in sample in the user's colours: with
   // the user's own (often still empty) resume every template looks blank.
   const sample = useMemo(
-    () => getSampleResume(data.uiLanguage, { selectedThemeId: data.selectedThemeId, colorMode: data.colorMode }),
-    [data.uiLanguage, data.selectedThemeId, data.colorMode],
+    () => getSampleResume(getResumeLanguage(data), { selectedThemeId: data.selectedThemeId, colorMode: data.colorMode }),
+    [data.uiLanguage, data.resumeLanguage, data.selectedThemeId, data.colorMode],
   );
   const definitions = templateRegistry.filter((definition) => definition.category === tab);
 

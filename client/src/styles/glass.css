@@ -168,9 +168,8 @@
   }
 }
 
-[data-design='glass'] .landing-card h1,
-[data-design='glass'] .landing-card p,
-[data-design='glass'] .landing-card li {
+/* Only the hero copy: resume previews inside the card keep their own colours */
+[data-design='glass'] .landing-card :is(h1, p, li):not(.landing-card [data-theme] *) {
   color: var(--glass-text);
 }
 

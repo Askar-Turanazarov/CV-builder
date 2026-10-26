@@ -159,3 +159,10 @@
   --color-primary-contrast: #2a1300;
   --color-accent-soft: #3a2213;
 }
+
+/* A template rendered inside the app (landing showcase, thumbnails, previews)
+   carries its own theme scope; without this it inherits the chrome's text
+   colour, e.g. glass dark mode's near-white text on a light resume. */
+[data-theme][data-color-mode]:not(.app-root) {
+  color: var(--color-text);
+}

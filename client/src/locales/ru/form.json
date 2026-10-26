@@ -9,7 +9,7 @@
     "review": "Проверка и ИИ"
   },
   "personal": {
-    "fullName": { "label": "Имя и фамилия", "placeholder": "Например, Айгерим Нурланова" },
+    "fullName": { "label": "Имя и фамилия", "placeholder": "Например, {{name}}", "placeholderPair": "Например, {{name}} или {{other}}" },
     "jobTitle": { "label": "Должность", "placeholder": "Например, Frontend-разработчик" },
     "birthDate": { "label": "Дата рождения" },
     "photo": { "label": "Фотография", "hint": "JPG или PNG — изображение будет автоматически уменьшено" }

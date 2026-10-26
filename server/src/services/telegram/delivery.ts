@@ -22,26 +22,36 @@ export function newLinkToken(): string {
   return randomBytes(16).toString('base64url');
 }
 
-function sign(chatId: number): string {
-  return createHmac('sha256', botToken() ?? '').update(`chat:${chatId}`).digest('base64url');
+/** How long a device stays linked to a chat after the first delivery. */
+export const CHAT_TOKEN_TTL_SECONDS = 3 * 60 * 60;
+
+function sign(chatId: number, exp: number): string {
+  return createHmac('sha256', botToken() ?? '').update(`chat:${chatId}:${exp}`).digest('base64url');
 }
 
 /**
  * A chat id the site may send to again without the bot round-trip: the
  * client keeps it in localStorage after the first delivery. Signed, so a
- * visitor can't make the bot message an arbitrary chat.
+ * visitor can't make the bot message an arbitrary chat, and short-lived
+ * (exp in unix seconds), so a shared device doesn't stay linked for good.
  */
 export function createChatToken(chatId: number): string {
-  return `${chatId}.${sign(chatId)}`;
+  const exp = Math.floor(Date.now() / 1000) + CHAT_TOKEN_TTL_SECONDS;
+  return `${chatId}.${exp}.${sign(chatId, exp)}`;
 }
 
-export function verifyChatToken(chatToken: string): number | null {
-  const [idPart, signature] = chatToken.split('.');
+export type ChatTokenCheck = { ok: true; chatId: number } | { ok: false; reason: 'invalid' | 'expired' };
+
+export function verifyChatToken(chatToken: string): ChatTokenCheck {
+  const [idPart, expPart, signature] = chatToken.split('.');
   const chatId = Number(idPart);
-  if (!Number.isSafeInteger(chatId) || !signature) return null;
-  const expected = Buffer.from(sign(chatId));
+  const exp = Number(expPart);
+  if (!Number.isSafeInteger(chatId) || !Number.isSafeInteger(exp) || !signature) return { ok: false, reason: 'invalid' };
+  const expected = Buffer.from(sign(chatId, exp));
   const given = Buffer.from(signature);
-  return expected.length === given.length && timingSafeEqual(expected, given) ? chatId : null;
+  if (expected.length !== given.length || !timingSafeEqual(expected, given)) return { ok: false, reason: 'invalid' };
+  if (exp * 1000 <= Date.now()) return { ok: false, reason: 'expired' };
+  return { ok: true, chatId };
 }
 
 /** Renders the resume PDF and sends it with a formatted text card. */

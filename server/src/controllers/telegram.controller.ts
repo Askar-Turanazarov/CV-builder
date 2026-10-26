@@ -71,11 +71,12 @@ export const sendToTelegramController: RequestHandler = async (req, res) => {
     return;
   }
   const { chatToken, resume } = req.body as { chatToken: string; resume: ExportPdfRequest };
-  const chatId = verifyChatToken(chatToken);
-  if (chatId === null) {
-    res.status(401).json({ error: 'telegram_chat_invalid' });
+  const check = verifyChatToken(chatToken);
+  if (!check.ok) {
+    res.status(401).json({ error: check.reason === 'expired' ? 'telegram_link_expired' : 'telegram_chat_invalid' });
     return;
   }
+  const { chatId } = check;
   try {
     await deliverResume(chatId, resume);
     res.json({ ok: true });

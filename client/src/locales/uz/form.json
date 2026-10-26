@@ -9,7 +9,7 @@
     "review": "Ko'rib chiqish va AI"
   },
   "personal": {
-    "fullName": { "label": "Ism-familiya", "placeholder": "Masalan, Diyora Karimova" },
+    "fullName": { "label": "Ism-familiya", "placeholder": "Masalan, {{name}}", "placeholderPair": "Masalan, {{name}} yoki {{other}}" },
     "jobTitle": { "label": "Lavozim", "placeholder": "Masalan, Frontend dasturchi" },
     "birthDate": { "label": "Tug'ilgan sana" },
     "photo": { "label": "Fotosurat", "hint": "JPG yoki PNG — rasm avtomatik ravishda kichraytiriladi" }

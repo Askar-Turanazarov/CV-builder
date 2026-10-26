@@ -62,6 +62,8 @@ interface ResumeStore {
   setColorMode: (mode: ColorMode) => void;
   setViewMode: (mode: ViewMode) => void;
   setUiLanguage: (lang: UiLanguage) => void;
+  /** null = follow the interface language */
+  setResumeLanguage: (lang: UiLanguage | null) => void;
   setUiDesignSystem: (design: UiDesignSystem) => void;
   reset: () => void;
   /** Creates a new, empty resume with the given display name, makes it the
@@ -152,6 +154,7 @@ export const useResumeStore = create<ResumeStore>()(
         setColorMode: (mode) => updateUiPrefs({ colorMode: mode }),
         setViewMode: (mode) => updateActive((data) => ({ ...data, viewMode: mode })),
         setUiLanguage: (lang) => updateUiPrefs({ uiLanguage: lang }),
+        setResumeLanguage: (lang) => updateActive((data) => ({ ...data, resumeLanguage: lang ?? undefined })),
         setUiDesignSystem: (design) => updateUiPrefs({ uiDesignSystem: design }),
         reset: () => updateActive((data) => ({ ...createEmptyResumeData(), ...pickUiPrefs(data) })),
 

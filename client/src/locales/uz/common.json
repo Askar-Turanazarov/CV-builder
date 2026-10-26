@@ -96,6 +96,7 @@
     "classic": "Oddiy",
     "glass": "Glass"
   },
+  "resumeLanguage": { "label": "Rezyume tili", "auto": "Sayt kabi", "hint": "Bo‘lim matnlari siz yozgandek qoladi" },
   "viewMode": {
     "label": "Rejim",
     "document": "Hujjat",
@@ -163,8 +164,9 @@
     "waiting": "Start tugmasini bosishingizni kutyapmiz…",
     "sendingDirect": "PDF tayyorlanib, Telegramingizga yuborilmoqda…",
     "doneTitle": "Tayyor! Rezyume Telegramda",
-    "doneLinked": "Chat bu qurilmada eslab qolindi — keyingi safar bir bosishda.",
+    "doneLinked": "Chat bu qurilmada 3 soatga eslab qolindi — shu vaqtgacha bir bosishda.",
     "doneDirect": "PDF va matn bot bilan chatingizda.",
+    "linkedUntil": "Telegram ulanishi {{time}} gacha amal qiladi",
     "ok": "Ajoyib",
     "unlink": "Telegramni uzish",
     "expired": "Havola eskirdi — yangisini yaratamiz",

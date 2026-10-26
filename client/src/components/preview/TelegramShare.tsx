@@ -15,14 +15,24 @@ import {
 import type { ResumeData } from '../../types/resume';
 import styles from './TelegramShare.module.css';
 
-// After the first delivery the server hands back a signed chat token; with
-// it the next sends go straight to the user's chat, no bot round-trip.
+// After the first delivery the server hands back a signed chat token
+// ("id.exp.sig", exp in unix seconds, 3 hours); until it expires the next
+// sends go straight to the user's chat, no bot round-trip.
 const CHAT_TOKEN_KEY = 'cvforge:telegram-chat';
 const POLL_INTERVAL_MS = 2000;
 
+const tokenExpiry = (token: string) => Number(token.split('.')[1]) * 1000;
+
 const readChatToken = () => {
   try {
-    return localStorage.getItem(CHAT_TOKEN_KEY);
+    const token = localStorage.getItem(CHAT_TOKEN_KEY);
+    if (!token) return null;
+    // Expired, or an old token from before expiry existed (no exp part)
+    if (!(tokenExpiry(token) > Date.now())) {
+      localStorage.removeItem(CHAT_TOKEN_KEY);
+      return null;
+    }
+    return token;
   } catch {
     return null;
   }
@@ -48,7 +58,7 @@ type Phase =
   | { name: 'error' };
 
 export default function TelegramShare({ data, disabled }: { data: ResumeData; disabled?: boolean }) {
-  const { t } = useTranslation('common');
+  const { t, i18n } = useTranslation('common');
   const [enabled, setEnabled] = useState(false);
   const [phase, setPhase] = useState<Phase>({ name: 'idle' });
   const [linked, setLinked] = useState(() => Boolean(readChatToken()));
@@ -130,6 +140,10 @@ export default function TelegramShare({ data, disabled }: { data: ResumeData; di
   if (!enabled) return null;
 
   const busy = phase.name === 'linking' || phase.name === 'sending';
+  const currentToken = phase.name === 'done' && linked ? readChatToken() : null;
+  const linkedUntil = currentToken
+    ? new Date(tokenExpiry(currentToken)).toLocaleTimeString(i18n.language, { hour: '2-digit', minute: '2-digit' })
+    : null;
 
   return (
     <>
@@ -191,6 +205,7 @@ export default function TelegramShare({ data, disabled }: { data: ResumeData; di
                   </div>
                   <h2 className={styles.title}>{t('telegram.doneTitle')}</h2>
                   <p className={styles.hint}>{t(phase.direct ? 'telegram.doneDirect' : 'telegram.doneLinked')}</p>
+                  {linkedUntil && <p className={styles.hint}>{t('telegram.linkedUntil', { time: linkedUntil })}</p>}
                   <div className={styles.actions}>
                     <Button onClick={close}>{t('telegram.ok')}</Button>
                     {linked && (

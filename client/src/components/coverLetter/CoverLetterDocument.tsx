@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { formatFullDate } from '../templates/shared/dateFormat';
+import ResumeI18n from '../templates/shared/ResumeI18n';
 import type { UiLanguage } from '../../types/resume';
 import styles from './CoverLetterDocument.module.css';
 
@@ -15,7 +16,16 @@ export interface CoverLetterDocumentData {
   dateIso: string;
 }
 
+/** The letter is written in its own language, independent of the interface */
 export default function CoverLetterDocument({ data }: { data: CoverLetterDocumentData }) {
+  return (
+    <ResumeI18n lang={data.uiLanguage}>
+      <LetterBody data={data} />
+    </ResumeI18n>
+  );
+}
+
+function LetterBody({ data }: { data: CoverLetterDocumentData }) {
   const { t } = useTranslation('insights');
   const paragraphs = data.content
     .split(/\n\s*\n/)

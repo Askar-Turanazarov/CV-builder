@@ -69,7 +69,8 @@ const MESSAGE_LIMIT = 4096;
  * sections (never mid-tag) to stay under Telegram's 4096-char limit.
  */
 export function formatResumeMessage(resume: ExportPdfRequest): string {
-  const lang = resume.uiLanguage;
+  // The card is part of the resume, so it follows the resume's language
+  const lang = resume.resumeLanguage ?? resume.uiLanguage;
   const l = LABELS[lang];
   const { personalInfo: info, contacts } = resume;
   const blocks: string[] = [];
@@ -149,7 +150,7 @@ export function formatResumeMessage(resume: ExportPdfRequest): string {
 }
 
 export function documentCaption(resume: ExportPdfRequest): string {
-  return `📄 ${LABELS[resume.uiLanguage].caption}`;
+  return `📄 ${LABELS[resume.resumeLanguage ?? resume.uiLanguage].caption}`;
 }
 
 /** e.g. "Aigul_Rakhimova_CV.pdf"; Telegram shows the name as-is. */

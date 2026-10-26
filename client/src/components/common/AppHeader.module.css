@@ -93,7 +93,9 @@
   .inner {
     gap: 10px;
     padding-block: 12px;
-    transition: padding-block var(--transition-smooth);
+    transition:
+      padding-block var(--transition-smooth),
+      row-gap var(--transition-smooth);
   }
 
   .brand {
@@ -129,7 +131,9 @@
     pointer-events: none;
     transition:
       opacity var(--transition-smooth),
-      transform var(--transition-slide);
+      transform var(--transition-slide),
+      width var(--transition-smooth),
+      height var(--transition-smooth);
   }
 
   .controls {
@@ -160,6 +164,8 @@
   /* Collapsed: compact brand, controls tucked under the bar, settings button shown */
   .header[data-collapsed] .inner {
     padding-block: 8px;
+    /* the hidden controls row still sits between two gaps: keep them tight */
+    row-gap: 4px;
   }
 
   .header[data-collapsed] .brand {
@@ -172,6 +178,8 @@
   }
 
   .header[data-collapsed] .settingsButton {
+    width: 32px;
+    height: 32px;
     opacity: 1;
     transform: none;
     pointer-events: auto;

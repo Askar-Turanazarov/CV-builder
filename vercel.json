@@ -10,7 +10,35 @@
     }
   },
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api" },
-    { "source": "/((?!api/).*)", "destination": "/index.html" }
+    {
+      "source": "/api/(.*)",
+      "destination": "/api"
+    },
+    {
+      "source": "/((?!api/).*)",
+      "has": [
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "destination": "/app.en.html"
+    },
+    {
+      "source": "/((?!api/).*)",
+      "has": [
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "uz"
+        }
+      ],
+      "destination": "/app.uz.html"
+    },
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/app.ru.html"
+    }
   ]
 }

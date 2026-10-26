@@ -133,11 +133,17 @@ export interface ResumeData {
   colorMode: ColorMode;
   viewMode: ViewMode;
   uiLanguage: UiLanguage;
+  /** Language of the resume itself (headings, dates). Unset = same as the interface. */
+  resumeLanguage?: UiLanguage;
   uiDesignSystem: UiDesignSystem;
 }
 
 export interface ResumeTemplateProps {
   data: ResumeData;
+}
+
+export function getResumeLanguage(data: Pick<ResumeData, 'uiLanguage' | 'resumeLanguage'>): UiLanguage {
+  return data.resumeLanguage ?? data.uiLanguage;
 }
 
 const CURRENT_SCHEMA_VERSION = 1;

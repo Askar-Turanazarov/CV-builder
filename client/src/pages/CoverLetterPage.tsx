@@ -8,7 +8,7 @@ import Button from '../components/common/Button';
 import Spinner from '../components/common/Spinner';
 import ErrorBanner from '../components/common/ErrorBanner';
 import PdfProgressOverlay from '../components/common/PdfProgressOverlay';
-import type { CoverLetterContent } from '../types/resume';
+import { getResumeLanguage, type CoverLetterContent } from '../types/resume';
 import styles from './CoverLetterPage.module.css';
 
 export default function CoverLetterPage() {
@@ -38,7 +38,7 @@ export default function CoverLetterPage() {
     setGenerateError(null);
     try {
       const result = await generateCoverLetter({
-        uiLanguage: data.uiLanguage,
+        uiLanguage: getResumeLanguage(data),
         fullName: data.personalInfo.fullName,
         jobTitle: data.personalInfo.jobTitle,
         targetRole,
@@ -74,7 +74,7 @@ export default function CoverLetterPage() {
         targetCompany,
         selectedThemeId: data.selectedThemeId,
         colorMode: data.colorMode,
-        uiLanguage: data.uiLanguage,
+        uiLanguage: getResumeLanguage(data),
       });
     } catch {
       setDownloadError(t('coverLetter.downloadError'));
@@ -162,7 +162,7 @@ export default function CoverLetterPage() {
                 content,
                 targetRole,
                 targetCompany,
-                uiLanguage: data.uiLanguage,
+                uiLanguage: getResumeLanguage(data),
                 dateIso,
               }}
             />

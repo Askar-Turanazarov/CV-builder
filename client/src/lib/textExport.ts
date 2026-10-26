@@ -1,16 +1,16 @@
 import i18n from '../i18n';
-import type { ResumeData } from '../types/resume';
+import { getResumeLanguage, type ResumeData } from '../types/resume';
 import { formatDateRange } from '../components/templates/shared/dateFormat';
 
 /**
  * Plain-text version of the resume — for pasting into job-portal application
  * forms that only accept typed/pasted text, not a file upload. Reuses the
  * same section labels/date formatting the templates already render, in
- * whichever language the resume itself is currently set to (`data.uiLanguage`),
+ * whichever language the resume itself is currently set to (`getResumeLanguage`),
  * not necessarily the browser's current UI language.
  */
 function buildResumePlainText(data: ResumeData): string {
-  const lng = data.uiLanguage;
+  const lng = getResumeLanguage(data);
   const t = (key: string) => i18n.t(key, { lng, ns: 'templates' });
   const present = t('present');
   const lines: string[] = [];

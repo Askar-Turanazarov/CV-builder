@@ -96,6 +96,7 @@
     "classic": "Simple",
     "glass": "Glass"
   },
+  "resumeLanguage": { "label": "Resume language", "auto": "Same as site", "hint": "Section texts stay as you wrote them" },
   "viewMode": {
     "label": "View",
     "document": "Document",
@@ -163,8 +164,9 @@
     "waiting": "Waiting for you to tap Start…",
     "sendingDirect": "Preparing the PDF and sending it to your Telegram…",
     "doneTitle": "Done! Your resume is in Telegram",
-    "doneLinked": "This device remembers the chat — next time it’s one click.",
+    "doneLinked": "This device remembers the chat for 3 hours — until then it’s one click.",
     "doneDirect": "The PDF and text are already in your chat with the bot.",
+    "linkedUntil": "Telegram link is active until {{time}}",
     "ok": "Great",
     "unlink": "Unlink Telegram",
     "expired": "The link has expired — let’s make a new one",

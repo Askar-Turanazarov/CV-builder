@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef, useState } from 'react';
-import { getTemplateComponent } from '../templates/templateRegistry';
+import ResumeTemplate from '../templates/ResumeTemplate';
 import type { ResumeData } from '../../types/resume';
 import styles from './TemplateThumbnail.module.css';
 
@@ -10,7 +10,6 @@ const TEMPLATE_WIDTH = 760;
 export default function TemplateThumbnail({ data }: { data: ResumeData }) {
   const frameRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0.25);
-  const TemplateComponent = getTemplateComponent(data.selectedTemplateId);
 
   useLayoutEffect(() => {
     const frame = frameRef.current;
@@ -30,7 +29,7 @@ export default function TemplateThumbnail({ data }: { data: ResumeData }) {
         data-theme={data.selectedThemeId}
         data-color-mode={data.colorMode}
       >
-        <TemplateComponent data={data} />
+        <ResumeTemplate data={data} />
       </div>
     </div>
   );
