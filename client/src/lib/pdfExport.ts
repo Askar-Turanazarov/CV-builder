@@ -1,5 +1,4 @@
-import { downloadResumePdf } from './api';
-import type { ResumeData, ViewMode } from '../types/resume';
+import type { ViewMode } from '../types/resume';
 
 /**
  * Physical/system print — opens the browser's native print dialog. Forcing
@@ -22,16 +21,6 @@ export function printResume(currentViewMode: ViewMode, setViewMode: (mode: ViewM
       window.print();
     });
   });
-}
-
-/**
- * Real one-click PDF download — no print dialog. The server renders the
- * resume in headless Chrome (see server/src/services/pdfRenderer.ts) and
- * streams back an actual PDF file, which we save via a synthetic <a download>
- * click.
- */
-export async function downloadPdf(data: ResumeData): Promise<void> {
-  saveBlob(await downloadResumePdf({ ...data, viewMode: 'document' }), 'resume.pdf');
 }
 
 export function saveBlob(blob: Blob, filename: string): void {

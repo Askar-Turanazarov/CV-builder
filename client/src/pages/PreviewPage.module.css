@@ -107,3 +107,8 @@
   color: var(--color-text);
   font-weight: 600;
 }
+
+/* Positioning context for the PDF page-break lines drawn over the resume */
+.pageFrame {
+  position: relative;
+}

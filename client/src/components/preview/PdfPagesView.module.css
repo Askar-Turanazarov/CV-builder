@@ -1,0 +1,47 @@
+.wrapper {
+  /* A grid item with auto margins shrinks to its content, and the pages
+     are measured from this width before any exist */
+  width: 100%;
+  max-width: 794px;
+  margin-inline: auto;
+}
+
+.pages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.page {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow:
+    0 24px 60px -20px rgba(0, 0, 0, 0.25),
+    0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* An empty A4 sheet while the file is being built */
+.placeholder {
+  aspect-ratio: 210 / 297;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: 4px;
+  color: var(--color-text-muted, var(--color-text));
+  text-align: center;
+  padding: 24px;
+}
+
+.building {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}

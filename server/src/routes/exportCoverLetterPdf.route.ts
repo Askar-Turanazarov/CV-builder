@@ -7,7 +7,7 @@ import { createPdfExportController } from '../controllers/exportPdf.controller.j
 export const exportCoverLetterPdfRouter = Router();
 exportCoverLetterPdfRouter.post(
   '/',
-  createLimiter(15),
+  createLimiter(40),
   validateBody(exportCoverLetterRequestSchema),
   createPdfExportController({
     printPath: '/print/letter',

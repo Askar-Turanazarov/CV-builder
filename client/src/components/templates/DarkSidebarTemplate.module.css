@@ -183,3 +183,11 @@
   line-height: 1.55;
   white-space: pre-line;
 }
+
+/* Paint the panel on the page itself so it runs down every printed page,
+   not only as far as the sidebar's own content reaches */
+@media print and (min-width: 700px) {
+  .page {
+    background: linear-gradient(90deg, #1a1d24 0 260px, var(--color-surface) 260px);
+  }
+}

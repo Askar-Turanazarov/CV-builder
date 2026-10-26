@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useResumeStore } from '../store/resumeStore';
@@ -8,16 +8,25 @@ import ThemeSwitcher from '../components/theme/ThemeSwitcher';
 import ViewModeToggle from '../components/theme/ViewModeToggle';
 import ResumeLanguageToggle from '../components/theme/ResumeLanguageToggle';
 import Button from '../components/common/Button';
+import SegmentedControl from '../components/common/SegmentedControl';
 import PdfProgressOverlay from '../components/common/PdfProgressOverlay';
 import ErrorBanner from '../components/common/ErrorBanner';
 import ResumeInsightsPanel from '../components/preview/ResumeInsightsPanel';
 import TelegramShare from '../components/preview/TelegramShare';
-import { printResume, downloadPdf } from '../lib/pdfExport';
+import PageBreakLines from '../components/preview/PageBreakLines';
+import PdfPagesView from '../components/preview/PdfPagesView';
+import { printResume, saveBlob } from '../lib/pdfExport';
 import { copyResumeAsText } from '../lib/textExport';
-import { warmUpPdf } from '../lib/api';
+import { downloadResumePdf } from '../lib/api';
+import { usePdfWarmUp } from '../hooks/usePdfWarmUp';
+import { usePdfPrerender } from '../hooks/usePdfPrerender';
 import { getSampleResume, isResumeEmpty } from '../data/sampleResume';
 import { getResumeLanguage } from '../types/resume';
+import switcherStyles from '../components/theme/TemplateSwitcher.module.css';
 import styles from './PreviewPage.module.css';
+
+type PreviewKind = 'page' | 'pdf';
+const PREVIEW_KINDS: PreviewKind[] = ['page', 'pdf'];
 
 export default function PreviewPage() {
   const { t } = useTranslation('common');
@@ -32,15 +41,28 @@ export default function PreviewPage() {
   const [downloadError, setDownloadError] = useState<string | null>(null);
   const [copyState, setCopyState] = useState<'idle' | 'copied' | 'error'>('idle');
 
-  useEffect(warmUpPdf, []);
+  usePdfWarmUp();
+  const pdfPayload = useMemo(() => (isEmpty ? null : { ...data, viewMode: 'document' as const }), [isEmpty, data]);
+  const pdf = usePdfPrerender(pdfPayload, downloadResumePdf);
+
+  // Document mode shows where the real PDF breaks pages, or the PDF itself
+  const [previewKind, setPreviewKind] = useState<PreviewKind>('page');
+  const isDocument = data.viewMode === 'document' && !isEmpty;
+  const showPdfPages = isDocument && previewKind === 'pdf';
+  const frameRef = useRef<HTMLDivElement>(null);
 
   const handlePrint = () => printResume(data.viewMode, setViewMode);
 
   const handleDownloadPdf = async () => {
-    setIsDownloading(true);
     setDownloadError(null);
+    // Already built in the background: hand it over without the progress card
+    if (pdf.blob) {
+      saveBlob(pdf.blob, 'resume.pdf');
+      return;
+    }
+    setIsDownloading(true);
     try {
-      await downloadPdf(data);
+      saveBlob(await (isEmpty ? downloadResumePdf({ ...data, viewMode: 'document' }) : pdf.getPdf()), 'resume.pdf');
     } catch {
       setDownloadError(t('errors.pdfFailed'));
     } finally {
@@ -67,6 +89,17 @@ export default function PreviewPage() {
           <ThemeSwitcher />
           <ViewModeToggle />
           <ResumeLanguageToggle />
+          {isDocument && (
+            <div className={switcherStyles.wrapper}>
+              <span className={switcherStyles.label}>{t('previewKind.label')}</span>
+              <SegmentedControl
+                options={PREVIEW_KINDS.map((kind) => ({ value: kind, label: t(`previewKind.${kind}`) }))}
+                value={previewKind}
+                onChange={setPreviewKind}
+                ariaLabel={t('previewKind.label')}
+              />
+            </div>
+          )}
         </div>
         <div className={styles.pdfActions}>
           <Button onClick={handleDownloadPdf} disabled={isDownloading}>
@@ -101,9 +134,16 @@ export default function PreviewPage() {
           </div>
         )}
         <div className={`container ${styles.stageGrid}`}>
-          <div className="resume-frame">
-            <ResumeTemplate data={shownData} />
-          </div>
+          {showPdfPages ? (
+            <PdfPagesView blob={pdf.blob} getPdf={pdf.getPdf} />
+          ) : (
+            <div className="resume-frame">
+              <div ref={frameRef} className={styles.pageFrame}>
+                <ResumeTemplate data={shownData} />
+                {isDocument && <PageBreakLines blob={pdf.blob} targetRef={frameRef} />}
+              </div>
+            </div>
+          )}
           <div className={`${styles.insightsColumn} no-print`}>
             <ResumeInsightsPanel />
           </div>

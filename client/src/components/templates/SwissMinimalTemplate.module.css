@@ -9,7 +9,9 @@
     Helvetica,
     Arial,
     -apple-system,
-    sans-serif;
+    'Inter Variable',
+    sans-serif,
+    var(--font-symbols);
 }
 
 @media (max-width: 480px) {

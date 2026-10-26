@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './i18n';
+import './styles/fonts.css';
 import './styles/globals.css';
 import './styles/themes.css';
 import './styles/glass.css';

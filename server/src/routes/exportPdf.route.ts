@@ -8,8 +8,9 @@ export const exportPdfRouter = Router();
 exportPdfRouter.get('/warm', createLimiter(30), warmUpPdfController);
 exportPdfRouter.post(
   '/',
-  // Headless Chrome is pricier per request than the AI proxy, hence its own limit.
-  createLimiter(15),
+  // Headless Chrome is pricier per request than the AI proxy, hence its own
+  // limit — roomy enough for the client's background prerenders (one per edit pause).
+  createLimiter(40),
   validateBody(exportPdfRequestSchema),
   createPdfExportController({
     printPath: '/print/resume',

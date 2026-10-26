@@ -1,5 +1,6 @@
 import { useState, type ComponentType } from 'react';
 import { useTranslation } from 'react-i18next';
+import { usePdfWarmUp } from '../../hooks/usePdfWarmUp';
 import { useLocation } from 'react-router-dom';
 import styles from './FormWizard.module.css';
 import StepIndicator from './StepIndicator';
@@ -39,6 +40,9 @@ export default function FormWizard({ onFinish }: FormWizardProps) {
   const requestedStepKey = (location.state as { stepKey?: StepKey } | null)?.stepKey;
   const requestedIndex = requestedStepKey ? STEP_KEYS.indexOf(requestedStepKey) : -1;
   const [stepIndex, setStepIndex] = useState(requestedIndex >= 0 ? requestedIndex : 0);
+
+  // From the second step on, get the PDF engine running for the finish line
+  usePdfWarmUp(stepIndex >= 1);
 
   const stepKey = STEP_KEYS[stepIndex];
   const StepComponent = STEP_COMPONENTS[stepKey];

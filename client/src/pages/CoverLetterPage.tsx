@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useResumeStore } from '../store/resumeStore';
-import { generateCoverLetter, warmUpPdf } from '../lib/api';
-import { downloadCoverLetter } from '../lib/coverLetterExport';
+import { downloadCoverLetterPdf, generateCoverLetter, type ExportCoverLetterPdfBody } from '../lib/api';
+import { saveBlob } from '../lib/pdfExport';
+import { usePdfWarmUp } from '../hooks/usePdfWarmUp';
+import { usePdfPrerender } from '../hooks/usePdfPrerender';
 import CoverLetterDocument from '../components/coverLetter/CoverLetterDocument';
 import Button from '../components/common/Button';
 import Spinner from '../components/common/Spinner';
@@ -26,7 +28,27 @@ export default function CoverLetterPage() {
   const [isDownloading, setIsDownloading] = useState(false);
   const [downloadError, setDownloadError] = useState<string | null>(null);
 
-  useEffect(warmUpPdf, []);
+  usePdfWarmUp();
+  const letterLanguage = getResumeLanguage(data);
+  const pdfBody = useMemo<ExportCoverLetterPdfBody | null>(
+    () =>
+      content.trim()
+        ? {
+            fullName: data.personalInfo.fullName,
+            email: data.contacts.email,
+            phone: data.contacts.phone,
+            location: data.contacts.location,
+            content,
+            targetRole,
+            targetCompany,
+            selectedThemeId: data.selectedThemeId,
+            colorMode: data.colorMode,
+            uiLanguage: letterLanguage,
+          }
+        : null,
+    [data.personalInfo.fullName, data.contacts, content, targetRole, targetCompany, data.selectedThemeId, data.colorMode, letterLanguage],
+  );
+  const pdf = usePdfPrerender(pdfBody, downloadCoverLetterPdf);
 
   const patchCoverLetter = (patch: Partial<CoverLetterContent>) => {
     const base: CoverLetterContent = coverLetter ?? { content: '', targetRole: '', targetCompany: '', generatedAt: null };
@@ -61,21 +83,15 @@ export default function CoverLetterPage() {
   };
 
   const handleDownload = async () => {
-    setIsDownloading(true);
     setDownloadError(null);
+    // Already built in the background: hand it over without the progress card
+    if (pdf.blob) {
+      saveBlob(pdf.blob, 'cover-letter.pdf');
+      return;
+    }
+    setIsDownloading(true);
     try {
-      await downloadCoverLetter({
-        fullName: data.personalInfo.fullName,
-        email: data.contacts.email,
-        phone: data.contacts.phone,
-        location: data.contacts.location,
-        content,
-        targetRole,
-        targetCompany,
-        selectedThemeId: data.selectedThemeId,
-        colorMode: data.colorMode,
-        uiLanguage: getResumeLanguage(data),
-      });
+      saveBlob(await pdf.getPdf(), 'cover-letter.pdf');
     } catch {
       setDownloadError(t('coverLetter.downloadError'));
     } finally {

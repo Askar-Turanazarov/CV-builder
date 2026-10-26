@@ -172,5 +172,14 @@
     "expired": "The link has expired — let’s make a new one",
     "error": "Couldn’t send it. Please try again",
     "retry": "Get a new link"
+  },
+  "previewKind": {
+    "label": "View",
+    "page": "Page",
+    "pdf": "As PDF",
+    "building": "Building the PDF…",
+    "failed": "Couldn’t build the PDF",
+    "retry": "Retry",
+    "pageLabel": "Page {{n}}"
   }
 }

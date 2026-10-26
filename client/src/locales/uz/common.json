@@ -172,5 +172,14 @@
     "expired": "Havola eskirdi — yangisini yaratamiz",
     "error": "Yuborib bo‘lmadi. Qayta urinib ko‘ring",
     "retry": "Yangi havola olish"
+  },
+  "previewKind": {
+    "label": "Ko‘rinish",
+    "page": "Sahifa",
+    "pdf": "PDF kabi",
+    "building": "PDF tayyorlanmoqda…",
+    "failed": "PDF tayyorlab bo‘lmadi",
+    "retry": "Qayta urinish",
+    "pageLabel": "{{n}}-sahifa"
   }
 }

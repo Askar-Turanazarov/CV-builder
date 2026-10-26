@@ -148,7 +148,7 @@
 
 .colPeriod {
   font-variant-numeric: tabular-nums;
-  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, 'PT Mono', monospace, var(--font-symbols);
   color: var(--color-text-muted);
   white-space: nowrap;
 }

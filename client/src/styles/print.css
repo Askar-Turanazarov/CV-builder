@@ -8,6 +8,11 @@
     display: none !important;
   }
 
+  /* The empty photo frame is an on-screen hint; on paper it is just clutter */
+  :has(> [class*='photoPlaceholder']) {
+    display: none !important;
+  }
+
   @page {
     size: A4;
     margin: 12mm;
@@ -45,8 +50,31 @@
     background: transparent !important;
   }
 
-  .resume-section,
-  .resume-entry {
+  /* Sections flow across pages like a typeset document; only small units
+     stay whole. A whole-section "avoid" pushed every section that didn't
+     fit to a fresh page and left the rest of the previous one empty. */
+  .resume-entry,
+  .resume-section ul,
+  .resume-section li,
+  .skill-pill,
+  .language-badge {
     break-inside: avoid;
+  }
+
+  /* Never leave a heading alone at the bottom of a page */
+  .resume-section > :first-child,
+  .resume-document :is(h2, h3, h4) {
+    break-after: avoid;
+  }
+
+  /* Same rule from the other side: inline-block headings (pill titles)
+     sit in a line box, where break-after has no effect */
+  .resume-section > :first-child + * {
+    break-before: avoid;
+  }
+
+  .resume-document :is(p, li) {
+    orphans: 2;
+    widows: 2;
   }
 }

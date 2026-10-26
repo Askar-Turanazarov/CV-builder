@@ -1,0 +1,26 @@
+.overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 2px dashed var(--color-primary);
+  opacity: 0.75;
+}
+
+.label {
+  position: absolute;
+  right: 12px;
+  top: -11px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: #fff;
+  font: 600 11px/18px var(--font-sans, system-ui, sans-serif);
+  letter-spacing: 0.02em;
+}

@@ -5,7 +5,7 @@
   max-width: 720px;
   margin-inline: auto;
   width: 100%;
-  font-family: 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  font-family: 'Iowan Old Style', Georgia, 'Times New Roman', 'PT Serif', serif, var(--font-symbols);
 }
 
 .header {
