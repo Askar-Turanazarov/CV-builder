@@ -1,0 +1,287 @@
+.page {
+  --accent: var(--color-primary);
+  container-type: inline-size;
+  color: var(--color-text);
+  font-family: var(--tpl-sans);
+  font-size: 14px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  border-radius: 16px;
+  padding: 34px clamp(18px, 5vw, 44px) 34px;
+  max-width: 920px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+/* Hollow letters: only the outline of the glyph is drawn */
+.hollow,
+.heading {
+  color: transparent;
+  -webkit-text-stroke: 1.4px var(--accent);
+}
+
+/* ---- Header ---- */
+.header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: end;
+}
+
+.headText {
+  --column: calc(100cqi - 150px);
+  min-width: 0;
+}
+
+.role {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Shrinks until the longest word (--word letters) fits on one line */
+.name {
+  display: grid;
+  margin-top: 10px;
+  font-family: var(--tpl-condensed);
+  font-size: min(
+    clamp(3rem, 13cqi, 6.4rem),
+    calc(var(--column) / (var(--word, 8) * 0.52))
+  );
+  font-weight: 600;
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.solid {
+  font-size: 0.62em;
+  color: var(--color-text);
+}
+
+.hollow {
+  -webkit-text-stroke-width: 2px;
+}
+
+.meta {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+/* Photo with an offset outline frame */
+.photo {
+  width: 118px;
+  height: 148px;
+  margin: 0 10px 10px 0;
+  outline: 2px solid var(--accent);
+  outline-offset: 6px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: var(--color-surface-alt);
+  font-size: 0.68rem;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.contacts {
+  margin-top: 22px;
+  padding: 12px 0;
+  border-block: 1px solid var(--color-text);
+  font-size: 0.8rem;
+}
+
+/* ---- Parts with giant hollow titles ---- */
+.part {
+  padding-top: 22px;
+}
+
+.heading {
+  margin-bottom: 12px;
+  font-family: var(--tpl-condensed);
+  font-size: clamp(2rem, 6.4cqi, 2.9rem);
+  font-weight: 600;
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  -webkit-text-stroke-width: 1.2px;
+}
+
+.summary {
+  font-size: 1.08rem;
+  line-height: 1.6;
+}
+
+@container (min-width: 620px) {
+  .summary {
+    padding-left: 170px;
+    padding-right: 4%;
+  }
+}
+
+.strengths {
+  list-style: none;
+  display: grid;
+  gap: 10px 28px;
+}
+
+@container (min-width: 620px) {
+  .strengths {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.strengths li {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--color-border);
+  line-height: 1.45;
+  font-size: 0.9rem;
+}
+
+.strengthNo {
+  font-family: var(--tpl-condensed);
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.entry {
+  display: grid;
+  gap: 2px 20px;
+  padding: 10px 0 12px;
+  border-top: 1px solid var(--color-border);
+}
+
+.entry:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+@container (min-width: 620px) {
+  .entry {
+    grid-template-columns: 150px minmax(0, 1fr);
+  }
+}
+
+.entryDate {
+  padding-top: 2px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.entryBody {
+  min-width: 0;
+}
+
+.entryTitle,
+.entrySub {
+  break-inside: avoid;
+  break-after: avoid;
+}
+
+.entryTitle {
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+
+.entrySub {
+  margin: 2px 0 6px;
+  font-size: 0.86rem;
+  color: var(--color-text-muted);
+}
+
+.entryText {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  padding-left: 16px;
+}
+
+p.entryText {
+  padding-left: 0;
+}
+
+.entryText li::marker {
+  content: "◦ ";
+  color: var(--accent);
+}
+
+.skills {
+  list-style: none;
+}
+
+@container (min-width: 520px) {
+  .skills {
+    column-count: 2;
+    column-gap: 36px;
+  }
+}
+
+@container (min-width: 760px) {
+  .skills {
+    column-count: 3;
+  }
+}
+
+.skill {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  break-inside: avoid;
+}
+
+.meter {
+  display: block;
+  height: 6px;
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+}
+
+.meter span {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+}
+
+.langs {
+  margin-top: 8px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border);
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  font-weight: 600;
+}
+
+.langs li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.langLevel {
+  padding: 2px 8px;
+  border: 1.5px solid var(--accent);
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent);
+}

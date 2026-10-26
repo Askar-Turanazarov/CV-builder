@@ -1,0 +1,285 @@
+/* A packaging label: black on white in both colour modes, with one round
+   sticker in the theme colour */
+.page {
+  --ink: #111;
+  --paper: #fff;
+  container-type: inline-size;
+  color: var(--ink);
+  font-family: var(--tpl-sans);
+  font-size: 14px;
+  background: var(--paper);
+  box-shadow: var(--shadow-card);
+  border-radius: 10px;
+  padding: 22px;
+  max-width: 920px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+.label {
+  border: 2px solid var(--ink);
+  padding: 10px 16px 14px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* ---- Header ---- */
+.header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: start;
+  padding-bottom: 8px;
+  border-bottom: 10px solid var(--ink);
+}
+
+.facts {
+  font-size: clamp(1.8rem, 6.2cqi, 3rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.name {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--ink);
+  font-size: clamp(1.3rem, 4cqi, 1.7rem);
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.serving {
+  margin-top: 3px;
+  font-size: 0.95rem;
+}
+
+.photo {
+  width: 104px;
+  height: 104px;
+  border: 2px solid var(--ink);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  font-size: 0.68rem;
+  text-align: center;
+  color: #666;
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Round "new!" sticker, slightly tilted */
+.side {
+  display: flex;
+  align-items: flex-start;
+}
+
+.badge {
+  margin: 4px 0 0 -26px;
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  padding: 10px;
+  border-radius: 50%;
+  border: 2px dashed var(--color-primary-contrast);
+  outline: 4px solid var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+  font-size: 0.54rem;
+  font-weight: 900;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+  text-align: center;
+  text-transform: uppercase;
+  transform: rotate(12deg);
+}
+
+@container (max-width: 560px) {
+  .badge {
+    display: none;
+  }
+}
+
+.contacts {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--ink);
+  font-size: 0.78rem;
+}
+
+/* Calories line: the biggest number on the label */
+.calories {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 2px 0 4px;
+  border-bottom: 6px solid var(--ink);
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.calories strong {
+  margin-left: auto;
+  font-size: 3rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.unit {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+/* Short block: never leave its heading alone at a page end */
+.block:has(.vitamins) {
+  break-inside: avoid;
+}
+
+/* ---- Rows ---- */
+.block {
+  border-bottom: 6px solid var(--ink);
+  padding-bottom: 6px;
+}
+
+.rowLabel,
+.sectionHead {
+  padding: 6px 0 4px;
+  border-bottom: 1px solid var(--ink);
+  font-size: 1rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.summary {
+  padding-top: 6px;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.dvHead {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0 4px;
+  border-bottom: 1px solid var(--ink);
+  font-size: 0.85rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.nutrients,
+.vitamins {
+  padding-left: 0;
+}
+
+.nutrients {
+  list-style: none;
+}
+
+@container (min-width: 620px) {
+  .nutrients {
+    column-count: 2;
+    column-gap: 28px;
+    column-rule: 1px solid var(--ink);
+  }
+}
+
+.nutrient {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--ink);
+  font-size: 0.88rem;
+  break-inside: avoid;
+}
+
+.pct {
+  font-weight: 900;
+}
+
+.row {
+  padding: 6px 0 8px;
+  border-bottom: 1px solid var(--ink);
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.rowHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+  font-size: 0.98rem;
+}
+
+.rowHead,
+.rowSub {
+  break-inside: avoid;
+  break-after: avoid;
+}
+
+.rowDate {
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.rowSub {
+  font-size: 0.84rem;
+  color: #444;
+}
+
+.rowText {
+  margin-top: 4px;
+  padding-left: 16px;
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+p.rowText {
+  padding-left: 0;
+}
+
+.vitamins {
+  break-inside: avoid;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 6px;
+  font-size: 0.9rem;
+}
+
+.vitamins li + li::before {
+  content: "•";
+  margin: 0 10px;
+}
+
+.ingredients {
+  padding: 8px 0;
+  border-bottom: 6px solid var(--ink);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.inline {
+  display: inline;
+  font-size: inherit;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.footnote {
+  margin-top: 10px;
+  padding-top: 6px;
+  border-top: 1px solid var(--ink);
+  font-size: 0.72rem;
+  line-height: 1.4;
+}

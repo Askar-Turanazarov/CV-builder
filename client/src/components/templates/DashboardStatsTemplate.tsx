@@ -1,24 +1,15 @@
 import { useTranslation } from 'react-i18next';
-import type { ResumeTemplateProps, UiLanguage } from '../../types/resume';
+import type { ResumeTemplateProps } from '../../types/resume';
 import { formatDateRange, formatFullDate } from './shared/dateFormat';
 import Section from './shared/Section';
 import LanguageBadge from './shared/LanguageBadge';
 import ContactLinks from './shared/ContactLinks';
+import { descriptionLines } from './shared/templateKit';
 import styles from './DashboardStatsTemplate.module.css';
 
-// No dedicated i18n keys exist for dashboard-specific stat labels, and this
-// task intentionally avoids touching locale files. Following the same
-// manual per-language table approach already used in shared/dateFormat.ts,
-// small fixed labels are kept here instead.
-const STAT_LABELS: Record<UiLanguage, { years: string; places: string; skills: string; languages: string }> = {
-  ru: { years: 'Лет опыта', places: 'Мест работы', skills: 'Навыков', languages: 'Языков' },
-  en: { years: 'Years experience', places: 'Places worked', skills: 'Skills', languages: 'Languages' },
-  uz: { years: 'Tajriba yili', places: 'Ish joylari', skills: "Ko'nikmalar", languages: 'Tillar' },
-};
-
 // Reframes the resume as an analytics/KPI dashboard: big stat tiles up top,
-// skills rendered as horizontal progress bars instead of pills, and
-// experience/education as a clean card grid. Deliberately reads like a
+// skills rendered as horizontal progress bars instead of pills, jobs as
+// full-width cards and education as a card grid. Deliberately reads like a
 // metrics panel rather than a document.
 function parseYearMonth(value: string): number | null {
   const [year, month] = value.split('-').map(Number);
@@ -49,12 +40,11 @@ export default function DashboardStatsTemplate({ data }: ResumeTemplateProps) {
   const present = t('present');
 
   const years = estimateYearsOfExperience(data.experience);
-  const labels = STAT_LABELS[data.uiLanguage];
   const stats = [
-    { value: years, label: labels.years },
-    { value: data.experience.length, label: labels.places },
-    { value: data.skills.length, label: labels.skills },
-    { value: data.languages.length, label: labels.languages },
+    { value: years, label: t('deck.years', { count: years }) },
+    { value: data.experience.length, label: t('deck.companies', { count: data.experience.length }) },
+    { value: data.skills.length, label: t('deck.skills', { count: data.skills.length }) },
+    { value: data.languages.length, label: t('deck.languages', { count: data.languages.length }) },
   ];
 
   return (
@@ -123,9 +113,9 @@ export default function DashboardStatsTemplate({ data }: ResumeTemplateProps) {
 
       {data.experience.length > 0 && (
         <Section title={t('sections.experience')}>
-          <div className={styles.cardGrid}>
+          <div className={styles.cardList}>
             {data.experience.map((exp) => (
-              <div key={exp.id} className={`${styles.card} resume-entry`}>
+              <div key={exp.id} className={`${styles.card} ${styles.jobCard}`}>
                 <div className={styles.cardHead}>
                   <strong>{exp.position}</strong>
                   <span className={styles.cardDate}>
@@ -136,7 +126,11 @@ export default function DashboardStatsTemplate({ data }: ResumeTemplateProps) {
                   {exp.company}
                   {exp.location ? ` · ${exp.location}` : ''}
                 </div>
-                {exp.description && <p className={styles.cardDescription}>{exp.description}</p>}
+                {descriptionLines(exp.description).map((line, i) => (
+                  <p key={i} className={styles.cardLine}>
+                    {line}
+                  </p>
+                ))}
               </div>
             ))}
           </div>

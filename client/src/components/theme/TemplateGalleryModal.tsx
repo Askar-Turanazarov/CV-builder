@@ -2,14 +2,12 @@ import { useEffect, useMemo, useState, type CSSProperties } from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { useResumeStore } from '../../store/resumeStore';
-import { templateRegistry } from '../templates/templateRegistry';
+import { templateRegistry, type TemplateCategory } from '../templates/templateRegistry';
 import { getSampleResume } from '../../data/sampleResume';
 import { getResumeLanguage, type TemplateId } from '../../types/resume';
 import SegmentedControl from '../common/SegmentedControl';
 import TemplateThumbnail from './TemplateThumbnail';
 import styles from './TemplateGalleryModal.module.css';
-
-type GalleryTab = 'popular' | 'unusual';
 
 interface TemplateGalleryModalProps {
   onClose: () => void;
@@ -21,7 +19,7 @@ export default function TemplateGalleryModal({ onClose, onSelect }: TemplateGall
   const { t } = useTranslation('common');
   const data = useResumeStore((s) => s.data);
   const setTemplate = useResumeStore((s) => s.setTemplate);
-  const [tab, setTab] = useState<GalleryTab>('popular');
+  const [tab, setTab] = useState<TemplateCategory>('popular');
 
   // Thumbnails always show a filled-in sample in the user's colours: with
   // the user's own (often still empty) resume every template looks blank.
@@ -64,10 +62,11 @@ export default function TemplateGalleryModal({ onClose, onSelect }: TemplateGall
             <h2 className={styles.title}>{t('templateGallery.title')}</h2>
             <p className={styles.subtitle}>{t('templateGallery.subtitle', { count: templateRegistry.length })}</p>
           </div>
-          <SegmentedControl<GalleryTab>
+          <SegmentedControl<TemplateCategory>
             options={[
               { value: 'popular', label: t('templateGallery.popular') },
               { value: 'unusual', label: t('templateGallery.unusual') },
+              { value: 'concept', label: t('templateGallery.concept') },
             ]}
             value={tab}
             onChange={setTab}

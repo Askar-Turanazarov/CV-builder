@@ -1,0 +1,336 @@
+/* A night sky whatever the site theme: deep navy with a scatter of stars;
+   the theme colour tints the constellation and orbits. Stars are a tiled SVG
+   of solid dots and the glow an opaque gradient: semi-transparent gradients
+   become per-pixel functions in the PDF that take seconds to draw a page. */
+.page {
+  --night: #0b1330;
+  --night-2: #131d45;
+  --starlight: #f4f1e3;
+  --dim: #a9b1d6;
+  --accent: color-mix(in srgb, var(--color-primary) 55%, #9ec5ff);
+  container-type: inline-size;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='300'%3E%3Ccircle cx='43' cy='54' r='.6' fill='%238c909e'/%3E%3Ccircle cx='259' cy='24' r='.6' fill='%239a9eab'/%3E%3Ccircle cx='317' cy='102' r='.8' fill='%23a9acb7'/%3E%3Ccircle cx='122' cy='186' r='.6' fill='%237d8291'/%3E%3Ccircle cx='209' cy='264' r='.6' fill='%238c909e'/%3E%3Ccircle cx='170' cy='96' r='.5' fill='%237d8291'/%3E%3Ccircle cx='24' cy='238' r='.7' fill='%239a9eab'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse at 80% -10%, var(--night-2), var(--night) 60%);
+  color: var(--starlight);
+  font-family: var(--tpl-sans);
+  padding: 30px 26px;
+  border-radius: 18px;
+  box-shadow: var(--shadow-card);
+  max-width: 900px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgb(255 255 255 / 0.15);
+}
+
+.photo {
+  flex: none;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 35% 35%, #fff6d8, #f2c14e 45%, #b0731c);
+  color: var(--night);
+  font-weight: 800;
+  font-size: 1.6rem;
+  box-shadow:
+    0 0 0 6px rgb(255 255 255 / 0.06),
+    0 0 30px rgb(242 193 78 / 0.45);
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo :global(.photoPlaceholder) {
+  font-size: 0.6rem;
+  font-weight: 500;
+  text-align: center;
+  padding: 6px;
+}
+
+.headText {
+  min-width: 0;
+}
+
+.catalog {
+  font-family: var(--tpl-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.name {
+  font-family: var(--tpl-display);
+  font-size: clamp(1.8rem, 6cqi, 2.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-top: 4px;
+}
+
+.title {
+  color: var(--dim);
+  margin-top: 4px;
+}
+
+.contacts {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: var(--dim);
+}
+
+.meta {
+  font-size: 0.75rem;
+  color: var(--dim);
+  margin-top: 4px;
+}
+
+.block {
+  margin-top: 24px;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--tpl-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.heading::before {
+  content: '✦';
+  color: var(--starlight);
+}
+
+.heading::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgb(255 255 255 / 0.25), transparent);
+}
+
+.log {
+  line-height: 1.65;
+  color: var(--starlight);
+}
+
+.bright {
+  list-style: none;
+  display: grid;
+  gap: 8px 22px;
+}
+
+@container (min-width: 620px) {
+  .bright {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.bright li {
+  position: relative;
+  padding-left: 22px;
+  line-height: 1.45;
+  font-size: 0.92rem;
+}
+
+.bright li::before {
+  content: '★';
+  position: absolute;
+  left: 0;
+  color: #f2c14e;
+}
+
+.constellation {
+  break-inside: avoid;
+}
+
+.sky {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  background: rgb(255 255 255 / 0.03);
+  border: 1px solid rgb(255 255 255 / 0.08);
+}
+
+.dust {
+  fill: #fff;
+  opacity: 0.35;
+}
+
+.figure {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 4;
+  opacity: 0.8;
+}
+
+.glow {
+  fill: var(--accent);
+  opacity: 0.18;
+}
+
+.star {
+  fill: var(--starlight);
+}
+
+.starNo {
+  fill: var(--dim);
+  font: 600 11px var(--tpl-mono);
+  text-anchor: middle;
+}
+
+.catalogList {
+  list-style: none;
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 6px 16px;
+  font-size: 0.85rem;
+}
+
+.catalogList li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.catNo {
+  flex: none;
+  font-family: var(--tpl-mono);
+  font-size: 0.72rem;
+  color: var(--accent);
+  min-width: 1.6em;
+}
+
+.magnitude {
+  margin-left: auto;
+  font-size: 0.55rem;
+  letter-spacing: 1px;
+  color: #f2c14e;
+}
+
+.orbits {
+  list-style: none;
+}
+
+.orbit {
+  position: relative;
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 12px;
+  padding-bottom: 16px;
+}
+
+/* The orbit path: a faint dashed arc on the left, drawn per entry so it
+   continues across pages */
+.orbit::before {
+  content: '';
+  position: absolute;
+  left: 16px;
+  top: 0;
+  bottom: 0;
+  border-left: 1.5px dashed rgb(255 255 255 / 0.25);
+}
+
+.planet {
+  position: relative;
+  z-index: 1;
+  justify-self: center;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff, var(--accent) 55%, #1d2a63);
+  box-shadow: 0 0 0 4px var(--night);
+}
+
+.planet[data-current='true'] {
+  width: 26px;
+  height: 26px;
+  margin-top: -1px;
+  box-shadow:
+    0 0 0 4px var(--night),
+    0 0 18px var(--accent);
+}
+
+.orbitBody {
+  min-width: 0;
+}
+
+.orbitTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+}
+
+.orbitName {
+  font-weight: 700;
+  font-size: 1.02rem;
+}
+
+.dates {
+  font-family: var(--tpl-mono);
+  font-size: 0.72rem;
+  color: var(--dim);
+  white-space: nowrap;
+}
+
+.role {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.88rem;
+  margin-top: 2px;
+}
+
+.detail {
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--starlight);
+  opacity: 0.9;
+  margin-top: 4px;
+}
+
+.observatories {
+  display: grid;
+  gap: 12px;
+}
+
+@container (min-width: 620px) {
+  .observatories {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.observatory {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  background: rgb(255 255 255 / 0.04);
+}
+
+.langs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}

@@ -1,0 +1,261 @@
+.page {
+  --gutter: 104px;
+  container-type: inline-size;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--tpl-sans);
+  font-size: 14px;
+  padding: 30px 26px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  max-width: 900px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--color-text);
+}
+
+.headText {
+  min-width: 0;
+}
+
+.name {
+  font-family: var(--tpl-condensed);
+  font-weight: 600;
+  font-size: clamp(2rem, 8cqi, 3.2rem);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.role {
+  margin-top: 6px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.contacts {
+  margin-top: 10px;
+  font-size: 0.8rem;
+}
+
+.meta {
+  margin-top: 4px;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.photo {
+  flex: none;
+  width: 96px;
+  height: 96px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--color-accent-soft);
+  display: grid;
+  place-items: center;
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo :global(.photoPlaceholder) {
+  font-size: 0.65rem;
+  text-align: center;
+  padding: 6px;
+  color: var(--color-text-muted);
+}
+
+/* Summary and strengths: label in the gutter, text beside it */
+.row {
+  display: grid;
+  gap: 4px 18px;
+  margin-top: 20px;
+}
+
+@container (min-width: 620px) {
+  .row {
+    grid-template-columns: var(--gutter) 1fr;
+  }
+}
+
+.label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  padding-top: 3px;
+}
+
+.text {
+  line-height: 1.6;
+}
+
+.strengths {
+  display: grid;
+  gap: 4px;
+  padding-left: 16px;
+  line-height: 1.5;
+}
+
+/* The scale: a ruled vertical line with a tick for every year mark */
+.scale {
+  margin-top: 26px;
+}
+
+.scaleHead {
+  font-family: var(--tpl-condensed);
+  font-weight: 600;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 12px;
+}
+
+.tick {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--gutter) 1fr;
+  gap: 18px;
+  padding-bottom: 18px;
+}
+
+.tick::before {
+  content: '';
+  position: absolute;
+  left: calc(var(--gutter) + 8px);
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: repeating-linear-gradient(var(--color-border) 0 6px, transparent 6px 10px);
+}
+
+.mark {
+  text-align: right;
+  position: relative;
+}
+
+.mark::after {
+  content: '';
+  position: absolute;
+  right: -17px;
+  top: 14px;
+  width: 14px;
+  height: 2px;
+  background: var(--color-primary);
+}
+
+.year {
+  display: block;
+  font-family: var(--tpl-condensed);
+  font-weight: 600;
+  font-size: 2.1rem;
+  line-height: 1;
+  color: var(--color-primary);
+}
+
+.until {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.body {
+  min-width: 0;
+  padding-left: 10px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.sub {
+  font-weight: 600;
+  font-size: 0.88rem;
+  margin-top: 1px;
+}
+
+.range {
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.bullets {
+  margin-top: 6px;
+  padding-left: 16px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.textSmall {
+  font-size: 0.86rem;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+@media (max-width: 520px) {
+  .page {
+    --gutter: 64px;
+  }
+
+  .year {
+    font-size: 1.5rem;
+  }
+}
+
+.footerGrid {
+  display: grid;
+  gap: 18px 28px;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 2px solid var(--color-text);
+}
+
+@container (min-width: 620px) {
+  .footerGrid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.footerGrid .label {
+  margin-bottom: 8px;
+}
+
+.chips {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1.5px solid var(--color-text);
+  border-radius: 4px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.chipLevel {
+  color: var(--color-primary);
+  font-size: 0.7rem;
+  letter-spacing: 0.5px;
+  font-weight: 800;
+}

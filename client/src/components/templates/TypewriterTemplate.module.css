@@ -1,0 +1,189 @@
+.page {
+  --ink: #26231f;
+  --stamp: #c62f2f;
+  container-type: inline-size;
+  position: relative;
+  color: var(--ink);
+  font-family: var(--tpl-mono);
+  font-size: 13px;
+  background: #f7f1e3;
+  box-shadow: var(--shadow-card);
+  padding: 34px clamp(18px, 5vw, 40px) 30px clamp(52px, 8vw, 64px);
+  max-width: 880px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+/* The red margin line: a plain element, as a hard-stop gradient it made the
+   PDF slow to draw */
+.page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 38px;
+  border-left: 1px solid color-mix(in srgb, var(--stamp) 35%, #f7f1e3);
+}
+
+.header {
+  position: relative;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--ink);
+}
+
+.name {
+  font-weight: 700;
+  font-size: clamp(1.4rem, 4.6cqi, 1.9rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding-right: 150px;
+}
+
+.role {
+  margin-top: 6px;
+  font-size: 0.95rem;
+}
+
+.role::before {
+  content: '> ';
+  color: var(--stamp);
+}
+
+.contacts {
+  margin-top: 10px;
+  font-size: 0.8rem;
+}
+
+.meta {
+  margin-top: 4px;
+  font-size: 0.8rem;
+}
+
+/* A rubber stamp: double red frame, rotated, a little uneven */
+.stamp {
+  position: absolute;
+  top: -6px;
+  right: 0;
+  padding: 6px 12px;
+  border: 3px double var(--stamp);
+  border-radius: 6px;
+  color: var(--stamp);
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transform: rotate(-8deg);
+  opacity: 0.8;
+}
+
+.part {
+  padding-top: 18px;
+}
+
+.heading {
+  display: inline-block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  margin-bottom: 10px;
+}
+
+.summary {
+  line-height: 1.7;
+  text-align: justify;
+}
+
+.checks {
+  list-style: none;
+  display: grid;
+  gap: 4px;
+  line-height: 1.55;
+}
+
+.checks li {
+  padding-left: 4ch;
+  text-indent: -4ch;
+}
+
+.checks li::before {
+  content: '[x] ';
+  font-weight: 700;
+  color: var(--stamp);
+}
+
+.entry {
+  margin-bottom: 14px;
+}
+
+.entryHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+}
+
+.entryTitle {
+  font-weight: 700;
+}
+
+.entryDate {
+  white-space: nowrap;
+  font-size: 0.82rem;
+}
+
+.entryDate::before {
+  content: '[';
+}
+
+.entryDate::after {
+  content: ']';
+}
+
+.entrySub {
+  font-size: 0.86rem;
+  margin: 1px 0 4px;
+  color: color-mix(in srgb, var(--ink) 75%, transparent);
+}
+
+.entryText {
+  font-size: 0.86rem;
+  line-height: 1.6;
+  list-style: none;
+}
+
+.entryText li {
+  padding-left: 2ch;
+  text-indent: -2ch;
+}
+
+.entryText li::before {
+  content: '- ';
+}
+
+.items {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 2px 24px;
+  font-size: 0.86rem;
+}
+
+.item {
+  display: flex;
+  gap: 1ch;
+}
+
+.item > span:first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+.itemLevel {
+  color: var(--stamp);
+  white-space: nowrap;
+}

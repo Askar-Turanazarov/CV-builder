@@ -4,7 +4,7 @@
  * (`.resume-document`, `.resume-section`, `.resume-name`, `.resume-photo`,
  * `.contact-links` — the same pattern print.css already uses), scoped by
  * `[data-view-mode]` on PreviewPage's stage wrapper. This is what lets a
- * handful of rules affect all 40 templates without editing each one
+ * handful of rules affect every template without editing each one
  * individually for the *visual* half of the difference.
  *
  * The other half — the actual FUNCTIONAL difference — lives in
@@ -33,7 +33,7 @@
  * deliberately don't style their own root at all — without this, they'd
  * render as a flat, shadow-less rectangle while every other template (and
  * every other card on the page — the toolbar, the wizard step, the landing
- * hero) has one. This guarantees all 40 templates read as a consistent
+ * hero) has one. This guarantees all templates read as a consistent
  * card in the on-screen preview, in both Document and Site view and both
  * UI skins, without editing each template file. Never applied to the
  * /print/:token PDF-rendering route (a separate page/render tree), so PDF
@@ -48,6 +48,10 @@
      wider allowance already used by `.resume-document` above, so the frame
      never ends up narrower than the resume it's wrapping. */
   max-width: 1000px;
+  /* Auto margins on a grid item shrink it to its content's width, and
+     templates with `container-type: inline-size` have none: without an
+     explicit width the frame collapsed to a thin strip. */
+  width: 100%;
   margin-inline: auto;
   border-radius: 20px;
   overflow: hidden;

@@ -6,7 +6,8 @@ import LanguageBadge from './shared/LanguageBadge';
 import ContactLinks from './shared/ContactLinks';
 import styles from './TerminalTemplate.module.css';
 
-// The whole resume styled as a dark terminal session: a fake window chrome,
+// The whole resume styled as a dark terminal session (commands stay real
+// shell commands, file names follow the resume's language): a fake window chrome,
 // `$` shell prompts, green-on-black monospace throughout. Not for every
 // recruiter — that's the point of the "unusual" category.
 export default function TerminalTemplate({ data }: ResumeTemplateProps) {
@@ -19,7 +20,7 @@ export default function TerminalTemplate({ data }: ResumeTemplateProps) {
         <span className={styles.dot} data-color="red" />
         <span className={styles.dot} data-color="yellow" />
         <span className={styles.dot} data-color="green" />
-        <span className={styles.titleText}>guest@resume: ~</span>
+        <span className={styles.titleText}>{t('terminal.host')}: ~</span>
       </div>
 
       <div className={styles.terminalBody}>
@@ -42,7 +43,7 @@ export default function TerminalTemplate({ data }: ResumeTemplateProps) {
         {data.aiContent?.summary && (
           <>
             <p className={styles.line}>
-              <span className={styles.prompt}>$</span> cat about.md
+              <span className={styles.prompt}>$</span> cat {t('terminal.about')}.md
             </p>
             <p className={styles.output}>{data.aiContent.summary}</p>
           </>
@@ -51,7 +52,7 @@ export default function TerminalTemplate({ data }: ResumeTemplateProps) {
         {data.aiContent && data.aiContent.strengths.length > 0 && (
           <>
             <p className={styles.line}>
-              <span className={styles.prompt}>$</span> ls strengths/
+              <span className={styles.prompt}>$</span> ls {t('terminal.strengths')}/
             </p>
             {data.aiContent.strengths.map((strength, index) => (
               <p key={index} className={styles.output}>
@@ -64,7 +65,7 @@ export default function TerminalTemplate({ data }: ResumeTemplateProps) {
         {data.experience.length > 0 && (
           <>
             <p className={styles.line}>
-              <span className={styles.prompt}>$</span> git log --oneline experience
+              <span className={styles.prompt}>$</span> git log --oneline {t('terminal.experience')}
             </p>
             {data.experience.map((exp) => (
               <p key={exp.id} className={`${styles.output} resume-entry`}>
@@ -78,7 +79,7 @@ export default function TerminalTemplate({ data }: ResumeTemplateProps) {
         {data.education.length > 0 && (
           <>
             <p className={styles.line}>
-              <span className={styles.prompt}>$</span> cat education.txt
+              <span className={styles.prompt}>$</span> cat {t('terminal.education')}.txt
             </p>
             {data.education.map((edu) => (
               <p key={edu.id} className={`${styles.output} resume-entry`}>

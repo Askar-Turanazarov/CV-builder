@@ -1,0 +1,402 @@
+.page {
+  --spine: 58px;
+  container-type: inline-size;
+  color: var(--color-text);
+  font-family: var(--tpl-serif);
+  font-size: 14px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  border-radius: 4px 14px 14px 4px;
+  overflow: hidden;
+  max-width: 920px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+/* The spine is the inner box's left border: on paper it repeats on every
+   page (print.css strips borders from the outer .resume-document) */
+.book {
+  position: relative;
+  border-left: var(--spine) solid var(--color-primary);
+  padding: 30px clamp(18px, 5cqi, 40px) 32px clamp(18px, 4cqi, 34px);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+@container (max-width: 520px) {
+  .page {
+    --spine: 34px;
+  }
+}
+
+/* Name along the spine, between two gilt bands; only the first page's
+   height so it does not stretch across a multi-page PDF */
+.spine {
+  position: absolute;
+  top: 0;
+  left: calc(-1 * var(--spine));
+  width: var(--spine);
+  height: min(100%, 980px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 26px 0 18px;
+  color: var(--color-primary-contrast);
+}
+
+.spine::before,
+.spine::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  height: 6px;
+  border-block: 1px solid var(--color-primary-contrast);
+}
+
+.spine::before {
+  top: 12px;
+}
+
+.spine::after {
+  bottom: 62px;
+}
+
+.spineName {
+  writing-mode: vertical-rl;
+  margin-top: 12px;
+  max-height: 80%;
+  overflow: hidden;
+  font-family: var(--tpl-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@container (max-width: 520px) {
+  .spineName {
+    font-size: 0.8rem;
+  }
+}
+
+.spineMark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--color-primary-contrast);
+  border-radius: 50%;
+  font-family: var(--tpl-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+@container (max-width: 520px) {
+  .spineMark {
+    display: none;
+  }
+}
+
+/* ---- Title page ---- */
+.titlePage {
+  padding-bottom: 6px;
+}
+
+.publisher {
+  font-family: var(--tpl-sans);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.titleRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: start;
+  margin-top: 16px;
+}
+
+.name {
+  font-family: var(--tpl-display);
+  font-size: clamp(2rem, 7cqi, 3.2rem);
+  font-weight: 900;
+  line-height: 1.02;
+  overflow-wrap: break-word;
+}
+
+.role {
+  margin-top: 8px;
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--color-text-muted);
+}
+
+.edition {
+  margin-top: 10px;
+  font-family: var(--tpl-sans);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.photo {
+  width: 104px;
+  height: 132px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  padding: 4px;
+  background: var(--color-surface);
+  display: grid;
+  place-items: center;
+  font-family: var(--tpl-sans);
+  font-size: 0.68rem;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.contacts {
+  margin-top: 16px;
+  padding-top: 10px;
+  border-top: 1px solid var(--color-border);
+  font-family: var(--tpl-sans);
+  font-size: 0.8rem;
+}
+
+/* Table of contents with dotted leaders */
+.toc {
+  margin-top: 18px;
+  padding: 12px 16px;
+  background: var(--color-surface-alt);
+  border-radius: 6px;
+}
+
+.tocTitle {
+  font-family: var(--tpl-sans);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 6px;
+}
+
+.toc ol {
+  list-style: none;
+  display: grid;
+  gap: 2px 28px;
+}
+
+@container (min-width: 620px) {
+  .toc ol {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.toc li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 0.92rem;
+}
+
+.toc li::after {
+  content: "";
+  flex: 1;
+  order: 2;
+  border-bottom: 1px dotted var(--color-text-muted);
+}
+
+.tocNo {
+  min-width: 2.2em;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.tocName {
+  order: 1;
+}
+
+/* ---- Chapters ---- */
+.chapter {
+  padding-top: 24px;
+}
+
+.chapterTitle {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--color-border);
+  font-family: var(--tpl-display);
+  font-size: 1.45rem;
+  font-weight: 700;
+}
+
+.chapterNo {
+  font-size: 0.82rem;
+  font-family: var(--tpl-sans);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--color-primary);
+}
+
+.chapterNo::before {
+  content: "— ";
+}
+
+.chapterNo::after {
+  content: " —";
+}
+
+/* Drop cap on the first chapter's prose */
+.prose {
+  font-size: 1.02rem;
+  line-height: 1.7;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.prose::first-letter {
+  float: left;
+  margin: 4px 8px 0 0;
+  font-family: var(--tpl-display);
+  font-size: 3.4rem;
+  font-weight: 900;
+  line-height: 0.8;
+  color: var(--color-primary);
+}
+
+.theses {
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+
+.theses li {
+  padding-left: 22px;
+  text-indent: -22px;
+  line-height: 1.55;
+}
+
+.theses li::before {
+  content: "❦";
+  display: inline-block;
+  width: 22px;
+  text-indent: 0;
+  color: var(--color-primary);
+}
+
+.entry {
+  margin-bottom: 14px;
+}
+
+.entryHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+}
+
+.entryTitle {
+  font-weight: 700;
+  font-size: 1.04rem;
+}
+
+.para {
+  color: var(--color-primary);
+}
+
+.entryDate {
+  font-style: italic;
+  font-size: 0.86rem;
+  color: var(--color-text-muted);
+}
+
+.entrySub {
+  margin: 2px 0 6px;
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+}
+
+.entryText {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  padding-left: 18px;
+}
+
+p.entryText {
+  padding-left: 0;
+}
+
+.entryText li::marker {
+  content: "– ";
+  color: var(--color-primary);
+}
+
+/* Alphabetical index in columns */
+.index {
+  list-style: none;
+  font-size: 0.9rem;
+}
+
+@container (min-width: 520px) {
+  .index {
+    column-count: 2;
+    column-gap: 32px;
+  }
+}
+
+@container (min-width: 760px) {
+  .index {
+    column-count: 3;
+  }
+}
+
+.indexItem {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 2px 0;
+  break-inside: avoid;
+}
+
+.indexItem::after {
+  content: "";
+  flex: 1;
+  order: 1;
+  border-bottom: 1px dotted var(--color-border);
+}
+
+.indexPage {
+  order: 2;
+  font-size: 0.6rem;
+  letter-spacing: 1px;
+  color: var(--color-primary);
+}
+
+.translations {
+  margin-top: 12px;
+  font-style: italic;
+  line-height: 1.55;
+}
+
+.translationsLabel {
+  font-style: normal;
+  font-weight: 700;
+}

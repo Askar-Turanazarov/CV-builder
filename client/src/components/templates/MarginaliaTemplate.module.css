@@ -1,0 +1,181 @@
+/* The text column sits right of a wide margin; notes are positioned into the
+   margin, out of the flow, so they never hold an entry back from breaking. */
+.page {
+  container-type: inline-size;
+  color: #2b2a27;
+  font-family: var(--tpl-serif);
+  font-size: 14px;
+  background: #fffdf8;
+  box-shadow: var(--shadow-card);
+  padding: 34px clamp(20px, 5vw, 40px) 30px;
+  max-width: 900px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+@container (min-width: 620px) {
+  .header,
+  .section {
+    margin-left: 170px;
+    position: relative;
+  }
+
+  /* The margin line */
+  .section::before {
+    content: '';
+    position: absolute;
+    left: -16px;
+    top: 0;
+    bottom: 0;
+    border-left: 1px solid color-mix(in srgb, var(--color-primary) 30%, transparent);
+  }
+
+  .entry {
+    position: relative;
+  }
+
+  .note {
+    position: absolute;
+    right: calc(100% + 30px);
+    top: 2px;
+    width: 140px;
+    text-align: right;
+    transform: rotate(-3deg);
+  }
+}
+
+.note {
+  display: block;
+  font-family: var(--tpl-hand);
+  font-size: 1.05rem;
+  line-height: 1.15;
+  color: var(--color-primary);
+}
+
+.note small {
+  display: block;
+  font-size: 0.86em;
+  color: color-mix(in srgb, #2b2a27 60%, transparent);
+}
+
+.header {
+  padding-bottom: 18px;
+}
+
+.header .note {
+  top: 10px;
+}
+
+.name {
+  font-weight: 600;
+  font-size: clamp(1.9rem, 6cqi, 2.6rem);
+  line-height: 1.1;
+}
+
+.role {
+  margin-top: 4px;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--color-primary);
+}
+
+.contacts {
+  margin-top: 10px;
+  font-family: var(--tpl-sans);
+  font-size: 0.78rem;
+  color: color-mix(in srgb, #2b2a27 70%, transparent);
+}
+
+.section {
+  padding: 12px 0 6px;
+}
+
+.heading {
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.heading::after {
+  content: '';
+  display: block;
+  width: 36px;
+  margin-top: 6px;
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.summary {
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.summary::first-letter {
+  font-size: 2.6em;
+  float: left;
+  line-height: 0.9;
+  padding: 4px 6px 0 0;
+  color: var(--color-primary);
+}
+
+.entry {
+  margin-bottom: 16px;
+}
+
+.entryTitle {
+  font-size: 1.04rem;
+  font-weight: 700;
+}
+
+.entrySub {
+  font-style: italic;
+  margin: 1px 0 4px;
+  font-size: 0.92rem;
+}
+
+.entryText {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  padding-left: 18px;
+}
+
+p.entryText {
+  padding-left: 0;
+}
+
+.strengths {
+  display: grid;
+  gap: 4px;
+  padding-left: 18px;
+  line-height: 1.6;
+}
+
+.strengths li::marker {
+  content: '¶ ';
+  color: var(--color-primary);
+}
+
+.items {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 0;
+  font-size: 0.94rem;
+}
+
+/* Items read like a sentence: "Rust ✓✓✓, Python ✓✓, …" */
+.item {
+  display: inline;
+}
+
+.item:not(:last-child)::after {
+  content: ',';
+  margin-right: 10px;
+}
+
+.itemLevel {
+  margin-left: 4px;
+  font-family: var(--tpl-hand);
+  color: var(--color-primary);
+  font-size: 0.9em;
+}

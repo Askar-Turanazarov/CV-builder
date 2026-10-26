@@ -1,0 +1,365 @@
+/* Newsprint: warm paper and black ink whatever the site theme; the theme
+   colour only marks kickers and the "breaking" tag. */
+.page {
+  --paper: #f6f1e7;
+  --ink: #1b1a17;
+  --ink-soft: #4a463e;
+  --rule: #1b1a17;
+  container-type: inline-size;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--tpl-serif);
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 26px 24px 18px;
+  border-radius: 4px;
+  box-shadow: var(--shadow-card);
+  max-width: 940px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+.masthead {
+  text-align: center;
+  border-bottom: 4px double var(--rule);
+  padding-bottom: 10px;
+}
+
+.dateLine {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-family: var(--tpl-sans);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 4px 0;
+}
+
+.title {
+  font-family: var(--tpl-display);
+  font-weight: 900;
+  font-size: clamp(2rem, 9cqi, 3.8rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 10px 0 4px;
+}
+
+.tagline {
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.front {
+  text-align: center;
+  padding: 18px 0 14px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.headline {
+  font-family: var(--tpl-display);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 7cqi, 3rem);
+  line-height: 1.05;
+}
+
+.deck {
+  font-family: var(--tpl-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  margin-top: 6px;
+  color: var(--ink-soft);
+}
+
+.byline {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  font-family: var(--tpl-sans);
+  font-size: 0.78rem;
+}
+
+.contacts {
+  justify-content: center;
+}
+
+.born {
+  color: var(--ink-soft);
+}
+
+.kicker,
+.sectionBar {
+  font-family: var(--tpl-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.kicker {
+  color: var(--color-primary);
+  margin: 14px 0 8px;
+}
+
+.sectionBar {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 4px 8px;
+  margin: 18px 0 12px;
+}
+
+/* Everything flows in newspaper columns rather than sitting in grid cells:
+   on paper a tall grid cell drags its whole row to the next page and leaves
+   the rest of the page blank */
+@container (min-width: 620px) {
+  .leadText {
+    column-count: 2;
+    column-gap: 22px;
+    column-rule: 1px solid #cfc7b6;
+  }
+}
+
+.photo {
+  float: left;
+  width: 110px;
+  margin: 4px 12px 6px 0;
+  filter: grayscale(1) contrast(1.05);
+  border: 1px solid var(--rule);
+}
+
+.photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.photo :global(.photoPlaceholder) {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 5;
+  padding: 8px;
+  font-size: 0.7rem;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+.dropCap {
+  text-align: justify;
+  hyphens: auto;
+}
+
+.dropCap::first-letter {
+  float: left;
+  font-family: var(--tpl-display);
+  font-weight: 900;
+  font-size: 3.6em;
+  line-height: 0.85;
+  padding: 4px 6px 0 0;
+}
+
+.highlights {
+  margin-top: 14px;
+  border-top: 3px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 8px 0 10px;
+}
+
+.boxTitle {
+  font-family: var(--tpl-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+
+.highlights ul {
+  list-style: none;
+}
+
+@container (min-width: 620px) {
+  .highlights ul {
+    column-count: 2;
+    column-gap: 22px;
+  }
+}
+
+.highlights li {
+  font-size: 0.86rem;
+  padding-left: 14px;
+  margin-bottom: 8px;
+  position: relative;
+  break-inside: avoid;
+}
+
+.highlights li::before {
+  content: '■';
+  position: absolute;
+  left: 0;
+  font-size: 0.6em;
+  top: 0.35em;
+}
+
+.articleKicker {
+  font-family: var(--tpl-sans);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  margin-bottom: 4px;
+}
+
+.breaking {
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+  font-weight: 700;
+  padding: 1px 6px;
+  margin-right: 8px;
+}
+
+.articleHead {
+  font-family: var(--tpl-display);
+  font-weight: 700;
+  font-size: 1.6rem;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+
+.articleHeadSmall {
+  font-family: var(--tpl-display);
+  font-weight: 700;
+  font-size: 1.12rem;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.leadArticle p,
+.article p,
+.archiveItem p {
+  text-align: justify;
+  hyphens: auto;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
+
+@container (min-width: 620px) {
+  .columns {
+    column-count: 2;
+    column-gap: 22px;
+    column-rule: 1px solid #cfc7b6;
+  }
+}
+
+.leadArticle {
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+
+@container (min-width: 620px) {
+  .articleColumns {
+    column-count: 2;
+    column-gap: 22px;
+    column-rule: 1px solid #cfc7b6;
+  }
+}
+
+.article {
+  padding: 14px 0;
+  border-bottom: 1px solid #cfc7b6;
+}
+
+.bottom {
+  display: grid;
+  gap: 0 22px;
+}
+
+/* Languages sit under the archive, next to the long market table, instead
+   of trailing alone after it */
+@container (min-width: 620px) {
+  .bottom {
+    grid-template-columns: 3fr 2fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .market {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+
+  .langBox {
+    align-self: start;
+  }
+}
+
+.archiveItem {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px dotted var(--ink-soft);
+}
+
+.degree {
+  font-style: italic;
+}
+
+.ticker {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--tpl-sans);
+  font-size: 0.8rem;
+}
+
+.ticker td {
+  padding: 4px 2px;
+  border-bottom: 1px dotted var(--ink-soft);
+}
+
+.trend {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: #2f7d32;
+  font-weight: 700;
+}
+
+.langBox {
+  margin-top: 14px;
+  border: 1px solid var(--ink);
+  padding: 8px 10px;
+}
+
+.langs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 6px;
+  border-top: 4px double var(--rule);
+  font-family: var(--tpl-sans);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+}
+
+/* The lead story is long: it flows across pages, only its headline stays
+   with the first lines */
+.leadHead {
+  break-inside: avoid;
+  break-after: avoid;
+}
+
+.columns p {
+  break-inside: avoid;
+}

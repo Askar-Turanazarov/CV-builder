@@ -97,7 +97,7 @@ export type LengthVerdict = 'fits' | 'tight' | 'overflow';
 
 /**
  * Rough character-count heuristic, NOT a real layout calculation — actual
- * page count depends heavily on which of the 40 templates is selected.
+ * page count depends heavily on which template is selected.
  * Deliberately framed as an estimate in the UI copy ("вероятно",
  * "скорее всего"), not a guarantee.
  */

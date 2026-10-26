@@ -1,0 +1,190 @@
+.page {
+  --ink: #23201c;
+  --seal: #c0392b;
+  container-type: inline-size;
+  background: #fbf9f4;
+  color: var(--ink);
+  font-family: var(--tpl-serif);
+  font-size: 14px;
+  padding: clamp(40px, 6vw, 52px) clamp(22px, 7vw, 56px);
+  box-shadow: var(--shadow-card);
+  max-width: 880px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  padding-bottom: 34px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 25%, transparent);
+}
+
+.name {
+  font-weight: 400;
+  font-size: clamp(1.9rem, 6cqi, 2.6rem);
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+}
+
+.role {
+  margin-top: 8px;
+  font-family: var(--tpl-sans);
+  font-size: 0.82rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.contacts {
+  margin-top: 18px;
+  font-family: var(--tpl-sans);
+  font-size: 0.78rem;
+  color: color-mix(in srgb, var(--ink) 70%, transparent);
+}
+
+.meta {
+  margin-top: 4px;
+  font-family: var(--tpl-sans);
+  font-size: 0.76rem;
+  color: color-mix(in srgb, var(--ink) 60%, transparent);
+}
+
+/* Hanko: a square red seal, slightly rotated, with a worn inner frame */
+.seal {
+  flex: none;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border: 3px solid var(--seal);
+  border-radius: 6px;
+  outline: 1px solid var(--seal);
+  outline-offset: -8px;
+  color: var(--seal);
+  font-family: var(--tpl-serif);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transform: rotate(-4deg);
+  opacity: 0.88;
+}
+
+/* Each part: the heading is set top to bottom in the left margin. It stays
+   out of the flow: as a grid cell it held the whole part on one page. */
+.part {
+  position: relative;
+  padding: 30px 0 0 52px;
+}
+
+@container (min-width: 620px) {
+  .part {
+    padding-left: 74px;
+  }
+}
+
+.heading {
+  position: absolute;
+  left: 4px;
+  top: 32px;
+  writing-mode: vertical-rl;
+  font-family: var(--tpl-sans);
+  font-weight: 500;
+  font-size: 0.78rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--ink) 65%, transparent);
+  padding-block: 2px 10px;
+  border-left: 1px solid var(--seal);
+  padding-left: 6px;
+}
+
+.summary {
+  font-size: 1rem;
+  line-height: 1.85;
+}
+
+.entry {
+  margin-bottom: 22px;
+}
+
+.entryHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px 14px;
+}
+
+.entryTitle {
+  font-weight: 600;
+  font-size: 1.06rem;
+  letter-spacing: 0.02em;
+}
+
+.entryDate {
+  font-family: var(--tpl-sans);
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  color: color-mix(in srgb, var(--ink) 55%, transparent);
+  white-space: nowrap;
+}
+
+.entrySub {
+  font-style: italic;
+  color: var(--color-primary);
+  margin: 2px 0 6px;
+  font-size: 0.9rem;
+}
+
+.entryText {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  padding-left: 16px;
+}
+
+p.entryText {
+  padding-left: 0;
+}
+
+.entryText li::marker {
+  content: '— ';
+  color: var(--seal);
+}
+
+.strengths {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  line-height: 1.6;
+}
+
+.strengths li::before {
+  content: '○';
+  margin-right: 10px;
+  color: var(--seal);
+}
+
+.items {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+  font-size: 0.92rem;
+}
+
+.item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.itemLevel {
+  font-family: var(--tpl-sans);
+  font-size: 0.74rem;
+  color: var(--seal);
+  letter-spacing: 0.05em;
+}

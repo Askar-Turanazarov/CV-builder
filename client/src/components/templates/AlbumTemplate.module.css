@@ -1,0 +1,323 @@
+/* A record sleeve on top, the back cover below: opaque fills and solid SVG
+   circles only, so PDF pages stay quick to draw */
+.page {
+  --ink: var(--color-text);
+  --sleeve: var(--color-primary);
+  --on-sleeve: var(--color-primary-contrast);
+  container-type: inline-size;
+  color: var(--ink);
+  font-family: var(--tpl-sans);
+  font-size: 14px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  border-radius: 10px;
+  padding: 0 0 22px;
+  max-width: 920px;
+  margin-inline: auto;
+  width: 100%;
+  overflow: clip;
+}
+
+/* ---- Sleeve ---- */
+.sleeve {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 230px;
+  gap: 24px;
+  align-items: center;
+  padding: 26px 0 26px 34px;
+  background: var(--sleeve);
+  color: var(--on-sleeve);
+  overflow: hidden;
+}
+
+.kicker {
+  font-family: var(--tpl-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.artist {
+  margin-top: 10px;
+  font-family: var(--tpl-condensed);
+  font-size: clamp(2rem, 7cqi, 3.3rem);
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  overflow-wrap: anywhere;
+}
+
+.album {
+  margin-top: 8px;
+  font-family: var(--tpl-display);
+  font-size: clamp(1.1rem, 3.4cqi, 1.5rem);
+  font-style: italic;
+  line-height: 1.2;
+}
+
+.meta {
+  margin-top: 6px;
+  font-size: 0.82rem;
+  opacity: 0.85;
+}
+
+.contacts {
+  margin-top: 14px;
+  font-size: 0.78rem;
+}
+
+/* The record slides out of the sleeve to the right */
+.disc {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  margin-right: -60px;
+}
+
+.grooves {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.label {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 96px;
+  height: 96px;
+  margin: -48px 0 0 -48px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: var(--color-accent-soft);
+  color: var(--ink);
+  border: 3px solid #f4f1ea;
+  font-family: var(--tpl-condensed);
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.label img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@container (max-width: 600px) {
+  .sleeve {
+    grid-template-columns: minmax(0, 1fr);
+    padding-right: 24px;
+  }
+
+  .disc {
+    display: none;
+  }
+}
+
+/* ---- Back cover ---- */
+.notes,
+.block,
+.credits {
+  padding: 14px 34px 0;
+}
+
+.head {
+  margin-bottom: 8px;
+  font-family: var(--tpl-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.summary {
+  font-family: var(--tpl-serif);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.singles {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  gap: 6px 22px;
+}
+
+.singles li {
+  display: flex;
+  gap: 10px;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.singleNo {
+  font-family: var(--tpl-mono);
+  font-weight: 700;
+  color: var(--sleeve);
+}
+
+/* Side heading: a round label with the side letter */
+.sideHead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--ink);
+  font-family: var(--tpl-condensed);
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.sideDot {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #141414;
+  color: #fff;
+  box-shadow:
+    inset 0 0 0 9px #141414,
+    inset 0 0 0 12px var(--sleeve);
+  font-size: 0.95rem;
+}
+
+.total {
+  margin-left: auto;
+  font-family: var(--tpl-mono);
+  font-size: 0.74rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+}
+
+.track {
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.track:last-child {
+  border-bottom: none;
+}
+
+.trackHead {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.trackHead,
+.trackSub {
+  break-inside: avoid;
+  break-after: avoid;
+}
+
+.trackNo {
+  font-family: var(--tpl-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--sleeve);
+}
+
+.trackTitle {
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+
+.time {
+  font-family: var(--tpl-mono);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.trackSub {
+  margin-left: 46px;
+  font-size: 0.84rem;
+  color: var(--color-text-muted);
+}
+
+.lyrics {
+  margin: 4px 0 0 46px;
+  padding-left: 16px;
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+p.lyrics {
+  padding-left: 0;
+}
+
+/* ---- Credits ---- */
+.credits {
+  margin: 16px 34px 0;
+  padding: 14px 18px;
+  border: 2px solid var(--ink);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.creditRole {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.instruments {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0 4px;
+}
+
+@container (min-width: 620px) {
+  .instruments {
+    column-count: 2;
+    column-gap: 28px;
+  }
+}
+
+.instrument {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 3px 0;
+  border-bottom: 1px dotted var(--color-border);
+  font-size: 0.88rem;
+  break-inside: avoid;
+}
+
+.meter {
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: var(--sleeve);
+  white-space: nowrap;
+}
+
+.meterOff {
+  color: var(--color-border);
+}
+
+.vocals {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+  margin-top: 10px;
+  font-size: 0.88rem;
+}
+
+.rights {
+  margin: 16px 34px 0;
+  font-family: var(--tpl-mono);
+  font-size: 0.68rem;
+  color: var(--color-text-muted);
+}

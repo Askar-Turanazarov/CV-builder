@@ -18,5 +18,218 @@
     "institution": "Institution",
     "details": "Details"
   },
-  "nativeLanguage": "native"
+  "nativeLanguage": "native",
+  "metro": {
+    "direction": "Towards",
+    "youAreHere": "You are here",
+    "terminus": "Start of line",
+    "transfers": "Transfers"
+  },
+  "ide": {
+    "file": "resume",
+    "readme": "about-me",
+    "explorer": "Explorer",
+    "branch": "main · open to work",
+    "noErrors": "0 errors",
+    "lines": "Lines: {{count}}",
+    "id": {
+      "candidate": "candidate",
+      "name": "name",
+      "title": "title",
+      "born": "born",
+      "city": "city",
+      "email": "email",
+      "phone": "phone",
+      "links": "links",
+      "strengths": "strengths",
+      "experience": "experience",
+      "company": "company",
+      "position": "position",
+      "period": "period",
+      "location": "location",
+      "education": "education",
+      "institution": "institution",
+      "degree": "degree",
+      "skills": "skills",
+      "languages": "languages"
+    }
+  },
+  "newspaper": {
+    "title": "The Career Herald",
+    "tagline": "All about the candidate in one issue",
+    "issue": "Issue No. {{n}}",
+    "edition": "Special edition",
+    "highlights": "Highlights",
+    "chronicle": "Chronicle",
+    "breaking": "Breaking",
+    "archive": "Archive",
+    "market": "Skills market report",
+    "price": "Price: one interview"
+  },
+  "boardingPass": {
+    "airline": "Career Airlines",
+    "title": "Boarding pass",
+    "passenger": "Passenger",
+    "flight": "Flight",
+    "gate": "Gate",
+    "seat": "Seat",
+    "boarding": "Boarding",
+    "now": "Now",
+    "class": "Class",
+    "business": "Business",
+    "miles": "Flight time",
+    "years_one": "{{count}} year",
+    "years_other": "{{count}} years",
+    "captain": "A word from the captain",
+    "included": "Included in the fare",
+    "itinerary": "Itinerary",
+    "leg": "Leg {{n}}",
+    "inFlight": "In flight",
+    "layovers": "Layovers",
+    "baggage": "Baggage",
+    "kg": "{{n}} kg",
+    "crew": "Crew languages"
+  },
+  "chat": {
+    "online": "online",
+    "today": "Today",
+    "placeholder": "Message…",
+    "intro": "Hi! I’m {{name}}, {{title}}.",
+    "ask": {
+      "hello": "Hi! Could you tell me a bit about yourself?",
+      "strengths": "What are you especially good at?",
+      "experience": "Where have you worked?",
+      "education": "What is your education?",
+      "skills": "What skills do you have?",
+      "languages": "Which languages do you speak?",
+      "contacts": "How can we reach you?"
+    }
+  },
+  "menu": {
+    "house": "Chef’s menu",
+    "since": "In the kitchen since {{date}}",
+    "special": "Signature dish",
+    "starters": "Starters",
+    "mains": "Main courses",
+    "desserts": "Desserts",
+    "spices": "Spices",
+    "drinks": "Drinks",
+    "reservations": "Reservations",
+    "fresh": "In season",
+    "years_one": "{{count}} yr",
+    "years_other": "{{count}} yrs"
+  },
+  "starMap": {
+    "catalog": "Star catalogue · object CV-1",
+    "discovered": "Discovered {{date}}",
+    "observations": "Observations",
+    "brightest": "Brightest stars",
+    "constellation": "Constellation of skills",
+    "orbits": "Orbits",
+    "observatories": "Observatories",
+    "signals": "Signals"
+  },
+  "magazine": {
+    "feature": "Cover story",
+    "years_one": "year of experience",
+    "years_other": "years of experience"
+  },
+  "skillRadar": {
+    "title": "Skill profile"
+  },
+  "portfolio": {
+    "hello": "Hi, I’m",
+    "work": "Projects and work"
+  },
+  "typewriter": {
+    "stamp": "Approved"
+  },
+  "deck": {
+    "years_one": "year of experience",
+    "years_other": "years of experience",
+    "companies_one": "company",
+    "companies_other": "companies",
+    "skills_one": "skill",
+    "skills_other": "skills",
+    "languages_one": "language",
+    "languages_other": "languages"
+  },
+  "terminal": {
+    "host": "guest@resume",
+    "about": "about",
+    "strengths": "strengths",
+    "experience": "experience",
+    "education": "education"
+  },
+  "riso": {
+    "issue": "Issue No. 1 · résumé"
+  },
+  "spine": {
+    "publisher": "Career Press",
+    "edition": "Edition {{from}}–{{to}}",
+    "contents": "Contents",
+    "index": "Index",
+    "translations": "Translations"
+  },
+  "encyclopedia": {
+    "from": "From the free encyclopedia of careers",
+    "career": "Career",
+    "born": "Born",
+    "occupation": "Occupation",
+    "active": "Years active",
+    "now": "present",
+    "employer": "Employer",
+    "alma": "Alma mater",
+    "contents": "Contents",
+    "categories": "Categories"
+  },
+  "nutrition": {
+    "facts": "Nutrition Facts",
+    "serving": "Serving size: 1 professional —",
+    "produced": "Produced on:",
+    "badge": "100% natural experience",
+    "experience": "Experience",
+    "years_one": "year",
+    "years_other": "years",
+    "description": "Product description",
+    "dailyValue": "% Daily Value",
+    "vitamins": "Vitamins & minerals: languages",
+    "ingredients": "Ingredients",
+    "footnote": "The % Daily Value is the skill level. Keep in a team, apply daily."
+  },
+  "album": {
+    "stereo": "Stereo",
+    "recorded": "Recorded:",
+    "notes": "Liner notes",
+    "singles": "Singles",
+    "total": "Total time",
+    "feat": "feat.",
+    "credits": "Credits",
+    "instruments": "Instruments — skills",
+    "vocals": "Vocals — languages:",
+    "rights": "℗ {{year}} {{name}}. All rights reserved."
+  },
+  "periodic": {
+    "kicker": "Periodic table of professionals",
+    "number": "Atomic number — experience",
+    "discovered": "Discovered:",
+    "mass": "atomic mass — skill level",
+    "properties": "Properties"
+  },
+  "character": {
+    "sheet": "Character sheet",
+    "level": "Lvl",
+    "class": "Class",
+    "born": "Date of birth",
+    "xp": "XP",
+    "backstory": "Backstory",
+    "stats": "Abilities — skills",
+    "feats": "Feats",
+    "tongues": "Languages:",
+    "quests": "Completed quests — experience",
+    "guild": "Guild",
+    "active": "quest active",
+    "rewards": "Rewards",
+    "academies": "Academies — education"
+  }
 }

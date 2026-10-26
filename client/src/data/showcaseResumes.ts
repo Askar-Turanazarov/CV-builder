@@ -238,7 +238,7 @@ const PEOPLE: ShowcasePerson[] = [
     phone: '+998 91 234 56 78',
     linkedin: 'linkedin.com/in/timur-azizov',
     github: 'github.com/tazizov',
-    templateId: 'sidebar',
+    templateId: 'dark-sidebar',
     themeId: 'emerald',
     byLang: {
       ru: {
@@ -418,7 +418,7 @@ const PEOPLE: ShowcasePerson[] = [
     website: 'madinayusupova.com',
     linkedin: 'linkedin.com/in/madina-yusupova',
     telegram: '@madina_marketing',
-    templateId: 'sales-vibrant',
+    templateId: 'gradient-header',
     themeId: 'sunset',
     byLang: {
       ru: {

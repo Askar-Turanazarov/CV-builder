@@ -18,5 +18,218 @@
     "institution": "Muassasa",
     "details": "Tafsilotlar"
   },
-  "nativeLanguage": "ona tili"
+  "nativeLanguage": "ona tili",
+  "metro": {
+    "direction": "Yo‘nalish",
+    "youAreHere": "Siz shu yerdasiz",
+    "terminus": "Liniya boshi",
+    "transfers": "O‘tish bekatlari"
+  },
+  "ide": {
+    "file": "rezyume",
+    "readme": "men-haqimda",
+    "explorer": "Fayllar",
+    "branch": "main · ish izlayapman",
+    "noErrors": "0 xato",
+    "lines": "Qatorlar: {{count}}",
+    "id": {
+      "candidate": "nomzod",
+      "name": "ism",
+      "title": "lavozim",
+      "born": "tugilgan",
+      "city": "shahar",
+      "email": "pochta",
+      "phone": "telefon",
+      "links": "havolalar",
+      "strengths": "kuchliTomonlar",
+      "experience": "tajriba",
+      "company": "kompaniya",
+      "position": "vazifa",
+      "period": "davr",
+      "location": "joy",
+      "education": "talim",
+      "institution": "oquvYurti",
+      "degree": "daraja",
+      "skills": "konikmalar",
+      "languages": "tillar"
+    }
+  },
+  "newspaper": {
+    "title": "Karyera xabarnomasi",
+    "tagline": "Nomzod haqida hammasi — bitta sonda",
+    "issue": "{{n}}-son",
+    "edition": "Maxsus son",
+    "highlights": "Asosiysi",
+    "chronicle": "Xronika",
+    "breaking": "Shoshilinch",
+    "archive": "Arxiv",
+    "market": "Ko‘nikmalar birjasi",
+    "price": "Narxi: bitta suhbat"
+  },
+  "boardingPass": {
+    "airline": "Karyera aviayo‘llari",
+    "title": "Bortga chiqish taloni",
+    "passenger": "Yo‘lovchi",
+    "flight": "Reys",
+    "gate": "Chiqish",
+    "seat": "O‘rin",
+    "boarding": "Bortga chiqish",
+    "now": "Hozir",
+    "class": "Klass",
+    "business": "Biznes",
+    "miles": "Parvoz vaqti",
+    "years_one": "{{count}} yil",
+    "years_other": "{{count}} yil",
+    "captain": "Kema komandiri so‘zlaydi",
+    "included": "Tarifga kiritilgan",
+    "itinerary": "Marshrut",
+    "leg": "{{n}}-qism",
+    "inFlight": "Parvozda",
+    "layovers": "Tranzit bekatlar",
+    "baggage": "Bagaj",
+    "kg": "{{n}} kg",
+    "crew": "Ekipaj tillari"
+  },
+  "chat": {
+    "online": "tarmoqda",
+    "today": "Bugun",
+    "placeholder": "Xabar…",
+    "intro": "Assalomu alaykum! Men {{name}}, {{title}}.",
+    "ask": {
+      "hello": "Assalomu alaykum! O‘zingiz haqingizda gapirib bersangiz?",
+      "strengths": "Qaysi jihatlaringiz ayniqsa kuchli?",
+      "experience": "Qayerlarda ishlagansiz?",
+      "education": "Ma’lumotingiz qanday?",
+      "skills": "Qaysi ko‘nikmalarni egallagansiz?",
+      "languages": "Qaysi tillarda gaplashasiz?",
+      "contacts": "Siz bilan qanday bog‘lansak bo‘ladi?"
+    }
+  },
+  "menu": {
+    "house": "Oshpaz menyusi",
+    "since": "{{date}} dan beri kasbda",
+    "special": "Firma taomi",
+    "starters": "Gazaklar",
+    "mains": "Asosiy taomlar",
+    "desserts": "Desertlar",
+    "spices": "Ziravorlar",
+    "drinks": "Ichimliklar",
+    "reservations": "Stol band qilish",
+    "fresh": "Mavsumiy",
+    "years_one": "{{count}} yil",
+    "years_other": "{{count}} yil"
+  },
+  "starMap": {
+    "catalog": "Yulduzlar katalogi · CV-1 obyekti",
+    "discovered": "{{date}} da kashf etilgan",
+    "observations": "Kuzatuvlar",
+    "brightest": "Eng yorqin yulduzlar",
+    "constellation": "Ko‘nikmalar yulduz turkumi",
+    "orbits": "Orbitalar",
+    "observatories": "Rasadxonalar",
+    "signals": "Signallar"
+  },
+  "magazine": {
+    "feature": "Son qahramoni",
+    "years_one": "yillik tajriba",
+    "years_other": "yillik tajriba"
+  },
+  "skillRadar": {
+    "title": "Ko‘nikmalar profili"
+  },
+  "portfolio": {
+    "hello": "Salom, men —",
+    "work": "Loyihalar va ish"
+  },
+  "typewriter": {
+    "stamp": "Qabul qilindi"
+  },
+  "deck": {
+    "years_one": "yillik tajriba",
+    "years_other": "yillik tajriba",
+    "companies_one": "kompaniya",
+    "companies_other": "kompaniya",
+    "skills_one": "ko‘nikma",
+    "skills_other": "ko‘nikma",
+    "languages_one": "til",
+    "languages_other": "til"
+  },
+  "terminal": {
+    "host": "mehmon@rezyume",
+    "about": "men-haqimda",
+    "strengths": "kuchli-tomonlar",
+    "experience": "tajriba",
+    "education": "talim"
+  },
+  "riso": {
+    "issue": "1-son · rezyume"
+  },
+  "spine": {
+    "publisher": "«Karyera» nashriyoti",
+    "edition": "{{from}}–{{to}} nashri",
+    "contents": "Mundarija",
+    "index": "Mavzu ko‘rsatkichi",
+    "translations": "Tarjimalar"
+  },
+  "encyclopedia": {
+    "from": "Kasblar erkin ensiklopediyasidan maqola",
+    "career": "Faoliyati",
+    "born": "Tug‘ilgan sana",
+    "occupation": "Kasbi",
+    "active": "Faoliyat yillari",
+    "now": "h. v.",
+    "employer": "Ish joyi",
+    "alma": "O‘qigan joyi",
+    "contents": "Mundarija",
+    "categories": "Turkumlar"
+  },
+  "nutrition": {
+    "facts": "Ozuqaviy qiymati",
+    "serving": "Porsiya: 1 mutaxassis —",
+    "produced": "Ishlab chiqarilgan sana:",
+    "badge": "100% tabiiy tajriba",
+    "experience": "Tajriba",
+    "years_one": "yil",
+    "years_other": "yil",
+    "description": "Mahsulot tavsifi",
+    "dailyValue": "% kunlik me’yor",
+    "vitamins": "Vitamin va minerallar: tillar",
+    "ingredients": "Tarkibi",
+    "footnote": "Kunlik me’yor foizi — ko‘nikma darajasi. Jamoada saqlang, har kuni qo‘llang."
+  },
+  "album": {
+    "stereo": "Stereo",
+    "recorded": "Yozilgan:",
+    "notes": "Annotatsiya",
+    "singles": "Singllar",
+    "total": "Umumiy vaqt",
+    "feat": "ishtirokida:",
+    "credits": "Yozuv ishtirokchilari",
+    "instruments": "Asboblar — ko‘nikmalar",
+    "vocals": "Vokal — tillar:",
+    "rights": "℗ {{year}} {{name}}. Barcha huquqlar himoyalangan."
+  },
+  "periodic": {
+    "kicker": "Mutaxassislar davriy jadvali",
+    "number": "Atom raqami — tajriba",
+    "discovered": "Kashf etilgan:",
+    "mass": "atom massasi — ko‘nikma darajasi",
+    "properties": "Xossalari"
+  },
+  "character": {
+    "sheet": "Personaj varaqasi",
+    "level": "Dar.",
+    "class": "Sinf",
+    "born": "Tug‘ilgan sana",
+    "xp": "Tajriba",
+    "backstory": "Tarixi",
+    "stats": "Xususiyatlar — ko‘nikmalar",
+    "feats": "Maxsus qobiliyatlar",
+    "tongues": "Tillar:",
+    "quests": "Bajarilgan kvestlar — ish tajribasi",
+    "guild": "Gildiya",
+    "active": "kvest faol",
+    "rewards": "Mukofotlar",
+    "academies": "Akademiyalar — ta’lim"
+  }
 }

@@ -18,5 +18,234 @@
     "institution": "Учреждение",
     "details": "Детали"
   },
-  "nativeLanguage": "родной"
+  "nativeLanguage": "родной",
+  "metro": {
+    "direction": "Направление",
+    "youAreHere": "Вы здесь",
+    "terminus": "Начало линии",
+    "transfers": "Пересадки"
+  },
+  "ide": {
+    "file": "резюме",
+    "readme": "обо-мне",
+    "explorer": "Проводник",
+    "branch": "main · ищу работу",
+    "noErrors": "0 ошибок",
+    "lines": "Строк: {{count}}",
+    "id": {
+      "candidate": "кандидат",
+      "name": "имя",
+      "title": "должность",
+      "born": "родился",
+      "city": "город",
+      "email": "почта",
+      "phone": "телефон",
+      "links": "ссылки",
+      "strengths": "сильныеСтороны",
+      "experience": "опыт",
+      "company": "компания",
+      "position": "позиция",
+      "period": "период",
+      "location": "место",
+      "education": "образование",
+      "institution": "учебноеЗаведение",
+      "degree": "степень",
+      "skills": "навыки",
+      "languages": "языки"
+    }
+  },
+  "newspaper": {
+    "title": "Вестник карьеры",
+    "tagline": "Всё о кандидате — в одном номере",
+    "issue": "Выпуск № {{n}}",
+    "edition": "Специальный выпуск",
+    "highlights": "Главное",
+    "chronicle": "Хроника",
+    "breaking": "Срочно",
+    "archive": "Архив",
+    "market": "Биржевая сводка навыков",
+    "price": "Цена: одно собеседование"
+  },
+  "boardingPass": {
+    "airline": "Карьерные авиалинии",
+    "title": "Посадочный талон",
+    "passenger": "Пассажир",
+    "flight": "Рейс",
+    "gate": "Выход",
+    "seat": "Место",
+    "boarding": "Посадка",
+    "now": "Сейчас",
+    "class": "Класс",
+    "business": "Бизнес",
+    "miles": "Налёт",
+    "years_one": "{{count}} год",
+    "years_few": "{{count}} года",
+    "years_many": "{{count}} лет",
+    "years_other": "{{count}} года",
+    "captain": "Говорит командир корабля",
+    "included": "Включено в тариф",
+    "itinerary": "Маршрут",
+    "leg": "Участок {{n}}",
+    "inFlight": "В полёте",
+    "layovers": "Пересадки",
+    "baggage": "Багаж",
+    "kg": "{{n}} кг",
+    "crew": "Языки экипажа"
+  },
+  "chat": {
+    "online": "в сети",
+    "today": "Сегодня",
+    "placeholder": "Сообщение…",
+    "intro": "Здравствуйте! Я {{name}}, {{title}}.",
+    "ask": {
+      "hello": "Здравствуйте! Расскажите немного о себе?",
+      "strengths": "Чем вы особенно сильны?",
+      "experience": "Где вы работали?",
+      "education": "Какое у вас образование?",
+      "skills": "Какими навыками владеете?",
+      "languages": "На каких языках говорите?",
+      "contacts": "Как с вами связаться?"
+    }
+  },
+  "menu": {
+    "house": "Меню от шефа",
+    "since": "В профессии с {{date}}",
+    "special": "Фирменное блюдо",
+    "starters": "Закуски",
+    "mains": "Основные блюда",
+    "desserts": "Десерты",
+    "spices": "Специи",
+    "drinks": "Напитки",
+    "reservations": "Бронирование столика",
+    "fresh": "Сезонное",
+    "years_one": "{{count}} год",
+    "years_few": "{{count}} года",
+    "years_many": "{{count}} лет",
+    "years_other": "{{count}} года"
+  },
+  "starMap": {
+    "catalog": "Звёздный каталог · объект CV-1",
+    "discovered": "Открыт {{date}}",
+    "observations": "Наблюдения",
+    "brightest": "Самые яркие звёзды",
+    "constellation": "Созвездие навыков",
+    "orbits": "Орбиты",
+    "observatories": "Обсерватории",
+    "signals": "Сигналы"
+  },
+  "magazine": {
+    "feature": "Герой номера",
+    "years_one": "год опыта",
+    "years_few": "года опыта",
+    "years_many": "лет опыта",
+    "years_other": "года опыта"
+  },
+  "skillRadar": {
+    "title": "Профиль навыков"
+  },
+  "portfolio": {
+    "hello": "Привет, я —",
+    "work": "Проекты и работа"
+  },
+  "typewriter": {
+    "stamp": "Принято"
+  },
+  "deck": {
+    "years_one": "год опыта",
+    "years_few": "года опыта",
+    "years_many": "лет опыта",
+    "years_other": "года опыта",
+    "companies_one": "компания",
+    "companies_few": "компании",
+    "companies_many": "компаний",
+    "companies_other": "компании",
+    "skills_one": "навык",
+    "skills_few": "навыка",
+    "skills_many": "навыков",
+    "skills_other": "навыка",
+    "languages_one": "язык",
+    "languages_few": "языка",
+    "languages_many": "языков",
+    "languages_other": "языка"
+  },
+  "terminal": {
+    "host": "гость@резюме",
+    "about": "обо-мне",
+    "strengths": "сильные-стороны",
+    "experience": "опыт",
+    "education": "образование"
+  },
+  "riso": {
+    "issue": "Выпуск № 1 · резюме"
+  },
+  "spine": {
+    "publisher": "Издательство «Карьера»",
+    "edition": "Издание {{from}}–{{to}}",
+    "contents": "Содержание",
+    "index": "Предметный указатель",
+    "translations": "Переводы"
+  },
+  "encyclopedia": {
+    "from": "Материал из свободной энциклопедии карьер",
+    "career": "Карьера",
+    "born": "Дата рождения",
+    "occupation": "Род деятельности",
+    "active": "Годы активности",
+    "now": "н. в.",
+    "employer": "Место работы",
+    "alma": "Альма-матер",
+    "contents": "Содержание",
+    "categories": "Категории"
+  },
+  "nutrition": {
+    "facts": "Пищевая ценность",
+    "serving": "Порция: 1 специалист —",
+    "produced": "Дата изготовления:",
+    "badge": "100% натуральный опыт",
+    "experience": "Опыт",
+    "years_one": "год",
+    "years_few": "года",
+    "years_many": "лет",
+    "years_other": "года",
+    "description": "Описание продукта",
+    "dailyValue": "% суточной нормы",
+    "vitamins": "Витамины и минералы: языки",
+    "ingredients": "Состав",
+    "footnote": "Процент суточной нормы — уровень владения навыком. Хранить в команде, применять ежедневно."
+  },
+  "album": {
+    "stereo": "Стерео",
+    "recorded": "Записан:",
+    "notes": "Аннотация",
+    "singles": "Синглы",
+    "total": "Общее время",
+    "feat": "при участии",
+    "credits": "Участники записи",
+    "instruments": "Инструменты — навыки",
+    "vocals": "Вокал — языки:",
+    "rights": "℗ {{year}} {{name}}. Все права защищены."
+  },
+  "periodic": {
+    "kicker": "Периодическая таблица специалистов",
+    "number": "Атомный номер — опыт",
+    "discovered": "Открыт:",
+    "mass": "атомная масса — уровень навыка",
+    "properties": "Свойства"
+  },
+  "character": {
+    "sheet": "Лист персонажа",
+    "level": "Ур.",
+    "class": "Класс",
+    "born": "Дата рождения",
+    "xp": "Опыт",
+    "backstory": "Предыстория",
+    "stats": "Характеристики — навыки",
+    "feats": "Особые умения",
+    "tongues": "Языки:",
+    "quests": "Пройденные квесты — опыт работы",
+    "guild": "Гильдия",
+    "active": "квест активен",
+    "rewards": "Награды",
+    "academies": "Академии — образование"
+  }
 }

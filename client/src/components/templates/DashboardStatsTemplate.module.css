@@ -163,7 +163,13 @@
 /* Skills as horizontal progress bars instead of pills */
 .barList {
   display: grid;
-  gap: 12px;
+  gap: 12px 28px;
+}
+
+@media (min-width: 640px) {
+  .barList {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .barRow {
@@ -222,6 +228,38 @@
   color: var(--color-text-muted);
   font-size: 0.88rem;
   margin-top: 2px;
+}
+
+/* Jobs: one full-width card each. A two-up grid of unbreakable cards pushed a
+   whole row to the next page whenever one description was long, leaving
+   half a page empty; a single card may continue on the next page between
+   lines, with its frame repeated. */
+.cardList {
+  display: grid;
+  gap: 14px;
+}
+
+.jobCard {
+  break-inside: auto;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.jobCard .cardHead,
+.jobCard .cardSub {
+  break-inside: avoid;
+  break-after: avoid;
+}
+
+.cardLine {
+  margin-top: 6px;
+  line-height: 1.55;
+  font-size: 0.92rem;
+  break-inside: avoid;
+}
+
+.cardSub + .cardLine {
+  margin-top: 8px;
 }
 
 .cardDescription {

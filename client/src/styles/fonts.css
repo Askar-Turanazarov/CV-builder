@@ -12,10 +12,30 @@
 @import '@fontsource/pt-mono/400.css';
 @import '@fontsource/caveat/400.css';
 @import '@fontsource/caveat/700.css';
+/* Display and code faces of the concept templates (newspaper, menu, ticket, IDE) */
+@import '@fontsource/playfair-display/400.css';
+@import '@fontsource/playfair-display/400-italic.css';
+@import '@fontsource/playfair-display/700.css';
+@import '@fontsource/playfair-display/900.css';
+@import '@fontsource/oswald/400.css';
+@import '@fontsource/oswald/600.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/700.css';
 @import '@fontsource/noto-sans-symbols-2/400.css';
 @import '@fontsource/noto-color-emoji/400.css';
 
 :root {
   /* Appended to every font stack: local emoji fonts first, web fonts last */
   --font-symbols: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Sans Symbols 2', 'Noto Color Emoji';
+}
+
+/* Font stacks for templates: the bundled faces come first, so the site and
+   the server-side PDF use the very same font */
+:root {
+  --tpl-sans: 'Inter Variable', system-ui, sans-serif, var(--font-symbols);
+  --tpl-serif: 'PT Serif', Georgia, serif, var(--font-symbols);
+  --tpl-display: 'Playfair Display', 'PT Serif', Georgia, serif, var(--font-symbols);
+  --tpl-condensed: 'Oswald', 'Inter Variable', sans-serif, var(--font-symbols);
+  --tpl-mono: 'JetBrains Mono', 'PT Mono', monospace, var(--font-symbols);
+  --tpl-hand: 'Caveat', cursive, var(--font-symbols);
 }

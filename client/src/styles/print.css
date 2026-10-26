@@ -61,6 +61,20 @@
     break-inside: avoid;
   }
 
+  /* A long job or list (four items or more) may continue on the next page between
+     items: kept whole, it left up to a third of a page empty. A job's title
+     lines still go with the first bullets. */
+  .resume-entry:has(li:nth-child(4)),
+  .resume-entry:has(li:nth-child(4)) ul,
+  .resume-section ul:has(> li:nth-child(4)) {
+    break-inside: auto;
+  }
+
+  .resume-entry:has(li:nth-child(4)) > :not(ul) {
+    break-inside: avoid;
+    break-after: avoid;
+  }
+
   /* Never leave a heading alone at the bottom of a page */
   .resume-section > :first-child,
   .resume-document :is(h2, h3, h4) {

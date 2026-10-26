@@ -1,0 +1,257 @@
+/* The sidebar colour is painted on the whole layout (a hard-stop gradient) so
+   it continues on every printed page, not only as far as the sidebar goes. */
+.page {
+  --side: 250px;
+  container-type: inline-size;
+  color: var(--color-text);
+  font-family: var(--tpl-sans);
+  font-size: 14px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  border-radius: 14px;
+  max-width: 920px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+.layout {
+  display: grid;
+}
+
+@container (min-width: 620px) {
+  .layout {
+    grid-template-columns: var(--side) minmax(0, 1fr);
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-primary) 10%, var(--color-surface)) var(--side),
+      var(--color-surface) var(--side)
+    );
+  }
+}
+
+.side {
+  padding: 26px 20px;
+  background: color-mix(in srgb, var(--color-primary) 10%, var(--color-surface));
+}
+
+@container (min-width: 620px) {
+  .side {
+    background: none;
+  }
+}
+
+.photo {
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 14px;
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+  display: grid;
+  place-items: center;
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.name {
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.role {
+  margin-top: 4px;
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.contacts {
+  margin-top: 14px;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 0.78rem;
+}
+
+.meta {
+  margin-top: 6px;
+  font-size: 0.76rem;
+  color: var(--color-text-muted);
+}
+
+.side section {
+  margin-top: 22px;
+}
+
+.sideHeading {
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+
+.radar {
+  display: block;
+  width: 100%;
+  max-width: 210px;
+  margin: 0 auto 8px;
+}
+
+.ring {
+  fill: none;
+  stroke: color-mix(in srgb, var(--color-primary) 22%, transparent);
+  stroke-width: 1;
+}
+
+.axis {
+  stroke: color-mix(in srgb, var(--color-primary) 22%, transparent);
+  stroke-width: 1;
+}
+
+.area {
+  fill: color-mix(in srgb, var(--color-primary) 35%, transparent);
+  stroke: var(--color-primary);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.axisLabel {
+  fill: var(--color-primary);
+  font-size: 11px;
+  font-weight: 800;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.legend {
+  display: grid;
+  gap: 4px;
+  padding-left: 20px;
+  font-size: 0.8rem;
+}
+
+.legend li::marker {
+  color: var(--color-primary);
+  font-weight: 800;
+}
+
+.legend li {
+  padding-left: 2px;
+}
+
+.legend li > span:first-child {
+  margin-right: 6px;
+}
+
+.legendLevel {
+  color: var(--color-text-muted);
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+.more {
+  margin-top: 8px;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.langs {
+  list-style: none;
+  display: grid;
+  gap: 4px;
+  font-size: 0.82rem;
+}
+
+.lang {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.langLevel {
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.main {
+  padding: 26px 22px;
+}
+
+@container (min-width: 620px) {
+  .main {
+    padding: 30px 28px;
+  }
+}
+
+.main section + section {
+  margin-top: 22px;
+}
+
+.heading {
+  font-size: 1.05rem;
+  font-weight: 800;
+  padding-bottom: 6px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid var(--color-accent-soft);
+}
+
+.summary {
+  line-height: 1.6;
+}
+
+.strengths {
+  display: grid;
+  gap: 4px;
+  padding-left: 18px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.entry {
+  margin-bottom: 14px;
+}
+
+.entryHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px 10px;
+}
+
+.entryTitle {
+  font-weight: 700;
+}
+
+.entryDate {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.entrySub {
+  font-size: 0.86rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  margin: 1px 0 4px;
+}
+
+.entryText {
+  font-size: 0.87rem;
+  line-height: 1.5;
+  padding-left: 16px;
+}
+
+p.entryText {
+  padding-left: 0;
+}

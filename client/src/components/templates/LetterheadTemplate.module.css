@@ -1,0 +1,193 @@
+.page {
+  container-type: inline-size;
+  color: var(--color-text);
+  font-family: var(--tpl-serif);
+  font-size: 14px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  padding: 32px clamp(22px, 5vw, 44px) 24px;
+  max-width: 900px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px 24px;
+  padding-bottom: 14px;
+  border-bottom: 4px double var(--color-primary);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo {
+  flex: none;
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+  font-family: var(--tpl-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  border-radius: 4px 18px;
+}
+
+.name {
+  font-family: var(--tpl-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 5cqi, 2rem);
+  line-height: 1.1;
+}
+
+.role {
+  margin-top: 2px;
+  font-family: var(--tpl-sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.address {
+  font-family: var(--tpl-sans);
+  font-size: 0.76rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  text-align: right;
+  max-width: 360px;
+}
+
+.contacts {
+  justify-content: flex-end;
+  gap: 0 12px;
+}
+
+/* Headings sit in the left margin. They are taken out of the flow so a long
+   part can still break between pages like plain text. */
+.part {
+  position: relative;
+  padding-top: 18px;
+}
+
+@container (min-width: 620px) {
+  .part {
+    padding-left: 150px;
+  }
+
+  .heading {
+    position: absolute;
+    left: 0;
+    top: 20px;
+    width: 130px;
+    text-align: right;
+  }
+}
+
+.heading {
+  font-family: var(--tpl-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+
+.summary {
+  line-height: 1.7;
+  font-size: 0.98rem;
+}
+
+.entry {
+  margin-bottom: 14px;
+}
+
+.entryHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+}
+
+.entryTitle {
+  font-weight: 700;
+  font-size: 1.02rem;
+}
+
+.entryDate {
+  font-family: var(--tpl-sans);
+  font-size: 0.74rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.entrySub {
+  font-style: italic;
+  font-size: 0.9rem;
+  margin: 1px 0 4px;
+}
+
+.entryText {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  padding-left: 16px;
+}
+
+p.entryText {
+  padding-left: 0;
+}
+
+.strengths {
+  display: grid;
+  gap: 4px;
+  padding-left: 16px;
+  line-height: 1.55;
+  font-size: 0.92rem;
+}
+
+.items {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 4px 24px;
+  font-size: 0.88rem;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  border-bottom: 1px dotted var(--color-border);
+  padding-bottom: 2px;
+}
+
+.itemLevel {
+  font-family: var(--tpl-sans);
+  color: var(--color-primary);
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 28px;
+  padding-top: 8px;
+  border-top: 1px solid var(--color-primary);
+  font-family: var(--tpl-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}

@@ -1,0 +1,445 @@
+.page {
+  --ticket: var(--color-primary);
+  --ticket-ink: var(--color-primary-contrast);
+  container-type: inline-size;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--tpl-sans);
+  padding: 22px;
+  border-radius: 18px;
+  box-shadow: var(--shadow-card);
+  max-width: 920px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+/* ---- The ticket ---- */
+.ticket {
+  display: grid;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1.5px solid var(--color-border);
+  break-inside: avoid;
+}
+
+@container (min-width: 620px) {
+  .ticket {
+    grid-template-columns: minmax(0, 1fr) 168px;
+  }
+}
+
+.main {
+  padding: 18px 20px;
+  background: var(--color-surface);
+}
+
+.airline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  color: var(--ticket);
+  margin: -18px -20px 16px;
+  padding: 10px 20px;
+  background: var(--ticket);
+  color: var(--ticket-ink);
+}
+
+.plane {
+  font-size: 1.1rem;
+}
+
+.passLabel {
+  margin-left: auto;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+.route {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+}
+
+.port {
+  min-width: 0;
+}
+
+.portTo {
+  text-align: right;
+}
+
+.code {
+  font-family: var(--tpl-condensed);
+  font-weight: 600;
+  font-size: clamp(2.4rem, 10cqi, 3.6rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.portName {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.path {
+  position: relative;
+  width: clamp(60px, 16cqi, 140px);
+  height: 2px;
+  border-top: 2px dashed var(--color-border);
+}
+
+.path span {
+  position: absolute;
+  left: 50%;
+  top: -0.85em;
+  transform: translateX(-50%);
+  background: var(--color-surface);
+  padding: 0 6px;
+  color: var(--ticket);
+  font-size: 1.2rem;
+}
+
+.passenger {
+  margin-top: 14px;
+}
+
+.label {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.name {
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+}
+
+.small {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  gap: 10px 14px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border);
+}
+
+.value {
+  white-space: nowrap;
+  font-family: var(--tpl-condensed);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+/* The stub: a perforation with punched half-circles where it tears off */
+.stub {
+  position: relative;
+  padding: 16px 18px;
+  background: color-mix(in srgb, var(--ticket) 8%, var(--color-surface));
+  border-top: 2px dashed var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+@container (min-width: 620px) {
+  .stub {
+    border-top: none;
+    border-left: 2px dashed var(--color-border);
+  }
+
+  .stub::before,
+  .stub::after {
+    content: '';
+    position: absolute;
+    left: -11px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-surface);
+    border: 1.5px solid var(--color-border);
+  }
+
+  .stub::before {
+    top: -11px;
+  }
+
+  .stub::after {
+    bottom: -11px;
+  }
+}
+
+.stubName {
+  overflow-wrap: anywhere;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+.stubRoute {
+  font-family: var(--tpl-condensed);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.stubFields {
+  display: flex;
+  gap: 14px;
+  font-family: var(--tpl-condensed);
+  font-weight: 600;
+}
+
+.barcode {
+  margin-top: auto;
+  width: 100%;
+  height: 44px;
+  fill: var(--color-text);
+}
+
+.contactsRow {
+  margin: 14px 4px 4px;
+  font-size: 0.85rem;
+}
+
+/* ---- The body ---- */
+.block {
+  margin-top: 20px;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ticket);
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+  border-bottom: 2px solid var(--ticket);
+}
+
+.announcement {
+  line-height: 1.6;
+  font-style: italic;
+  padding-left: 14px;
+  border-left: 3px solid var(--color-border);
+}
+
+.included {
+  list-style: none;
+  display: grid;
+  gap: 6px 18px;
+}
+
+@container (min-width: 620px) {
+  .included {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.included li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.included li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 0.7rem;
+  font-weight: 800;
+  background: var(--color-accent-soft);
+  color: var(--ticket);
+}
+
+.legs {
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.leg {
+  /* A long job may continue on the next page; the card frame repeats there */
+  box-decoration-break: clone;
+  display: grid;
+  grid-template-columns: 74px 1fr;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.legSide {
+  border-radius: 11px 0 0 11px;
+  background: var(--color-surface-alt);
+  border-right: 2px dashed var(--color-border);
+  padding: 12px 6px;
+  text-align: center;
+}
+
+.legCode {
+  font-family: var(--tpl-condensed);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--ticket);
+}
+
+.legNo {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+}
+
+.legBody {
+  padding: 12px 14px;
+  min-width: 0;
+}
+
+.legTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px 10px;
+}
+
+.legTitle {
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.legDates {
+  font-family: var(--tpl-condensed);
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.legRole {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--ticket);
+  margin-top: 2px;
+}
+
+.status {
+  margin-left: 8px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: #16a34a;
+  color: #fff;
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  vertical-align: 1px;
+}
+
+.legNotes {
+  margin-top: 6px;
+  padding-left: 16px;
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.layovers {
+  display: grid;
+  gap: 10px;
+}
+
+@container (min-width: 620px) {
+  .layovers {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.layover {
+  padding: 10px 12px;
+  border: 1.5px dashed var(--color-border);
+  border-radius: 10px;
+}
+
+.layover .small {
+  margin-top: 4px;
+}
+
+.tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* A luggage tag: notched left end with a punched hole */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px 6px 10px;
+  background: var(--color-accent-soft);
+  border-radius: 4px 8px 8px 4px;
+  clip-path: polygon(10px 0, 100% 0, 100% 100%, 10px 100%, 0 50%);
+  padding-left: 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.tagHole {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  box-shadow: inset 0 0 0 1.5px var(--ticket);
+}
+
+.tagWeight {
+  font-family: var(--tpl-condensed);
+  font-size: 0.72rem;
+  color: var(--ticket);
+}
+
+.langs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.legTop,
+.legRole,
+.legNotes li {
+  break-inside: avoid;
+}
+
+.legTop {
+  break-after: avoid;
+}
+
+/* print.css keeps every list item whole; a route leg is too tall for that */
+.legs .leg,
+.leg .legNotes {
+  break-inside: auto;
+}

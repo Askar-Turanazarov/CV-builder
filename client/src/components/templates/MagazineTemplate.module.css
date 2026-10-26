@@ -1,0 +1,290 @@
+.page {
+  container-type: inline-size;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--tpl-sans);
+  font-size: 14px;
+  padding: 30px 28px;
+  border-radius: 6px;
+  box-shadow: var(--shadow-card);
+  max-width: 940px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+.cover {
+  display: grid;
+  gap: 18px;
+  align-items: end;
+}
+
+@container (min-width: 620px) {
+  .cover {
+    grid-template-columns: 1fr 190px;
+  }
+
+  .name {
+    --column: calc(100cqi - 208px);
+  }
+}
+
+.issue {
+  display: inline-block;
+  background: var(--color-text);
+  color: var(--color-surface);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  padding: 3px 10px;
+  margin-bottom: 12px;
+}
+
+/* The longest word (--word letters, set by the template) must fit on one line:
+   Playfair Black capitals are about 0.8em wide on average */
+.name {
+  font-family: var(--tpl-display);
+  font-weight: 900;
+  font-size: min(clamp(2.6rem, 11cqi, 5.2rem), calc(var(--column, 100cqi) / (var(--word, 8) * 0.8)));
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.role {
+  margin-top: 12px;
+  font-family: var(--tpl-display);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--color-primary);
+}
+
+.coverSide {
+  position: relative;
+}
+
+.photo {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--color-accent-soft);
+  display: grid;
+  place-items: center;
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.2) contrast(1.05);
+}
+
+.photo :global(.photoPlaceholder) {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: 10px;
+}
+
+.number {
+  position: absolute;
+  left: -26px;
+  bottom: -16px;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+  display: grid;
+  place-content: center;
+  text-align: center;
+  line-height: 1;
+}
+
+/* Without a photo the cover number sits on its own */
+.coverSide:not(:has(img)) .number {
+  position: static;
+  margin-left: auto;
+}
+
+.numberValue {
+  font-family: var(--tpl-display);
+  font-weight: 900;
+  font-size: 2.2rem;
+}
+
+.numberLabel {
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 2px;
+  padding-inline: 8px;
+}
+
+.contactBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  align-items: center;
+  margin-top: 26px;
+  padding: 8px 0;
+  border-top: 3px solid var(--color-text);
+  border-bottom: 1px solid var(--color-text);
+  font-size: 0.8rem;
+}
+
+.quote {
+  margin: 22px 0 6px;
+  padding-left: 18px;
+  border-left: 6px solid var(--color-primary);
+}
+
+.quoteLabel {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 6px;
+}
+
+.quoteText {
+  font-family: var(--tpl-display);
+  font-size: 1.22rem;
+  line-height: 1.45;
+}
+
+.spread {
+  display: grid;
+  gap: 24px;
+  margin-top: 22px;
+}
+
+@container (min-width: 620px) {
+  .spread {
+    grid-template-columns: minmax(0, 1fr) 220px;
+  }
+
+  /* Sidebar on the right in the spread, after the feature column */
+  .aside {
+    order: 2;
+    border-left: 1px solid var(--color-border);
+    padding-left: 18px;
+  }
+}
+
+.box + .box {
+  margin-top: 18px;
+}
+
+.asideHead {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+
+.strengths {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  font-family: var(--tpl-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+.strengths li::before {
+  content: '— ';
+  color: var(--color-primary);
+}
+
+.skills,
+.langs {
+  list-style: none;
+  display: grid;
+  gap: 5px;
+  font-size: 0.85rem;
+}
+
+.skill,
+.lang {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  border-bottom: 1px dotted var(--color-border);
+  padding-bottom: 3px;
+}
+
+.level {
+  font-size: 0.6rem;
+  letter-spacing: 1px;
+  color: var(--color-primary);
+  white-space: nowrap;
+}
+
+.langLevel {
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.featureHead {
+  font-family: var(--tpl-display);
+  font-weight: 900;
+  font-size: 1.7rem;
+  line-height: 1;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 3px solid var(--color-text);
+}
+
+.feature > section + section {
+  margin-top: 22px;
+}
+
+.story {
+  padding: 10px 0 12px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.storyHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+}
+
+.storyTitle {
+  font-family: var(--tpl-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1.2;
+}
+
+.storyDate {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.storySub {
+  font-weight: 600;
+  color: var(--color-primary);
+  font-size: 0.86rem;
+  margin: 2px 0 6px;
+}
+
+.storyText {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  padding-left: 16px;
+}
+
+p.storyText {
+  padding-left: 0;
+}

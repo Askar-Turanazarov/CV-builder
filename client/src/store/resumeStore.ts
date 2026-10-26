@@ -16,6 +16,7 @@ import {
   type AiGeneratedContent,
   type CoverLetterContent,
 } from '../types/resume';
+import { resolveTemplateId } from '../data/legacyTemplates';
 
 // Bumped independently from `types/resume.ts`'s CURRENT_SCHEMA_VERSION —
 // that one guards ResumeData's own shape; this one guards the STORE's
@@ -30,6 +31,13 @@ type UiPrefKey = 'uiLanguage' | 'uiDesignSystem' | 'colorMode';
 
 function pickUiPrefs(data: ResumeData): Pick<ResumeData, UiPrefKey> {
   return { uiLanguage: data.uiLanguage, uiDesignSystem: data.uiDesignSystem, colorMode: data.colorMode };
+}
+
+// Removed templates map to their closest successor on every load: cheaper
+// than a schema bump, and it also covers resumes saved by an older tab
+function withCurrentTemplate(data: ResumeData): ResumeData {
+  const id = resolveTemplateId(data.selectedTemplateId);
+  return id === data.selectedTemplateId ? data : { ...data, selectedTemplateId: id };
 }
 
 function toGlassDefault<T extends { data?: ResumeData; resumes?: Record<string, ResumeData> }>(state: T): T {
@@ -252,9 +260,11 @@ export const useResumeStore = create<ResumeStore>()(
         return {
           ...currentState,
           ...persisted,
-          resumes: persisted?.resumes ?? currentState.resumes,
+          resumes: persisted?.resumes
+            ? Object.fromEntries(Object.entries(persisted.resumes).map(([id, d]) => [id, withCurrentTemplate(d)]))
+            : currentState.resumes,
           resumeNames: persisted?.resumeNames ?? currentState.resumeNames,
-          data: persisted?.data ? { ...currentState.data, ...persisted.data } : currentState.data,
+          data: persisted?.data ? withCurrentTemplate({ ...currentState.data, ...persisted.data }) : currentState.data,
         };
       },
     },
