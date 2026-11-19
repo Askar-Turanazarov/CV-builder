@@ -17,15 +17,20 @@ function isAuthorized(header: string | undefined): boolean {
 }
 
 /**
+ * A caller without the secret falls through to Express's own 404, so the
+ * route looks like it doesn't exist. Runs before the rate limiter, which
+ * would otherwise add its headers and give the route away.
+ */
+const hideUnlessAuthorized: RequestHandler = (req, _res, next) => {
+  next(isAuthorized(req.get('Authorization')) ? undefined : 'router');
+};
+
+/**
  * Upstash archives a free database after 30 days without commands. When
  * nobody sends a resume to Telegram for that long, this scheduled PING keeps
  * the database active.
  */
-const keepAliveController: RequestHandler = async (req, res) => {
-  if (!isAuthorized(req.get('Authorization'))) {
-    res.status(401).json({ error: 'unauthorized' });
-    return;
-  }
+const keepAliveController: RequestHandler = async (_req, res) => {
   if (!isPersistentStoreConfigured()) {
     res.json({ ok: true, redis: 'not_configured' });
     return;
@@ -40,4 +45,4 @@ const keepAliveController: RequestHandler = async (req, res) => {
 };
 
 export const cronRouter = Router();
-cronRouter.get('/keep-alive', createLimiter(5), keepAliveController);
+cronRouter.get('/keep-alive', hideUnlessAuthorized, createLimiter(5), keepAliveController);
