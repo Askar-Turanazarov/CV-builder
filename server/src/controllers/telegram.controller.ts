@@ -8,8 +8,8 @@ import {
   dataKey,
   deliverResume,
   newLinkToken,
+  resolveChatToken,
   statusKey,
-  verifyChatToken,
   type HandoffStatus,
 } from '../services/telegram/delivery.js';
 import { botText, resumeBotText } from '../services/telegram/formatResume.js';
@@ -71,13 +71,13 @@ export const sendToTelegramController: RequestHandler = async (req, res) => {
     return;
   }
   const { chatToken, resume } = req.body as { chatToken: string; resume: ExportPdfRequest };
-  const check = verifyChatToken(chatToken);
-  if (!check.ok) {
-    res.status(401).json({ error: check.reason === 'expired' ? 'telegram_link_expired' : 'telegram_chat_invalid' });
-    return;
-  }
-  const { chatId } = check;
   try {
+    // Unknown and expired look the same here: either way the client links again.
+    const chatId = await resolveChatToken(chatToken);
+    if (chatId === null) {
+      res.status(401).json({ error: 'telegram_link_expired' });
+      return;
+    }
     await deliverResume(chatId, resume);
     res.json({ ok: true });
   } catch (err) {
@@ -138,7 +138,7 @@ export const telegramWebhookController: RequestHandler = async (req, res) => {
     try {
       await sendMessage(chatId, resumeBotText(resume, 'preparing'));
       await deliverResume(chatId, resume);
-      const delivered: HandoffStatus = { state: 'delivered', chatToken: createChatToken(chatId) };
+      const delivered: HandoffStatus = { state: 'delivered', chatToken: await createChatToken(chatId) };
       await store.set(statusKey(payload), delivered, LINK_TTL_SECONDS);
     } catch (err) {
       console.error('[telegram] delivery failed:', err);

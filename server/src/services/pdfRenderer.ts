@@ -29,6 +29,14 @@ function getBrowser(): Promise<Browser> {
   return browserPromise;
 }
 
+function isSameOrigin(url: string, origin: string): boolean {
+  try {
+    return new URL(url).origin === origin;
+  } catch {
+    return false;
+  }
+}
+
 /** Starts Chromium ahead of time so the user's first PDF skips the cold launch. */
 export async function warmUpBrowser(): Promise<void> {
   await getBrowser();
@@ -50,6 +58,18 @@ export async function renderPrintPage(params: {
   const page = await browser.newPage();
   try {
     await page.setViewport({ width: 1000, height: 1400 });
+    // The print page needs only its own origin (scripts, styles, fonts) and
+    // inline data: images. Everything else is cut off, so resume data can
+    // never make this server-side browser reach another host.
+    const allowedOrigin = new URL(params.origin).origin;
+    await page.setRequestInterception(true);
+    page.on('request', (request) => {
+      const url = request.url();
+      const allowed =
+        url.startsWith('data:') || url.startsWith('blob:') || url === 'about:blank' || isSameOrigin(url, allowedOrigin);
+      if (allowed) void request.continue();
+      else void request.abort('blockedbyclient');
+    });
     await page.evaluateOnNewDocument((data) => {
       // Runs in the page; globalThis is window there (the server tsconfig has no DOM lib).
       (globalThis as unknown as { __PRINT_DATA__: unknown }).__PRINT_DATA__ = data;

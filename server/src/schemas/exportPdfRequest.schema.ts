@@ -4,7 +4,12 @@ const personalInfoSchema = z.object({
   fullName: z.string(),
   jobTitle: z.string(),
   birthDate: z.string(),
-  photo: z.string().nullable(),
+  // Only an inline image: the client stores the photo as a base64 data URL,
+  // and anything else would make the PDF browser fetch an outside address.
+  photo: z
+    .string()
+    .regex(/^data:image\/(?:jpeg|png|webp|gif);base64,[A-Za-z0-9+/]+={0,2}$/)
+    .nullable(),
 });
 
 const contactInfoSchema = z.object({

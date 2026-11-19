@@ -1,8 +1,9 @@
-import { createHmac, randomBytes, timingSafeEqual } from 'node:crypto';
+import { randomBytes } from 'node:crypto';
 import type { ExportPdfRequest } from '../../schemas/exportPdfRequest.schema.js';
 import { renderPrintPage } from '../pdfRenderer.js';
 import { printOrigin } from '../printOrigin.js';
-import { botToken, sendChatAction, sendDocument, sendMessage } from './botApi.js';
+import { sendChatAction, sendDocument, sendMessage } from './botApi.js';
+import { handoffStore } from './handoffStore.js';
 import { documentCaption, documentFilename, formatResumeMessage } from './formatResume.js';
 
 /** How long a "send to Telegram" link stays valid. */
@@ -25,33 +26,26 @@ export function newLinkToken(): string {
 /** How long a device stays linked to a chat after the first delivery. */
 export const CHAT_TOKEN_TTL_SECONDS = 3 * 60 * 60;
 
-function sign(chatId: number, exp: number): string {
-  return createHmac('sha256', botToken() ?? '').update(`chat:${chatId}:${exp}`).digest('base64url');
-}
+const chatLinkKey = (chatToken: string) => `tg:chat:${chatToken}`;
 
 /**
- * A chat id the site may send to again without the bot round-trip: the
- * client keeps it in localStorage after the first delivery. Signed, so a
- * visitor can't make the bot message an arbitrary chat, and short-lived
- * (exp in unix seconds), so a shared device doesn't stay linked for good.
+ * Lets the site send to the same chat again without the bot round-trip: the
+ * client keeps this token in localStorage after the first delivery. It is a
+ * random key (192 bits) whose chat id lives only in the server store, so the
+ * browser never learns the Telegram chat id; it expires on its own, so a
+ * shared device doesn't stay linked for good.
  */
-export function createChatToken(chatId: number): string {
-  const exp = Math.floor(Date.now() / 1000) + CHAT_TOKEN_TTL_SECONDS;
-  return `${chatId}.${exp}.${sign(chatId, exp)}`;
+export async function createChatToken(chatId: number): Promise<string> {
+  const chatToken = randomBytes(24).toString('base64url');
+  await handoffStore().set(chatLinkKey(chatToken), chatId, CHAT_TOKEN_TTL_SECONDS);
+  return chatToken;
 }
 
-export type ChatTokenCheck = { ok: true; chatId: number } | { ok: false; reason: 'invalid' | 'expired' };
-
-export function verifyChatToken(chatToken: string): ChatTokenCheck {
-  const [idPart, expPart, signature] = chatToken.split('.');
-  const chatId = Number(idPart);
-  const exp = Number(expPart);
-  if (!Number.isSafeInteger(chatId) || !Number.isSafeInteger(exp) || !signature) return { ok: false, reason: 'invalid' };
-  const expected = Buffer.from(sign(chatId, exp));
-  const given = Buffer.from(signature);
-  if (expected.length !== given.length || !timingSafeEqual(expected, given)) return { ok: false, reason: 'invalid' };
-  if (exp * 1000 <= Date.now()) return { ok: false, reason: 'expired' };
-  return { ok: true, chatId };
+/** The chat a token stands for, or null when it is unknown or expired. */
+export async function resolveChatToken(chatToken: string): Promise<number | null> {
+  if (!/^[\w-]{32}$/.test(chatToken)) return null;
+  const chatId = await handoffStore().get<number>(chatLinkKey(chatToken));
+  return Number.isSafeInteger(chatId) ? chatId : null;
 }
 
 /** Renders the resume PDF and sends it with a formatted text card. */
