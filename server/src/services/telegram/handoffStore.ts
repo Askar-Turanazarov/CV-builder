@@ -12,6 +12,8 @@ interface HandoffStore {
   get<T>(key: string): Promise<T | null>;
   /** Reads and deletes atomically, so a link can be redeemed only once. */
   take<T>(key: string): Promise<T | null>;
+  /** A no-op round trip that counts as activity for the database. */
+  ping(): Promise<string>;
 }
 
 function createRedisStore(url: string, token: string): HandoffStore {
@@ -22,6 +24,7 @@ function createRedisStore(url: string, token: string): HandoffStore {
     },
     get: (key) => redis.get(key),
     take: (key) => redis.getdel(key),
+    ping: () => redis.ping(),
   };
 }
 
@@ -46,6 +49,7 @@ function createMemoryStore(): HandoffStore {
       entries.delete(key);
       return value as T | null;
     },
+    ping: async () => 'PONG',
   };
 }
 

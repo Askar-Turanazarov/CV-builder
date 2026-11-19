@@ -9,6 +9,12 @@
       "includeFiles": "node_modules/@sparticuz/chromium/bin/**"
     }
   },
+  "crons": [
+    {
+      "path": "/api/cron/keep-alive",
+      "schedule": "0 6 1,11,21 * *"
+    }
+  ],
   "rewrites": [
     {
       "source": "/api/(.*)",

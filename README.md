@@ -54,7 +54,7 @@ PDF на Vercel рендерится через `puppeteer-core` + `@sparticuz/c
 
 1. В [@BotFather](https://t.me/BotFather) выполнить `/newbot` и получить токен.
 2. В Vercel → Settings → Environment Variables добавить `TELEGRAM_BOT_TOKEN`.
-3. В Vercel → Storage подключить Upstash Redis (Marketplace) к проекту — переменные `KV_REST_API_URL` / `KV_REST_API_TOKEN` появятся сами. В Redis резюме лежит не дольше 15 минут, только пока пользователь не нажмёт Start.
+3. В Vercel → Storage подключить Upstash Redis (Marketplace) к проекту — переменные `KV_REST_API_URL` / `KV_REST_API_TOKEN` появятся сами. В Redis резюме лежит не дольше 15 минут, только пока пользователь не нажмёт Start. Чтобы Upstash не архивировал бесплатную базу (после 30 дней без запросов), Vercel Cron 1, 11 и 21 числа вызывает `/api/cron/keep-alive`, и тот шлёт в Redis `PING`. Если добавить переменную `CRON_SECRET`, этот адрес будет принимать только Cron.
 4. Сделать Redeploy. Вебхук регистрируется автоматически при первом открытии превью; его секрет выводится из токена, отдельная переменная не нужна.
 
 Сами резюме хранятся только в браузере пользователя (localStorage). После первой отправки устройство запоминает подписанный токен чата, и следующие отправки идут в один клик, без бота.
